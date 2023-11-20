@@ -16,19 +16,19 @@
 int mainMenu() 
 {
 	int opcaoPrincipal;
-	printf("Welcome to the game of the Rings\n");
+	printf("WELCOME TO THE GAME OF THE RINGS\n");
+	printf("*********************************\n");
 	printf("1- Start new game\n");
 	printf("2- Load game\n");
 	printf("3- Settings\n");
 	printf("0- Exit\n");
-	printf("Option: \n");
-	printf("\n");
-	printf("\n");
+	printf("*********************************\n");
+	printf("Option: ");
 	scanf_s("%d", &opcaoPrincipal);
+	printf("*********************************\n");
 	return(opcaoPrincipal);
 
 }
-
 
 int StartNewGameMenu() {
 
@@ -65,6 +65,8 @@ int main()
 	case 2: LoadGame();
 		break;
 	case 3: Settings();
+		break;
+	case 0: printf("Leaving...\n");
 		break;
 	default:printf("Invalid Option!!!!");
 		break;
