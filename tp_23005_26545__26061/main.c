@@ -17,7 +17,12 @@
  */
 #pragma region Main menu
 
-
+/**
+ *
+ * \function name- mainMenu
+ * \brief- Este é o primeiro menu que aparece quando se inicializa o jogo
+ *  
+ */
 int mainMenu() 
 {
 	int opcaoPrincipal;
@@ -60,9 +65,8 @@ int main()
 
 #pragma region New game
 
+
 #pragma region factory
-
-
 /**
  *
  * \function name- showGondorFactory
@@ -140,6 +144,12 @@ void showMordorUnits()
 }
 #pragma endregion
 
+/**
+ *
+ * \function name- StartNewGameMenu
+ * \brief- Menu para escolher o lado que se quer jogar
+ *  
+ */
 int StartNewGameMenu() 
 {
 	int newOption; //opcao para escolher o que fazer quando se começa um novo jogo
@@ -153,7 +163,12 @@ int StartNewGameMenu()
 	return(newOption);
 
 }
-
+/**
+ *
+ * \function name- gordorMenu
+ * \brief- Menu para gordor
+ *  
+ */
 int gordorMenu() {
 
 	int gordorOption;
@@ -161,12 +176,21 @@ int gordorMenu() {
 
 }
 
-
+/**
+ *
+ * \function name- mordorMenu
+ * \brief- Menu para mordor
+ */
 int mordorMenu() {
 	int mordorOption;
 	printf("WELCOME TO MORDOR SIDE\n");
 }
-
+/**
+ *
+ * \function name- NewGame
+ * \brief- Menu para escolher se queremos jogar em mordor ou gondor
+ *  
+ */
 int NewGame() 
 {
 
