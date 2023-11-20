@@ -23,6 +23,7 @@ int mainMenu()
 	printf("0- Exit\n");
 	printf("Option: \n");
 	printf("\n");
+	printf("\n");
 	scanf_s("%d", &opcaoPrincipal);
 	return(opcaoPrincipal);
 
