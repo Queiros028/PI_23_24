@@ -9,7 +9,9 @@
 #pragma warning(disable: 4996)
 
 #pragma region Structs
-
+/**
+ * struct para o utilizador conseguir ver quais os seus edificios de batalha
+ */
 typedef struct faction 
 {
 	char factionName[20];
@@ -45,6 +47,10 @@ typedef struct gordorPlayer{
 	int cavalry;
 	int artillery;
 	int mines;
+	int base;
+	int barracks;
+	int stables;
+	int armoury;
 } gordorPlayer;
 
 typedef struct mordorPlayer {
@@ -54,18 +60,32 @@ typedef struct mordorPlayer {
 	int cavalry;
 	int artillery;
 	int mines;
+	int base;
+	int barracks;
+	int stables;
+	int armoury;
 } mordorPlayer;
 
 typedef struct Building {
-	char type; // Type of building (B - Base, M - Mine, R - Barracks, S - Stables, A - Armoury)
-	int cost;  // Cost in Castar coins
+	char type; //tipo de edificio
+	int cost;  //custo
 }Building;
 
+
+typedef struct cell {
+
+	char building;
+	char unit;
+}cell;
 #pragma endregion
 
 #pragma region Funcoes
 
 void printStatus(gordorPlayer* player);
-
+void move(gordorPlayer* player, char unitType, int cells);
+void placeBuilding(char grid[17][26], int row, int col, struct Building building);
+void collectMineIncome(gordorPlayer* player);
+void buildBuilding(gordorPlayer* player, char building_type);
+void trainUnit(gordorPlayer* player, char unit_type);
 #pragma endregion
 

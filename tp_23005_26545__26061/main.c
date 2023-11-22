@@ -167,25 +167,80 @@ void gordorMenu() {
 	int gordorOption;
 	printf("WELCOME TO GORDOR SIDE\n");
 
-	gordorPlayer player1 = { "Player 1", 100, 0, 0, 0, 0 };
-	printStatus(&player1);
+	gordorOption = gordorMovesMenu();
+	switch (gordorOption)
+	{
+	case 1: gordorMovesBattle();
+		break;
+	case 2: gordorBuildingBattle();
+		break;
+		
+	default: printf("Invalid Option!!!!\n");
+		break;
+	}
+
+}
+	#pragma region Moves/buildings
+
+int gordorMovesMenu()
+{
+	int gordorSecOption;
+	printf("1- Choose your moves: \n");
+	printf("2- Add buildings: \n");
+	printf(": \n");
+	printf("9999- Show my coins: \n"); //podemos ou nao ter isto, dps vê-se
+	printf("Opcao: \n");
+	scanf_s("%d", &gordorSecOption);
+	return(gordorSecOption);
+}
+/**
+ *
+ * \function name- gordorMovesBattle
+ * \brief- Para realizar o que fzr dps de escolher mos o que fzr
+
+ *  
+ */
+int gordorMovesBattle() 
+{
+	//so estou a meter esta funcao para ver se o menu esta a dar
+	showGondorFactory();
+	
+	//criamos uma funcao para mover
+	gordorPlayer player1 = { "Player 1", 100, 0, 0, 0, 1 };
+
 
 	char unit_type;
 	int cells;
 
-	printf("Enter your move (unit type - I/C/A, cells): ");
-	scanf(" %c %d", &unit_type, &cells);
 
+	printf("Enter your move (unit type - I/C/A, cells): ");
+	scanf_s(" %c %d", &unit_type, &cells);
 	move(&player1, unit_type, cells);
 	collectMineIncome(&player1);
 
 	printStatus(&player1);
 
-
-
-
 }
 
+/**
+ *
+ * \function name- gordorBuildingBattle
+ * \brief- Escolher quais os edificios que queremos adicionar
+ *  
+ */
+gordorBuildingBattle() 
+{
+	gordorPlayer player1 = { "Player 1", 100, 0, 0, 0, 1 };
+	char building_type;
+	char unit_type;
+
+	printf("Enter building type (B/M/R/S/A):\n ");
+	scanf_s(" %c", &building_type);
+
+	buildBuilding(&player1, building_type);
+
+}
+	#pragma endregion
 /**
  *
  * \function name- mordorMenu
