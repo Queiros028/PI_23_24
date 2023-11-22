@@ -8,13 +8,7 @@
 #include "Header.h"
 #pragma warning(disable: 4996)
 
-/**
- *
- * \function name- menuPrincipal
- * \brief- Esta função será utilizada como um menu principal do programa. Este menu será apresentado no início do programa. 
- *		   A função irá perguntar ao jogador qual o que ele quer fazer no jogo. 
- *  
- */
+
 #pragma region Main menu
 
 /**
@@ -61,7 +55,6 @@ int main()
 
 }
 #pragma endregion
-
 
 #pragma region New game
 
@@ -169,10 +162,27 @@ int StartNewGameMenu()
  * \brief- Menu para gordor
  *  
  */
-int gordorMenu() {
+void gordorMenu() {
 
 	int gordorOption;
 	printf("WELCOME TO GORDOR SIDE\n");
+
+	gordorPlayer player1 = { "Player 1", 100, 0, 0, 0, 0 };
+	printStatus(&player1);
+
+	char unit_type;
+	int cells;
+
+	printf("Enter your move (unit type - I/C/A, cells): ");
+	scanf(" %c %d", &unit_type, &cells);
+
+	move(&player1, unit_type, cells);
+	collectMineIncome(&player1);
+
+	printStatus(&player1);
+
+
+
 
 }
 
@@ -181,7 +191,7 @@ int gordorMenu() {
  * \function name- mordorMenu
  * \brief- Menu para mordor
  */
-int mordorMenu() {
+void mordorMenu() {
 	int mordorOption;
 	printf("WELCOME TO MORDOR SIDE\n");
 }

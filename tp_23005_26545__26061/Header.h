@@ -8,6 +8,8 @@
 #include <string.h>
 #pragma warning(disable: 4996)
 
+#pragma region Structs
+
 typedef struct faction 
 {
 	char factionName[20];
@@ -35,3 +37,35 @@ typedef struct mordorUnits
 	char artillery[2];
 
 }mordorUnits;
+
+typedef struct gordorPlayer{
+	char name[20];
+	int coins;
+	int infantry;
+	int cavalry;
+	int artillery;
+	int mines;
+} gordorPlayer;
+
+typedef struct mordorPlayer {
+	char name[20];
+	int coins;
+	int infantry;
+	int cavalry;
+	int artillery;
+	int mines;
+} mordorPlayer;
+
+typedef struct Building {
+	char type; // Type of building (B - Base, M - Mine, R - Barracks, S - Stables, A - Armoury)
+	int cost;  // Cost in Castar coins
+}Building;
+
+#pragma endregion
+
+#pragma region Funcoes
+
+void printStatus(gordorPlayer* player);
+
+#pragma endregion
+
