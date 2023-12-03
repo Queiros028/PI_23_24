@@ -172,8 +172,6 @@ void gordorMenu() {
 	{
 	case 1: gordorMovesBattle();
 		break;
-	case 2: gordorBuildingBattle();
-		break;
 		
 	default: printf("Invalid Option!!!!\n");
 		break;
@@ -204,21 +202,9 @@ int gordorMovesBattle()
 {
 	//so estou a meter esta funcao para ver se o menu esta a dar
 	showGondorFactory();
-	
-	//criamos uma funcao para mover
-	gordorPlayer player1 = { "Player 1", 100, 0, 0, 0, 1 };
 
 
-	char unit_type;
-	int cells;
 
-
-	printf("Enter your move (unit type - I/C/A, cells): ");
-	scanf_s(" %c %d", &unit_type, &cells);
-	move(&player1, unit_type, cells);
-	collectMineIncome(&player1);
-
-	printStatus(&player1);
 
 }
 
@@ -228,9 +214,10 @@ int gordorMovesBattle()
  * \brief- Escolher quais os edificios que queremos adicionar
  *  
  */
+/*
 gordorBuildingBattle() 
 {
-	gordorPlayer player1 = { "Player 1", 100, 0, 0, 0, 1 };
+	gordorPlayer player1 = { "Player 1", 100, 0, 0, 0,};
 	char building_type;
 	char unit_type;
 
@@ -240,6 +227,7 @@ gordorBuildingBattle()
 	buildBuilding(&player1, building_type);
 
 }
+*/
 	#pragma endregion
 /**
  *
