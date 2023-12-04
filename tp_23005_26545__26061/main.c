@@ -256,6 +256,8 @@ int NewGame()
 		break;
 	case 2: mordorMenu();
 		break;
+	default: printf("Invalid Option!!!!\n");
+		break;
 	}
 
 }
