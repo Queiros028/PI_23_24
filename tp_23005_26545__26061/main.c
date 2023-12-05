@@ -5,6 +5,7 @@
  * \date   November 2023
  *********************************************************************/
 #include<stdio.h>
+#include<stdlib.h>
 #include "Header.h"
 #pragma warning(disable: 4996)
 
@@ -168,12 +169,12 @@ void gordorMenu() {
 	printf("WELCOME TO GORDOR SIDE\n");
 
 	gordorOption = gordorMovesMenu();
-	switch (gordorOption)
-	{
+	switch (gordorOption) {
 	case 1: gordorMovesBattle();
 		break;
-		
-	default: printf("Invalid Option!!!!\n");
+	case 2:
+		break;
+	default: printf("Invalid Option!!!\n");
 		break;
 	}
 
@@ -183,10 +184,18 @@ void gordorMenu() {
 int gordorMovesMenu()
 {
 	int gordorSecOption;
-	printf("1- Choose your moves: \n");
-	printf("2- Add buildings: \n");
-	printf(": \n");
-	printf("9999- Show my coins: \n"); //podemos ou nao ter isto, dps vê-se
+	printf("1- Print field: \n");
+	printf("2- Print Gordor Status: \n");
+	printf("3- Insert Base Gondor: \n");
+	printf("4- Insert Barrack\n");
+	printf("5- Insert Stable\n");
+	printf("6- Insert Infantry\n");
+	printf("7- Insert Cavalry\n");
+	printf("8- Insert Artillhery\n");
+	printf("9- Choose the unit that you wanna move (I / C/ A)\n"); // I -> infantry, C-> cavalry, A -> artillery
+	printf("10- Show my coins: \n"); //podemos ou nao ter isto, dps vê-se
+	printf("11- Back to the New Game Menu: \n");
+	printf("***********************\n");
 	printf("Opcao: \n");
 	scanf_s("%d", &gordorSecOption);
 	return(gordorSecOption);
@@ -200,13 +209,94 @@ int gordorMovesMenu()
  */
 int gordorMovesBattle() 
 {
-	//so estou a meter esta funcao para ver se o menu esta a dar
-	showGondorFactory();
+	int opcaoMoves;
+	int resultado;
+	// *********para imprimir o campo de batalha********
+	gordorPlayer* gordPlayer = NULL;
+	mordorPlayer* mordPLayer = NULL;
+	//***********************************************
 
+	opcaoMoves = gordorMovesMenu();
 
+	switch (opcaoMoves) {
 
+	case 1:	printfField(gordPlayer, mordPLayer);
+		break;
+
+	case 2:showGondorFactory(gordPlayer);
+		printf("Units\n");
+		showGondorUnits(gordPlayer);
+		break;
+	case 3: printf("Where do you wanna insert your base? \n");
+		//scanf_s("%s", );
+		//resultado = createBaseGondor();
+		break;
+
+	case 4:printf("Where do you wanna insert the barrack? \n");
+		//scanf_s("%s", );
+		//resultado = createBaseGondor();
+		break;
+
+	case 5:printf("Where do you wanna insert the stable? \n");
+		//scanf_s("%s", );
+		//resultado = createBaseGondor();
+		break;
+
+	case 6:printf("Where do you wanna insert the infantry unit? \n");
+		//scanf_s("%s", );
+		//resultado = createBaseGondor();
+		break;
+
+	case 7:printf("Where do you wanna insert the cavalry unit? \n");
+		//scanf_s("%s", );
+		//resultado = createBaseGondor();
+		break;
+
+	case 8:printf("Where do you wanna insert the artillery unit? \n");
+		//scanf_s("%s", );
+		//resultado = createBaseGondor();
+		break;
+
+	case 9:printf("Where do you wanna insert your base? \n");
+		//scanf_s("%s", );
+		//resultado = createBaseGondor();
+		break;
+
+	case 10: showCoinsGondor(gordPlayer);
+		break;
+
+	case 11: StartNewGameMenu();
+		break;
+	default: printf("Invalid option!!!!\n");
+		break;
+	}
 
 }
+
+int mordorMovesBattle() {
+
+	int mordSecOption;
+	printf("1- Print field: \n");
+	printf("2- Print Gordor Status: \n");
+	printf("3- Insert Base Gondor: \n");
+	printf("4- Insert Barrack\n");
+	printf("5- Insert Stable\n");
+	printf("6- Insert Infantry\n");
+	printf("7- Insert Cavalry\n");
+	printf("8- Insert Artillhery\n");
+	printf("9- Choose the unit that you wanna move (I / C/ A)\n"); // I -> infantry, C-> cavalry, A -> artillery
+	printf("10- Show my coins: \n"); //podemos ou nao ter isto, dps vê-se
+	printf("11- Back to the New Game Menu: \n");
+	printf("***********************\n");
+	printf("Opcao: \n");
+	scanf_s("%d", &mordSecOption);
+	return(mordSecOption);
+}
+
+int mordorMenu() {
+
+}
+
 
 /**
  *
@@ -229,15 +319,7 @@ gordorBuildingBattle()
 }
 */
 	#pragma endregion
-/**
- *
- * \function name- mordorMenu
- * \brief- Menu para mordor
- */
-void mordorMenu() {
-	int mordorOption;
-	printf("WELCOME TO MORDOR SIDE\n");
-}
+
 /**
  *
  * \function name- NewGame

@@ -5,6 +5,7 @@
  * \date   November 2023
  *********************************************************************/
 #include <stdio.h>
+#include <stdlib.h>
 #include "Header.h"
 #pragma warning(disable: 4996)
 #define ROWS 17
@@ -33,17 +34,20 @@ void startGame() {
  * \function name- printfFiel
  * \params- gordPlayer
  * \params- mordPLayer
- * \brief- Imprime o campo de batalha 
+ * \brief- Imprime o campo de batalha, as colunas de A a Z e as linhas de 0 a 16
  * 
  *  
  */
-void printfFiel(const gordorPlayer  *gordPlayer, const mordorPlayer *mordPLayer) {
-
+void printfField(const gordorPlayer  *gordPlayer, const mordorPlayer *mordPLayer) {
+    // Print column numbers ('A' to 'Z')
+    printf("\n");
     for (int i = 0; i < COLS; i++) {
-        printf("%2d", i);
+        printf("%c ", 'A' + i);
     }
     printf("\n");
 
+
+    // Print game grid with row numbers (0 to 16)
     for (int i = 0; i < ROWS; i++) {
         printf("%2d ", i);
         for (int j = 0; j < COLS; j++) {
@@ -56,21 +60,33 @@ void printfFiel(const gordorPlayer  *gordPlayer, const mordorPlayer *mordPLayer)
         }
         printf("\n");
     }
+
 }
 /**
  *
  * \function name- showCoins
  * \params- gordPLayer
  * \params- mordPlayer
- * \brief-  Função para mostrar aos jogadores as suas coins
+ * \brief-  Função para mostrar as coins do jogador de gondor
  * 
  *  
  */
-void showCoins(const gordorPlayer* gordPLayer, const mordorPlayer* mordPlayer) {
+void showCoinsGondor(const gordorPlayer* gordPLayer) {
 
     printf("Gordor player coins: %d\n",gordPLayer->coins);
-    printf("Mordor player coins: %d\n", mordPlayer->coins);
+
 }
+/**
+ *
+ * \function name- showCoinsMordor
+ * \params- mordPlayer
+ * \brief- Funcao para mostrar as coins do jogador de mordor
+ * 
+ *  
+ */
+void showCoinsMordor(const mordorPlayer* mordPlayer){
+        printf("Mordor player coins: %d\n", mordPlayer->coins);
+    }
 
 
 /**
@@ -102,7 +118,7 @@ int checkEmptyPosition(int row, int col) {
  * 
  *  
  */
-void printStatusGordor(gordorPlayer* gordPlayer) {
+void printStatusGondor(gordorPlayer* gordPlayer) {
 	printf("\nPlayer: %s\n", gordPlayer->name);
 	printf("Coins: %d\n", gordPlayer->coins);
 	printf("Infantry: %d | Cavalry: %d | Artillery: %d\n", gordPlayer->infantry, gordPlayer->cavalry, gordPlayer->artillery);

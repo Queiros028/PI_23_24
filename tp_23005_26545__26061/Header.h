@@ -114,10 +114,11 @@ typedef struct cell {
 
 	#pragma region funcaoes gerais
 void startGame();
-void printfFiel(const gordorPlayer* gordPlayer, const mordorPlayer* mordPLayer);
-void showCoins(const gordorPlayer* gordPLayer, const mordorPlayer* mordPlayer);
+void printfField(const gordorPlayer* gordPlayer, const mordorPlayer* mordPLayer);
+void showCoinsGondor(const gordorPlayer* gordPLayer);
+void showCoinsMordor(const mordorPlayer* mordPlayer);
 int checkEmptyPosition(int row, int col);
-void printStatusGordor(gordorPlayer* player);
+void printStatusGondor(gordorPlayer* player);
 void printMordorStatus(mordorPlayer * mordPlayer);
 #pragma endregion
 
@@ -129,9 +130,11 @@ void createStables(int row, int col, building stable, gordorPlayer* gordPlayer);
 void createInfantry(int row, int col, gondorUnits infantry, gordorPlayer* gordPLayer);
 void createCavalry(int row, int col, gondorUnits cavalry, gordorPlayer* gordPlayer);
 void createArtillery(int row, int col, gondorUnits artillery, gordorPlayer* gordPlayer);
+/*
 void moveInfantryGondor(int originRow, int originCol, int destRow, int destCol);
 void moveCavalryGondor(int originRow, int originCol, int destRow, int destCol);
 void moveArtilleryGondor(int originRow, int originCol, int destRow, int destCol);
+*/
 void moveGordorUnits(gordorPlayer* player, char unitType, int cells, int originRow, int originCol, int destRow, int destCol, gordorPlayer* gordPlayer);
 	#pragma endregion	
 
@@ -143,9 +146,11 @@ void createStablesMordor(int row, int col, building stable, mordorPlayer* mordPl
 void createInfantryMordor(int row, int col, mordorUnits infantry, mordorPlayer* mordPLayer);
 void createCavalryMordor(int row, int col, mordorUnits cavalry, mordorPlayer* mordPlayer);
 void createArtilleryMordor(int row, int col, mordorUnits artillery, mordorPlayer* mordPlayer);
+/*
 void moveInfantryMordor(int originRow, int originCol, int destRow, int destCol);
 void moveCavalryMordor(int originRow, int originCol, int destRow, int destCol);
 void moveArtilleryMordor(int originRow, int originCol, int destRow, int destCol);
+*/
 void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int originRow, int originCol, int destRow, int destCol);
 	#pragma endregion 
 
