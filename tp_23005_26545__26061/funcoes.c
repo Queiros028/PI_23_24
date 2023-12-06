@@ -60,7 +60,10 @@ void printfField(const gordorPlayer  *gordPlayer, const mordorPlayer *mordPLayer
         }
         printf("\n");
     }
-
+    //dps ver o pq de n estar a dar
+    printf("\n");
+    //printf("Player gondor coins: %d\n", gordPlayer->coins);
+    //printf("Player mordor coins: %d\n", mordPLayer->coins);
 }
 /**
  *
@@ -109,7 +112,46 @@ int checkEmptyPosition(int row, int col) {
 }
 #pragma endregion
 
-#pragma region gordor functions
+#pragma region gondor functions
+
+/**
+ *
+ * \function name- showGondorFactory
+ * \brief- Mostra ao utilizador os edifícios de gondor
+ *
+ *
+ */
+void showGondorFactory()
+{
+    //declarar as variaveis dos edificios de gondor
+    struct faction gondor = { "Gondor", "GGGG", "SS", "RR", "LL", "GF" }; //como é o lado gondor
+    printf("Faction: %s\n", gondor.factionName);
+    printf("Base: %s\n", gondor.base);
+    printf("Mine: %s\n", gondor.mine);
+    printf("Barracks: %s\n", gondor.barracks);
+    printf("Stables: %s\n", gondor.stables);
+    printf("Armoury: %s\n", gondor.armoury);
+}
+
+/**
+ *
+ * \function name- showGondorUnits
+ * \brief- Mostra ao utilizador quais as unidades de militares de gondor
+ *
+ *
+ */
+void showGondorUnits()
+{
+    //declarar as unidades de batalha de gondor
+    struct gondorUnits gUnit = { "G", "SK", "T" };
+
+    printf("Gondor Units: \n");
+    printf("Infantry: %\n", gUnit.infantry);
+    printf("Cavalry: %s\n", gUnit.cavalry);
+    printf("Artillery: %s\n", gUnit.artillery);
+}
+
+
 /**
  *
  * \function name- printStatusGordor
@@ -411,6 +453,42 @@ void moveGordorUnits(gordorPlayer* player, char unitType, int cells, int originR
 #pragma endregion
 
 #pragma region mordor Functions
+
+/**
+ *
+ * \function name- showMordorFactory
+ * \brief- Mostra ao utilizador os edifícios de mordor
+ *
+ *
+ */
+void showMordorFactory()
+{
+    //declarar as variaveis dos edificios de mordor
+    struct faction mordor = { "Mordor", "MMMM", "EE", "II", "MK", "DF" }; //como é o lado mordor
+    printf("Faction: %s\n", mordor.factionName);
+    printf("Base: %s\n", mordor.base);
+    printf("Mine: %s\n", mordor.mine);
+    printf("Barracks: %s\n", mordor.barracks);
+    printf("Stables: %s\n", mordor.stables);
+    printf("Armoury: %s\n", mordor.armoury);
+}
+
+/**
+ *
+ * \function name- showGondorUnits
+ * \brief- Mostra ao utilizador quais as unidades de militares de mordor
+ *
+ *
+ */
+void showMordorUnits()
+{
+    //declarar as unidades de batalha de mordor
+    struct mordorUnits mUnit = { "OW", "W", "ST" };
+    printf("Mordor Units: \n");
+    printf("Infantry: %s\n", mUnit.infantry);
+    printf("Cavalry: %s\n", mUnit.cavalry);
+    printf("Artillery: %s\n", mUnit.artillery);
+}
 /**
  *
  * \function name- printMordorStatus

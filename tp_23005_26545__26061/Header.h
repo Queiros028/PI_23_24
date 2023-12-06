@@ -123,6 +123,8 @@ void printMordorStatus(mordorPlayer * mordPlayer);
 #pragma endregion
 
 	#pragma region funcoes gordor
+void showGondorFactory();
+void showGondorUnits();
 void createBaseGondor(int row, int col, gordorPlayer* gordPlayer, building base);
 void createMineGondor(int row, int col, building mine, gordorPlayer* gordPlayer);
 void createBarrack(int row, int col, building barrack, gordorPlayer* gordPlayer);
@@ -139,6 +141,8 @@ void moveGordorUnits(gordorPlayer* player, char unitType, int cells, int originR
 	#pragma endregion	
 
 	#pragma region funcoes mordor
+void showMordorFactory();
+void showMordorUnits();
 void createBaseMordor(int row, int col, mordorPlayer* mordPLayer, building base);
 void createMineMordor(int row, int col, building mine, mordorPlayer* mordPlayer);
 void createBarrackMordor(int row, int col, building barrack, mordorPlayer* mordPlayer);
