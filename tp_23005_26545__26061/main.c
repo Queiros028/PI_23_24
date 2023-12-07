@@ -37,6 +37,7 @@ int mainMenu()
 
 int main()
 {
+	startGame();
 	int field[17][26];
 
 	int mainOption =  mainMenu();	
@@ -110,17 +111,6 @@ int gordorMenu() {
 	printf("WELCOME TO GORDOR SIDE\n");
 
 	gordorOption = gordorMovesBattle();
-	//gordorOption = gordorMovesMenu();
-	/*
-	switch (gordorOption) {
-		
-	case 1: gordorMovesBattle();
-		break;
-	//case 2:
-		//break;
-	default: printf("Invalid option...\nLeaving...\n");
-		break;
-		*/
 	}
 	#pragma region Moves/buildings
 
@@ -156,14 +146,16 @@ int gordorMovesBattle()
 	int opcaoMoves;
 	int resultado;
 	// *********para imprimir o campo de batalha********
+	
 	gordorPlayer *gordPlayer = NULL;
 	mordorPlayer *mordPLayer = NULL;
 	//***********************************************
 	
-	opcaoMoves = gordorMovesMenu();
+
 	do {
+		opcaoMoves = gordorMovesMenu();
 		switch (opcaoMoves) {
-		case 1:	printfField(gordPlayer, mordPLayer);
+		case 1:	printfField();
 			break;
 
 		case 2:printf("Factory\n");

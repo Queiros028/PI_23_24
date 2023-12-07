@@ -37,6 +37,15 @@ typedef struct faction
 
 }faction;
 
+typedef struct gUnits
+{
+	char infantry[1];
+	char cavalry[2];
+	char artillery[1];
+
+}gUnits;
+
+
 /**
  * Mostra as unidades de gondor
  */
@@ -114,7 +123,7 @@ typedef struct cell {
 
 	#pragma region funcaoes gerais
 void startGame();
-void printfField(const gordorPlayer* gordPlayer, const mordorPlayer* mordPLayer);
+void printfField();
 void showCoinsGondor(const gordorPlayer* gordPLayer);
 void showCoinsMordor(const mordorPlayer* mordPlayer);
 int checkEmptyPosition(int row, int col);

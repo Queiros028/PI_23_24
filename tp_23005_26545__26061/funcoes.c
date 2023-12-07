@@ -13,7 +13,22 @@
 
 entity field[ROWS][COLS];
 
+
 #pragma region Funcoes gerais
+
+void printSquareCell() {
+    printf("----");
+}
+
+
+void printTableLine() {
+    for (int i = 0; i < COLS; i++) {
+        printSquareCell();
+    }
+    printf("\n");
+}
+
+
 /**
  *
  * \function name- startGame
@@ -32,13 +47,11 @@ void startGame() {
 /**
  *
  * \function name- printfFiel
- * \params- gordPlayer
- * \params- mordPLayer
  * \brief- Imprime o campo de batalha, as colunas de A a Z e as linhas de 0 a 16
  * 
  *  
  */
-void printfField(const gordorPlayer  *gordPlayer, const mordorPlayer *mordPLayer) {
+void printfField() {
     // Print column numbers ('A' to 'Z')
     printf("\n");
     for (int i = 0; i < COLS; i++) {
@@ -62,6 +75,7 @@ void printfField(const gordorPlayer  *gordPlayer, const mordorPlayer *mordPLayer
     }
     //dps ver o pq de n estar a dar
     printf("\n");
+    printTableLine();
     //printf("Player gondor coins: %d\n", gordPlayer->coins);
     //printf("Player mordor coins: %d\n", mordPLayer->coins);
 }
@@ -131,6 +145,8 @@ void showGondorFactory()
     printf("Barracks: %s\n", gondor.barracks);
     printf("Stables: %s\n", gondor.stables);
     printf("Armoury: %s\n", gondor.armoury);
+    printf("\n");
+    printf("***********************************\n");
 }
 
 /**
@@ -143,12 +159,14 @@ void showGondorFactory()
 void showGondorUnits()
 {
     //declarar as unidades de batalha de gondor
-    struct gondorUnits gUnit = { "G", "SK", "T" };
-
+    struct gUnits gUnit= { "G", "SK", "T" };
+    //aqui esta a imprimir td, por exemplo quando imprimo infantaria vai me aparecer o codigo das 3 units
     printf("Gondor Units: \n");
-    printf("Infantry: %\n", gUnit.infantry);
+    printf("Infantry: %s\n", gUnit.infantry);
     printf("Cavalry: %s\n", gUnit.cavalry);
     printf("Artillery: %s\n", gUnit.artillery);
+    printf("\n");
+    printf("***********************************\n");
 }
 
 
