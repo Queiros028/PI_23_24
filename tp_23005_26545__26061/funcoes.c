@@ -16,19 +16,6 @@ entity field[ROWS][COLS];
 
 #pragma region Funcoes gerais
 
-void printSquareCell() {
-    printf("----");
-}
-
-
-void printTableLine() {
-    for (int i = 0; i < COLS; i++) {
-        printSquareCell();
-    }
-    printf("\n");
-}
-
-
 /**
  *
  * \function name- startGame
@@ -51,11 +38,11 @@ void startGame() {
  * 
  *  
  */
-void printfField() {
+void printfField(const gordorPlayer *gordPlayer, const mordorPlayer *mordPlayer) {
     // Print column numbers ('A' to 'Z')
     printf("\n");
     for (int i = 0; i < COLS; i++) {
-        printf("%c ", 'A' + i);
+        printf("%2c ", 'A' + i);
     }
     printf("\n");
 
@@ -73,11 +60,10 @@ void printfField() {
         }
         printf("\n");
     }
-    //dps ver o pq de n estar a dar
-    printf("\n");
-    printTableLine();
+   // printTableLine();
+
     //printf("Player gondor coins: %d\n", gordPlayer->coins);
-    //printf("Player mordor coins: %d\n", mordPLayer->coins);
+    //printf("Player mordor coins: %d\n", mordPlayer->coins);
 }
 /**
  *
@@ -124,6 +110,19 @@ int checkEmptyPosition(int row, int col) {
     }
     return 0;
 }
+
+
+void getGridCords(int* row, int* col) {
+
+    char colInput;
+    printf("Choose the row (0-%d): \n", ROWS - 1);
+    scanf_s("%d", row);
+
+    printf("Choose the column(A-Z): ");
+    scanf_s("%c", &colInput);
+    *col = colInput - 'A';
+}
+
 #pragma endregion
 
 #pragma region gondor functions
@@ -195,18 +194,19 @@ void printStatusGondor(gordorPlayer* gordPlayer) {
  * \brief- Criar uma base no campo de batalha
  * 
  */
-void createBaseGondor(int row, int col, gordorPlayer *gordPlayer, building base) {
-    if (row >= 0 && row < ROWS && col >= 0 && col < COLS){
-        field[row][col] = base.base;
-        field[row][col + 1] = base.base;
-        field[row + 1][col] = base.base;
-        field[row + 1][col + 1] = base.base;
+int createBaseGondor(int row, int col, gordorPlayer *gordPlayer) {
+    if (row >= 0 && row + 1< ROWS && col >= 0 && col < COLS + 1 &&
+        field[row][col].symbol == '.' &&
+        field[row][col + 1].symbol == '.' &&
+        field[row + 1][col].symbol == '.' &&
+        field[row + 1][col + 1].symbol == '.'){
+        field[row][col].symbol = 'GGGG';
 
         //como o custo de uma base é 30 coins, tiramos 30 coins ao total de coins que o jogador tem
         gordPlayer->coins -= 30;
     }
     else {
-        printf("Nao e possivel realizar essa acao!!!!\n");
+        printf("Cannot perform this action!!!!\n");
     }
 }
 /**

@@ -123,18 +123,19 @@ typedef struct cell {
 
 	#pragma region funcaoes gerais
 void startGame();
-void printfField();
+void printfField(const gordorPlayer* gordPlayer, const mordorPlayer* mordPlayer);
 void showCoinsGondor(const gordorPlayer* gordPLayer);
 void showCoinsMordor(const mordorPlayer* mordPlayer);
 int checkEmptyPosition(int row, int col);
 void printStatusGondor(gordorPlayer* player);
 void printMordorStatus(mordorPlayer * mordPlayer);
+void getGridCords(int* row, int* col);
 #pragma endregion
 
 	#pragma region funcoes gordor
 void showGondorFactory();
 void showGondorUnits();
-void createBaseGondor(int row, int col, gordorPlayer* gordPlayer, building base);
+int createBaseGondor(int row, int col, gordorPlayer* gordPlayer);
 void createMineGondor(int row, int col, building mine, gordorPlayer* gordPlayer);
 void createBarrack(int row, int col, building barrack, gordorPlayer* gordPlayer);
 void createStables(int row, int col, building stable, gordorPlayer* gordPlayer);

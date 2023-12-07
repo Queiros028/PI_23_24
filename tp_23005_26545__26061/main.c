@@ -105,13 +105,15 @@ int StartNewGameMenu()
  * \brief- Menu para gordor
  *  
  */
-int gordorMenu() {
+int gordorMenu(gordorPlayer* gordPlayer, mordorPlayer *mordPlayer) {
 
 	int gordorOption;
+
 	printf("WELCOME TO GORDOR SIDE\n");
 
-	gordorOption = gordorMovesBattle();
+	gordorOption = gordorMovesBattle(gordPlayer, mordPlayer);
 	}
+
 	#pragma region Moves/buildings
 
 int gordorMovesMenu()
@@ -125,7 +127,7 @@ int gordorMovesMenu()
 	printf("6- Insert Infantry\n");
 	printf("7- Insert Cavalry\n");
 	printf("8- Insert Artillhery\n");
-	printf("9- Choose the unit that you wanna move (I / C/ A)\n"); // I -> infantry, C-> cavalry, A -> artillery
+	printf("9- Move Units\n"); // I -> infantry, C-> cavalry, A -> artillery
 	printf("10- Show my coins: \n"); //podemos ou nao ter isto, dps vê-se
 	printf("11- Back to the New Game Menu: \n");
 	printf("0- Exit\n");
@@ -141,32 +143,36 @@ int gordorMovesMenu()
 
  *  
  */
-int gordorMovesBattle() 
+int gordorMovesBattle(gordorPlayer *gordPLayer, mordorPlayer *mordPlayer) 
 {
 	int opcaoMoves;
 	int resultado;
 	// *********para imprimir o campo de batalha********
 	
-	gordorPlayer *gordPlayer = NULL;
-	mordorPlayer *mordPLayer = NULL;
+	//gordorPlayer *gordPlayer = NULL;
+	//mordorPlayer *mordPLayer = NULL;
 	//***********************************************
-	
+	//****************Variaveis para criar no campo de batalha a base****************
+	int baseRow, baseCol; //variaveis para escolher onde o utilizador quer inserir
 
 	do {
 		opcaoMoves = gordorMovesMenu();
 		switch (opcaoMoves) {
-		case 1:	printfField();
+		case 1:	printfField(gordPLayer, mordPlayer);
 			break;
 
 		case 2:printf("Factory\n");
-			showGondorFactory(gordPlayer);
+			showGondorFactory(gordPLayer);
 			printf("Units\n");
-			showGondorUnits(gordPlayer);
+			showGondorUnits(gordPLayer);
 			break;
-			/* 
+			
 		case 3: printf("Where do you wanna insert your base? \n");
-			//scanf_s("%s", );
-			//resultado = createBaseGondor();
+			getGridCords(&baseRow, &baseCol);
+			printf("Creating the base!!!!\n");
+			createBaseGondor(baseRow, baseCol, gordPLayer);
+			printf("Base created!!\n");
+			printfField(gordPLayer, mordPlayer);
 			break;
 
 		case 4:printf("Where do you wanna insert the barrack? \n");
@@ -178,7 +184,7 @@ int gordorMovesBattle()
 			//scanf_s("%s", );
 			//resultado = createBaseGondor();
 			break;
-
+			/*
 		case 6:printf("Where do you wanna insert the infantry unit? \n");
 			//scanf_s("%s", );
 			//resultado = createBaseGondor();
@@ -194,12 +200,12 @@ int gordorMovesBattle()
 			//resultado = createBaseGondor();
 			break;
 
-		case 9:printf("Where do you wanna insert your base? \n");
+		case 9:printf("Choose the unit that you wanna move (I / C/ A)? \n");
 			//scanf_s("%s", );
 			//resultado = createBaseGondor();
 			break;
 			*/
-		case 10: showCoinsGondor(gordPlayer, mordPLayer);
+		case 10: showCoinsGondor(gordPLayer, mordPlayer);
 			break;
 
 		case 11: NewGame();
