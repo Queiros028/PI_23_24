@@ -125,14 +125,15 @@ int gordorMovesMenu()
 	printf("1- Print field: \n");
 	printf("2- Print Gordor Status: \n");
 	printf("3- Insert Base Gondor: \n");
-	printf("4- Insert Barrack\n");
-	printf("5- Insert Stable\n");
-	printf("6- Insert Infantry\n");
-	printf("7- Insert Cavalry\n");
-	printf("8- Insert Artillhery\n");
-	printf("9- Move Units\n"); // I -> infantry, C-> cavalry, A -> artillery
-	printf("10- Show my coins: \n"); //podemos ou nao ter isto, dps vê-se
-	printf("11- Back to the New Game Menu: \n");
+	printf("4- Insert Mine Gondor: \n");
+	printf("5- Insert Barrack\n");
+	printf("6- Insert Stable\n");
+	printf("7- Insert Infantry\n");
+	printf("8- Insert Cavalry\n");
+	printf("9- Insert Artillhery\n");
+	printf("10- Move Units\n"); // I -> infantry, C-> cavalry, A -> artillery
+	printf("11- Show my coins: \n"); //podemos ou nao ter isto, dps vê-se
+	printf("12- Back to the New Game Menu: \n");
 	printf("0- Exit\n");
 	printf("***********************\n");
 	printf("Opcao: \n");
@@ -148,11 +149,13 @@ int gordorMovesMenu()
  */
 int gordorMovesBattle()
 {
+	gordorPlayer *gPlayer = NULL;
+
 	int opcaoMoves;
 	int resultado;
 	// *********para imprimir o campo de batalha********
 	
-	gordorPlayer *gordPlayer = NULL;
+	//gordorPlayer *gordPlayer = NULL;
 	
 	//***********************************************
 	int baseRow;
@@ -175,57 +178,31 @@ int gordorMovesBattle()
 			break;*/
 			
 		case 3: 			
-			printf("Where do you wanna insert your base? \n");
-			/*
-			getGridCords(&baseRow, &baseCol);
-			printf("Creating the base!!!!\n");
-			createBaseGondor(baseRow, baseCol, gordPlayer);*/
-			printf("Select Row (0-16): \n");
-			scanf_s("%d", &baseRow);
-			printf("Select COL (A-Z): \n");
-			scanf_s(" %c", &baseCol);
-			gordPlayer = createBaseGondor(baseRow, baseCol, gordPlayer);
+			placingBaseG(gPlayer);			
+			break;
+		case 4: placingMineG(gPlayer);
+			break;
+		case 5:placingBarrackG(gPlayer);
+			break;
+		case 6:placingStableG(gPlayer);
+			break;			
+		case 7:placingInfantryG(gPlayer);
+			break;
+		case 8:placingCavalryG(gPlayer);
+			break;
+		case 9:placingArtilleryG(gPlayer);
 			break;
 			/*
-		case 4:printf("Where do you wanna insert the barrack? \n");
-			getGridCords(&barrackCol, &barrackRow);
-			createBarrack(barrackCol, barrackRow, gordPLayer);
-			
-			//scanf_s("%s", );
-			//resultado = createBaseGondor();
-			*/
-			break;
-
-		case 5:printf("Where do you wanna insert the stable? \n");
-			//scanf_s("%s", );
-			//resultado = createBaseGondor();
-			break;
-			/*
-		case 6:printf("Where do you wanna insert the infantry unit? \n");
-			//scanf_s("%s", );
-			//resultado = createBaseGondor();
-			break;
-
-		case 7:printf("Where do you wanna insert the cavalry unit? \n");
-			//scanf_s("%s", );
-			//resultado = createBaseGondor();
-			break;
-
-		case 8:printf("Where do you wanna insert the artillery unit? \n");
-			//scanf_s("%s", );
-			//resultado = createBaseGondor();
-			break;
-
-		case 9:printf("Choose the unit that you wanna move (I / C/ A)? \n");
+		case 10:printf("Choose the unit that you wanna move (I / C/ A)? \n");
 			//scanf_s("%s", );
 			//resultado = createBaseGondor();
 			break;
 			*/
 			/*
-		case 10: showCoinsGondor(gordPLayer, mordPlayer);
+		case 11: showCoinsGondor(gordPLayer, mordPlayer);
 			break;
 
-		case 11: NewGame();
+		case 112: NewGame();
 			break;
 			*/
 		case 0: printf("Leaving...!!!\n");

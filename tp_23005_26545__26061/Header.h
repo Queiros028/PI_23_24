@@ -13,6 +13,7 @@
 #define PLAYER 2 //numero de jogadores do jogo
 
 #define BASE_SYMB_G 'G' 
+
 #define BARRACK_SYMB_G 'R'
 #pragma region Structs
 
@@ -20,7 +21,7 @@
  * Esta struct vai servir para as outras structs
  */
 typedef struct entity {
-	char symbol; //é representado assim: "."
+	char symbol; //é representado assim: " "
 	int health; //a vida começa a 100% em todos os elementos do jogo que têm vida
 }entity;
 
@@ -72,6 +73,7 @@ typedef struct mordorUnits
 typedef struct building {
 	char type; //tipo de edificio
 	int cost;  //custo
+	char symbol;
 	entity base;
 	entity mine;
 	entity barracks;
@@ -137,13 +139,28 @@ void getGridCords(int* row, int* col);
 	#pragma region funcoes gordor
 void showGondorFactory();
 void showGondorUnits();
-int createBaseGondor(int row, int col, gordorPlayer* gordPlayer);
+void createBaseGondor(int row, int col, gordorPlayer* gordPlayer);
+void placingBaseG(gordorPlayer* gordPlayer);
+
+void createBarrack(int row, int col, gordorPlayer* gordPlayer);
+void placingBarrackG(gordorPlayer* gordPlayer);
+
 void createMineGondor(int row, int col, building mine, gordorPlayer* gordPlayer);
-void createBarrack(int row, int col,gordorPlayer* gordPlayer);
+void placingMineG(gordorPlayer* gordPlayer);
+
+
 void createStables(int row, int col, building stable, gordorPlayer* gordPlayer);
+void placingStableG(gordorPlayer* gordPlayer);
+
 void createInfantry(int row, int col, gondorUnits infantry, gordorPlayer* gordPLayer);
+void placingInfantryG(gordorPlayer* gordPlayer);
+
 void createCavalry(int row, int col, gondorUnits cavalry, gordorPlayer* gordPlayer);
+void placingCavalryG(gordorPlayer* gordPlayer);
+
 void createArtillery(int row, int col, gondorUnits artillery, gordorPlayer* gordPlayer);
+void placingArtilleryG(gordorPlayer* gordPlayer);
+
 /*
 void moveInfantryGondor(int originRow, int originCol, int destRow, int destCol);
 void moveCavalryGondor(int originRow, int originCol, int destRow, int destCol);
@@ -151,6 +168,7 @@ void moveArtilleryGondor(int originRow, int originCol, int destRow, int destCol)
 */
 void moveGordorUnits(gordorPlayer* player, char unitType, int cells, int originRow, int originCol, int destRow, int destCol, gordorPlayer* gordPlayer);
 	#pragma endregion	
+
 
 	#pragma region funcoes mordor
 void showMordorFactory();

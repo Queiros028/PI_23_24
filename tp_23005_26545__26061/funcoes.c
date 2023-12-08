@@ -150,7 +150,7 @@ void showCoinsMordor(const mordorPlayer* mordPlayer){
  *
  */
 int checkEmptyPosition(int row, int col) {
-    if (field[row][col].symbol != '.') {
+    if (field[row][col].symbol != ' ') {
         printf("That cell is occupied!!\n");
         printf("Choose another cell to move your unit!!!\n");
         return 1;
@@ -162,13 +162,19 @@ int checkEmptyPosition(int row, int col) {
 void getGridCords(int* row, int* col) {
 
     char colInput;
-    printf("Choose the row (0-%d): \n", ROWS - 1);
-    scanf_s("%d", row);
+    if (checkEmptyPosition) {
+        printf("Choose the row (0-%d): \n", ROWS - 1);
+        scanf_s("%d", row);
 
-    printf("Choose the column(A-Z): ");
-    scanf_s(" %c", &colInput);
-    *col = colInput - 'A';
+        printf("Choose the column(A-Z): ");
+        scanf_s(" %c", &colInput);
+        *col = colInput - 'A';
+    }
+    
 }
+
+
+
 
 #pragma endregion
 
@@ -238,24 +244,52 @@ void printStatusGondor(gordorPlayer* gordPlayer) {
  * \params- row
  * \params- col
  * \params- gordPlayer
- * \brief- Criar uma base no campo de batalha
+ * \brief- Criar uma base 
  * 
  */
-int createBaseGondor(int row, int col,gordorPlayer *gordPlayer) {
+void createBaseGondor(int row, int col, gordorPlayer* gordPlayer) {
     
-    if (row >= 0 && row + 1< ROWS && col >= 0 && col < COLS + 1 &&
-        field[row][col].symbol == '.' &&
-        field[row][col + 1].symbol == '.' &&
-        field[row + 1][col].symbol == '.' &&
-        field[row + 1][col + 1].symbol == '.'){
+    if (row >= 0 && row + 1 < ROWS && col >= 0 && col + 1 < COLS &&
+        field[row][col].symbol == ' ' &&
+        field[row][col + 1].symbol == ' ' &&
+        field[row + 1][col].symbol == ' ' &&
+        field[row + 1][col + 1].symbol == ' ') {
         field[row][col].symbol = BASE_SYMB_G;
 
         //como o custo de uma base é 30 coins, tiramos 30 coins ao total de coins que o jogador tem
-        //gordPlayer->coins -= 30;
+        gordPlayer->coins -= 30;
+        printf("Base created!\n");
     }
     else {
         printf("Cannot perform this action!!!!\n");
     }
+}
+typedef struct entity {
+    char symbol; //é representado assim: " "
+    int health; //a vida começa a 100% em todos os elementos do jogo que têm vida
+}entity;
+
+
+/**
+ *
+ * \function name- placingBaseG
+ * \params- gordPlayer
+ * \brief-  Colocar a base no campo de batalha
+ * 
+ *  
+ */
+void placingBaseG(gordorPlayer* gordPlayer) {
+
+    int baseRow, baseCol;
+
+    getGridCords(&baseRow, &baseCol);
+    printf("Creating the base!!!!\n");
+    createBaseGondor(&baseRow, &baseCol,gordPlayer);
+    printf("Select Row (0-16): \n");
+    scanf_s("%d", &baseRow);
+    printf("Select COL (A-Z): \n");
+    scanf_s(" %c", &baseCol);
+
 }
 
 /**
@@ -265,7 +299,7 @@ int createBaseGondor(int row, int col,gordorPlayer *gordPlayer) {
  * \params- col
  * \params- mine
  * \params- gordPlayer
- * \brief- Criar uma mina no campo de batalha
+ * \brief- Criar uma mina 
  * 
  *  
  */
@@ -283,6 +317,23 @@ void createMineGondor(int row, int col,building mine,gordorPlayer *gordPlayer) {
         printf("Nao e possivel realizar essa acao!!!!\n");
     }
 }
+
+void placingMineG(gordorPlayer* gordPlayer) {
+
+    int mineRow, mineCol;
+
+    getGridCords(&mineRow, &mineCol);
+    printf("Creating the base!!!!\n");
+    createBaseGondor(&mineRow, &mineCol, gordPlayer);
+    printf("Select Row (0-16): \n");
+    scanf_s("%d", &mineRow);
+    printf("Select COL (A-Z): \n");
+    scanf_s(" %c", &mineCol);
+}
+
+
+
+
 /**
  *
  * \function name- createBarrack
@@ -309,6 +360,22 @@ void createBarrack(int row, int col, gordorPlayer *gordPlayer) {
         printf("Nao e possivel realizar essa acao!!!!\n");
     }
 }
+
+void placingBarrackG(gordorPlayer* gordPlayer) {
+
+    int barrackRow, barrackCol;
+
+    getGridCords(&barrackRow, &barrackCol);
+    printf("Creating the base!!!!\n");
+    createBaseGondor(&barrackRow, &barrackCol, gordPlayer);
+    printf("Select Row (0-16): \n");
+    scanf_s("%d", &barrackRow);
+    printf("Select COL (A-Z): \n");
+    scanf_s(" %c", &barrackCol);
+
+}
+
+
 /**
  *
  * \function name- createStables
@@ -334,6 +401,19 @@ void createStables(int row, int col, building stable, gordorPlayer *gordPlayer) 
         printf("Nao e possivel realizar essa acao!!!!\n");
     }
 }
+
+void placingStableG(gordorPlayer* gordPlayer) {
+    int stableRow, stableCol;
+
+    getGridCords(&stableRow, &stableCol);
+    printf("Creating the base!!!!\n");
+    createBaseGondor(&stableRow, &stableCol, gordPlayer);
+    printf("Select Row (0-16): \n");
+    scanf_s("%d", &stableRow);
+    printf("Select COL (A-Z): \n");
+    scanf_s(" %c", &stableCol);
+}
+
 /**
  *
  * \function name- createInfantry
@@ -359,6 +439,19 @@ void createInfantry(int row, int col, gondorUnits infantry, gordorPlayer *gordPL
         printf("Nao e possivel realizar essa acao!!!!\n");
     }
 }
+
+void placingInfantryG(gordorPlayer* gordPlayer) {
+    int infantryRow, infantryCol;
+
+    getGridCords(&infantryRow, &infantryCol);
+    printf("Creating the base!!!!\n");
+    createBaseGondor(&infantryRow, &infantryCol, gordPlayer);
+    printf("Select Row (0-16): \n");
+    scanf_s("%d", &infantryRow);
+    printf("Select COL (A-Z): \n");
+    scanf_s(" %c", &infantryCol);
+}
+
 /**
  *
  * \function name- createCavalry
@@ -383,6 +476,21 @@ void createCavalry(int row, int col, gondorUnits cavalry, gordorPlayer *gordPlay
     }
 
 }
+
+void placingCavalryG(gordorPlayer* gordPlayer) {
+    int cavalryRow, cavalryCol;
+
+    getGridCords(&cavalryRow, &cavalryCol);
+    printf("Creating the base!!!!\n");
+    createBaseGondor(&cavalryRow, &cavalryCol, gordPlayer);
+    printf("Select Row (0-16): \n");
+    scanf_s("%d", &cavalryRow);
+    printf("Select COL (A-Z): \n");
+    scanf_s(" %c", &cavalryCol);
+}
+
+
+
 /**
  *
  * \function name- createArtillery
@@ -405,6 +513,18 @@ void createArtillery(int row, int col, gondorUnits artillery, gordorPlayer *gord
     else {
         printf("Nao e possivel realizar essa acao!!!!\n");
     }
+}
+
+void placingArtilleryG(gordorPlayer* gordPlayer) {
+    int artilleryRow, artilleryCol;
+
+    getGridCords(&artilleryRow, &artilleryCol);
+    printf("Creating the base!!!!\n");
+    createBaseGondor(&artilleryRow, &artilleryCol, gordPlayer);
+    printf("Select Row (0-16): \n");
+    scanf_s("%d", &artilleryRow);
+    printf("Select COL (A-Z): \n");
+    scanf_s(" %c", &artilleryCol);
 }
 
 
