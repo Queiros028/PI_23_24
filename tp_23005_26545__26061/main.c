@@ -8,7 +8,10 @@
 #include<stdlib.h>
 #include "Header.h"
 #pragma warning(disable: 4996)
+#define ROWS 17
+#define COLS 26
 
+entity field[ROWS][COLS];
 
 #pragma region Main menu
 
@@ -105,13 +108,13 @@ int StartNewGameMenu()
  * \brief- Menu para gordor
  *  
  */
-int gordorMenu(gordorPlayer* gordPlayer, mordorPlayer *mordPlayer) {
+int gordorMenu() {
 
 	int gordorOption;
 
 	printf("WELCOME TO GORDOR SIDE\n");
 
-	gordorOption = gordorMovesBattle(gordPlayer, mordPlayer);
+	gordorOption = gordorMovesBattle();
 	}
 
 	#pragma region Moves/buildings
@@ -143,41 +146,54 @@ int gordorMovesMenu()
 
  *  
  */
-int gordorMovesBattle(gordorPlayer *gordPLayer, mordorPlayer *mordPlayer) 
+int gordorMovesBattle()
 {
 	int opcaoMoves;
 	int resultado;
 	// *********para imprimir o campo de batalha********
 	
-	//gordorPlayer *gordPlayer = NULL;
-	//mordorPlayer *mordPLayer = NULL;
+	gordorPlayer *gordPlayer = NULL;
+	
 	//***********************************************
-	//****************Variaveis para criar no campo de batalha a base****************
-	int baseRow, baseCol; //variaveis para escolher onde o utilizador quer inserir
+	int baseRow;
+	char baseCol; //variaveis para escolher onde o utilizador quer inserir a base
+
+	int barrackRow;
+	char barrackCol;
 
 	do {
 		opcaoMoves = gordorMovesMenu();
 		switch (opcaoMoves) {
-		case 1:	printfField(gordPLayer, mordPlayer);
+		case 1:	//printfField(gordPLayer, mordPlayer);
+			printField();
 			break;
-
+			/*
 		case 2:printf("Factory\n");
-			showGondorFactory(gordPLayer);
+			showGondorFactory(gordPlayer);
 			printf("Units\n");
-			showGondorUnits(gordPLayer);
-			break;
+			showGondorUnits(gordPlayer);
+			break;*/
 			
-		case 3: printf("Where do you wanna insert your base? \n");
+		case 3: 			
+			printf("Where do you wanna insert your base? \n");
+			/*
 			getGridCords(&baseRow, &baseCol);
 			printf("Creating the base!!!!\n");
-			createBaseGondor(baseRow, baseCol, gordPLayer);
-			printf("Base created!!\n");
-			printfField(gordPLayer, mordPlayer);
+			createBaseGondor(baseRow, baseCol, gordPlayer);*/
+			printf("Select Row (0-16): \n");
+			scanf_s("%d", &baseRow);
+			printf("Select COL (A-Z): \n");
+			scanf_s(" %c", &baseCol);
+			gordPlayer = createBaseGondor(baseRow, baseCol, gordPlayer);
 			break;
-
+			/*
 		case 4:printf("Where do you wanna insert the barrack? \n");
+			getGridCords(&barrackCol, &barrackRow);
+			createBarrack(barrackCol, barrackRow, gordPLayer);
+			
 			//scanf_s("%s", );
 			//resultado = createBaseGondor();
+			*/
 			break;
 
 		case 5:printf("Where do you wanna insert the stable? \n");
@@ -205,14 +221,17 @@ int gordorMovesBattle(gordorPlayer *gordPLayer, mordorPlayer *mordPlayer)
 			//resultado = createBaseGondor();
 			break;
 			*/
+			/*
 		case 10: showCoinsGondor(gordPLayer, mordPlayer);
 			break;
 
 		case 11: NewGame();
 			break;
+			*/
 		case 0: printf("Leaving...!!!\n");
 			break;
 		}
+		
 	} while (opcaoMoves != 0);
 }
 

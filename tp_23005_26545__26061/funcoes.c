@@ -27,7 +27,7 @@ void startGame() {
     int i, j;
     for (i = 0; i < ROWS; i++) {
         for (j = 0; j < COLS; j++) {
-            field[i][j].symbol = '.';
+            field[i][j].symbol = ' ';
         }
     }
 }
@@ -38,21 +38,69 @@ void startGame() {
  * 
  *  
  */
-void printfField(const gordorPlayer *gordPlayer, const mordorPlayer *mordPlayer) {
-    // Print column numbers ('A' to 'Z')
+
+void printSquareCell() {
+    printf("----");
+}
+
+
+void printTableLine() {
+    for (int i = 0; i <= COLS; i++) {
+        printSquareCell();
+    }
     printf("\n");
+}
+
+
+void initializeGame() {
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            field[i][j].symbol = ' ';
+        }
+    }
+}
+
+
+void printField() {
+    // Print column numbers ('A' to 'Z')
+    printf("\n    ");
     for (int i = 0; i < COLS; i++) {
-        printf("%2c ", 'A' + i);
+        printf(" %c  ", 'A' + i);
     }
     printf("\n");
 
-
     // Print game grid with row numbers (0 to 16)
     for (int i = 0; i < ROWS; i++) {
+        printTableLine();
         printf("%2d ", i);
         for (int j = 0; j < COLS; j++) {
+            printf("| %c ", field[i][j].symbol);
+        }
+        printf("|\n");
+    }
+    printTableLine();
+}
+
+
+/*
+void printfField(const gordorPlayer *gordPlayer, const mordorPlayer *mordPlayer) {
+    // Print column numbers ('A' to 'Z')
+    int i;
+    printf(" \n");
+    for (i = 0; i < COLS; i++) {
+        printf(" %c ", 'A' + i);
+    }
+    printf("\n");
+
+    // Print game grid with row numbers (0 to 16)
+    for (i = 0; i < ROWS; i++) {
+        printTableLine();
+        printf("%2d ", i);
+        for (int j = 0; j < COLS; j++) {
+            printf("| %c ", field[i][j].symbol);
+            /*
             if (field[i][j].symbol == '.') {
-                printf(". ");
+                printf(" . ");
             }
             else {
                 printf("%c ", field[i][j].symbol);
@@ -60,11 +108,10 @@ void printfField(const gordorPlayer *gordPlayer, const mordorPlayer *mordPlayer)
         }
         printf("\n");
     }
-   // printTableLine();
+    printTableLine();
+}*/
+   
 
-    //printf("Player gondor coins: %d\n", gordPlayer->coins);
-    //printf("Player mordor coins: %d\n", mordPlayer->coins);
-}
 /**
  *
  * \function name- showCoins
@@ -119,7 +166,7 @@ void getGridCords(int* row, int* col) {
     scanf_s("%d", row);
 
     printf("Choose the column(A-Z): ");
-    scanf_s("%c", &colInput);
+    scanf_s(" %c", &colInput);
     *col = colInput - 'A';
 }
 
@@ -194,21 +241,23 @@ void printStatusGondor(gordorPlayer* gordPlayer) {
  * \brief- Criar uma base no campo de batalha
  * 
  */
-int createBaseGondor(int row, int col, gordorPlayer *gordPlayer) {
+int createBaseGondor(int row, int col,gordorPlayer *gordPlayer) {
+    
     if (row >= 0 && row + 1< ROWS && col >= 0 && col < COLS + 1 &&
         field[row][col].symbol == '.' &&
         field[row][col + 1].symbol == '.' &&
         field[row + 1][col].symbol == '.' &&
         field[row + 1][col + 1].symbol == '.'){
-        field[row][col].symbol = 'GGGG';
+        field[row][col].symbol = BASE_SYMB_G;
 
         //como o custo de uma base é 30 coins, tiramos 30 coins ao total de coins que o jogador tem
-        gordPlayer->coins -= 30;
+        //gordPlayer->coins -= 30;
     }
     else {
         printf("Cannot perform this action!!!!\n");
     }
 }
+
 /**
  *
  * \function name- createMineGondor
@@ -245,12 +294,13 @@ void createMineGondor(int row, int col,building mine,gordorPlayer *gordPlayer) {
  * 
  *  
  */
-void createBarrack(int row, int col, building barrack, gordorPlayer *gordPlayer) {
-    if (row >= 0 && row < ROWS && col >= 0 && col < COLS && field[row][col].symbol == '.') {
-        field[row][col] = barrack.barracks;
-        field[row][col + 1] = barrack.barracks;
-        field[row + 1][col] = barrack.barracks;
-        field[row + 1][col + 1] = barrack.barracks;
+void createBarrack(int row, int col, gordorPlayer *gordPlayer) {
+    if (row >= 0 && row + 1 < ROWS && col >= 0 && col < COLS + 1 &&
+        field[row][col].symbol == '.' &&
+        field[row][col + 1].symbol == '.' &&
+        field[row + 1][col].symbol == '.' &&
+        field[row + 1][col + 1].symbol == '.') {
+        field[row][col].symbol = BARRACK_SYMB_G;
 
         //como o custo de uma barricada é 25 coins, tiramos 25 coins ao total de coins que o jogador tem
         gordPlayer->coins -= 25;

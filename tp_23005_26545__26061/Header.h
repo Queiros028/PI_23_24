@@ -12,6 +12,8 @@
 #define COLS 26
 #define PLAYER 2 //numero de jogadores do jogo
 
+#define BASE_SYMB_G 'G' 
+#define BARRACK_SYMB_G 'R'
 #pragma region Structs
 
 /**
@@ -120,10 +122,10 @@ typedef struct cell {
 #pragma endregion
 
 #pragma region Funcoes
-
 	#pragma region funcaoes gerais
 void startGame();
-void printfField(const gordorPlayer* gordPlayer, const mordorPlayer* mordPlayer);
+//void printfField(const gordorPlayer* gordPlayer, const mordorPlayer* mordPlayer);
+void printField();
 void showCoinsGondor(const gordorPlayer* gordPLayer);
 void showCoinsMordor(const mordorPlayer* mordPlayer);
 int checkEmptyPosition(int row, int col);
@@ -137,7 +139,7 @@ void showGondorFactory();
 void showGondorUnits();
 int createBaseGondor(int row, int col, gordorPlayer* gordPlayer);
 void createMineGondor(int row, int col, building mine, gordorPlayer* gordPlayer);
-void createBarrack(int row, int col, building barrack, gordorPlayer* gordPlayer);
+void createBarrack(int row, int col,gordorPlayer* gordPlayer);
 void createStables(int row, int col, building stable, gordorPlayer* gordPlayer);
 void createInfantry(int row, int col, gondorUnits infantry, gordorPlayer* gordPLayer);
 void createCavalry(int row, int col, gondorUnits cavalry, gordorPlayer* gordPlayer);
