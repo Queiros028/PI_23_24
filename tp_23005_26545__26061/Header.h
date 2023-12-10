@@ -1,6 +1,6 @@
 /*****************************************************************//**
  * \file   Header.h
- * 
+ *
  * \author Eduardo Queirós, João Lima, Luís Gonçalves
  * \date   November 2023
  *********************************************************************/
@@ -13,8 +13,31 @@
 #define PLAYER 2 //numero de jogadores do jogo
 
 #define BASE_SYMB_G 'G' 
-
+#define MINE_SYMB_G 'M'
 #define BARRACK_SYMB_G 'R'
+#define STABLES_SYMB_G 'S' 
+#define ARMOURY_SYMB_G 'A'
+
+#define INFANTARY_SYMB_G 'IF' 
+#define CAVALARY_SYMB_G 'CV'
+#define ARTILLERY_SYMB_G 'AT'
+
+#define BASE_SYMB_M 'G' 
+#define MINE_SYMB_M 'M'
+#define BARRACK_SYMB_M 'R'
+#define STABLES_SYMB_M 'S' 
+#define ARMOURY_SYMB_M 'A'
+
+#define INFANTARY_SYMB_M 'IF' 
+#define CAVALARY_SYMB_M 'CV'
+#define ARTILLERY_SYMB_M 'AT'
+
+ //entity base;
+ //entity mine;
+ //entity barracks;
+ //entity stables;
+ //entity armoury;
+
 #pragma region Structs
 
 /**
@@ -27,9 +50,9 @@ typedef struct entity {
 
 
 /**
- * struct para o utilizador conseguir ver quais os seus edificios de batalha 
+ * struct para o utilizador conseguir ver quais os seus edificios de batalha
  */
-typedef struct faction 
+typedef struct faction
 {
 	char factionName[20];
 	char base[5];
@@ -81,7 +104,7 @@ typedef struct building {
 	entity armoury;
 }building;
 
-typedef struct gordorPlayer{
+typedef struct gordorPlayer {
 	char name[20];
 	int coins;
 	int infantry;
@@ -124,7 +147,7 @@ typedef struct cell {
 #pragma endregion
 
 #pragma region Funcoes
-	#pragma region funcaoes gerais
+#pragma region funcaoes gerais
 void startGame();
 //void printfField(const gordorPlayer* gordPlayer, const mordorPlayer* mordPlayer);
 void printField();
@@ -132,11 +155,11 @@ void showCoinsGondor(const gordorPlayer* gordPLayer);
 void showCoinsMordor(const mordorPlayer* mordPlayer);
 int checkEmptyPosition(int row, int col);
 void printStatusGondor(gordorPlayer* player);
-void printMordorStatus(mordorPlayer * mordPlayer);
+void printMordorStatus(mordorPlayer* mordPlayer);
 void getGridCords(int* row, int* col);
 #pragma endregion
 
-	#pragma region funcoes gordor
+#pragma region funcoes gordor
 void showGondorFactory();
 void showGondorUnits();
 void createBaseGondor(int row, int col, gordorPlayer* gordPlayer);
@@ -167,10 +190,10 @@ void moveCavalryGondor(int originRow, int originCol, int destRow, int destCol);
 void moveArtilleryGondor(int originRow, int originCol, int destRow, int destCol);
 */
 void moveGordorUnits(gordorPlayer* player, char unitType, int cells, int originRow, int originCol, int destRow, int destCol, gordorPlayer* gordPlayer);
-	#pragma endregion	
+#pragma endregion	
 
 
-	#pragma region funcoes mordor
+#pragma region funcoes mordor
 void showMordorFactory();
 void showMordorUnits();
 void createBaseMordor(int row, int col, mordorPlayer* mordPLayer, building base);
@@ -186,11 +209,13 @@ void moveCavalryMordor(int originRow, int originCol, int destRow, int destCol);
 void moveArtilleryMordor(int originRow, int originCol, int destRow, int destCol);
 */
 void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int originRow, int originCol, int destRow, int destCol);
-	#pragma endregion 
+#pragma endregion 
 
-	#pragma region funcoes gravar
-
-	#pragma endregion
+#pragma region funcoes gravar
 
 #pragma endregion
+
+#pragma endregion
+
+
 

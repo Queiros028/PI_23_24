@@ -1,6 +1,6 @@
 /*****************************************************************//**
  * \file   main.c
- * 
+ *
  * \author Eduardo Queirós, João Lima, Luís Gonçalves
  * \date   November 2023
  *********************************************************************/
@@ -19,9 +19,9 @@ entity field[ROWS][COLS];
  *
  * \function name- mainMenu
  * \brief- Este é o primeiro menu que aparece quando se inicializa o jogo
- *  
+ *
  */
-int mainMenu() 
+int mainMenu()
 {
 	int opcaoPrincipal;
 	printf("WELCOME TO THE GAME OF THE RINGS\n");
@@ -43,7 +43,7 @@ int main()
 	startGame();
 	int field[17][26];
 
-	int mainOption =  mainMenu();	
+	int mainOption = mainMenu();
 	switch (mainOption)
 	{
 	case 1: NewGame();
@@ -87,9 +87,9 @@ int NewGame()
  *
  * \function name- StartNewGameMenu
  * \brief- Menu para escolher o lado que se quer jogar
- *  
+ *
  */
-int StartNewGameMenu() 
+int StartNewGameMenu()
 {
 	int newOption; //opcao para escolher o que fazer quando se começa um novo jogo
 	printf("CHOOSE YOUR SIDE\n");
@@ -106,7 +106,7 @@ int StartNewGameMenu()
  *
  * \function name- gordorMenu
  * \brief- Menu para gordor
- *  
+ *
  */
 int gordorMenu() {
 
@@ -115,9 +115,108 @@ int gordorMenu() {
 	printf("WELCOME TO GORDOR SIDE\n");
 
 	gordorOption = gordorMovesBattle();
-	}
+}
 
-	#pragma region Moves/buildings
+
+int mordorMenu() {
+
+	int mordorOption;
+
+	printf("WELCOME TO GORDOR SIDE\n");
+
+	mordorOption = mordorMovesBattle();
+
+}
+
+#pragma region Moves/buildings
+
+int mordorMovesMenu()
+{
+	int mordorSecOption;
+	printf("1- Print field: \n");
+	printf("2- Print Mordor Status: \n");
+	printf("3- Insert Base Mordor: \n");
+	printf("4- Insert Mine Mordor: \n");
+	printf("5- Insert Barrack\n");
+	printf("6- Insert Stable\n");
+	printf("7- Insert Infantry\n");
+	printf("8- Insert Cavalry\n");
+	printf("9- Insert Artillhery\n");
+	printf("10- Move Units\n"); // I -> infantry, C-> cavalry, A -> artillery
+	printf("11- Show my coins: \n"); //podemos ou nao ter isto, dps vê-se
+	printf("12- Back to the New Game Menu: \n");
+	printf("0- Exit\n");
+	printf("***********************\n");
+	printf("Opcao: \n");
+	scanf_s("%d", &mordorSecOption);
+	return(mordorSecOption);
+}
+
+int mordorMovesBattle()
+{
+	mordorPlayer* mPlayer = NULL;
+
+	int opcaoMoves;
+	int resultado;
+	// *********para imprimir o campo de batalha********
+
+	//gordorPlayer *gordPlayer = NULL;
+
+	//***********************************************
+	int baseRow;
+	char baseCol; //variaveis para escolher onde o utilizador quer inserir a base
+
+	int barrackRow;
+	char barrackCol;
+
+	do {
+		opcaoMoves = mordorMovesMenu();
+		switch (opcaoMoves) {
+		case 1:	    initializeGrid(field);
+			printField();
+			break;
+			/*
+		case 2:printf("Factory\n");
+			showGondorFactory(gordPlayer);
+			printf("Units\n");
+			showGondorUnits(gordPlayer);
+			break;*/
+
+		case 3:
+			placingBaseM(mPlayer);
+			break;
+		case 4: placingMineM(mPlayer);
+			break;
+		case 5:placingBarrackM(mPlayer);
+			break;
+		case 6:placingStableM(mPlayer);
+			break;
+		case 7:placingInfantryM(mPlayer);
+			break;
+		case 8:placingCavalryM(mPlayer);
+			break;
+		case 9:placingArtilleryM(mPlayer);
+			break;
+			/*
+		case 10:printf("Choose the unit that you wanna move (I / C/ A)? \n");
+			//scanf_s("%s", );
+			//resultado = createBaseGondor();
+			break;
+			*/
+			/*
+		case 11: showCoinsGondor(gordPLayer, mordPlayer);
+			break;
+			*/
+		case 12: NewGame();
+			break;
+			
+		case 0: printf("Leaving...!!!\n");
+			break;
+		}
+
+	} while (opcaoMoves != 0);
+}
+#pragma region Moves/buildings
 
 int gordorMovesMenu()
 {
@@ -145,18 +244,18 @@ int gordorMovesMenu()
  * \function name- gordorMovesBattle
  * \brief- Para realizar o que fzr dps de escolher mos o que fzr
 
- *  
+ *
  */
 int gordorMovesBattle()
 {
-	gordorPlayer *gPlayer = NULL;
+	gordorPlayer* gPlayer = NULL;
 
 	int opcaoMoves;
 	int resultado;
 	// *********para imprimir o campo de batalha********
-	
+
 	//gordorPlayer *gordPlayer = NULL;
-	
+
 	//***********************************************
 	int baseRow;
 	char baseCol; //variaveis para escolher onde o utilizador quer inserir a base
@@ -167,7 +266,7 @@ int gordorMovesBattle()
 	do {
 		opcaoMoves = gordorMovesMenu();
 		switch (opcaoMoves) {
-		case 1:	//printfField(gordPLayer, mordPlayer);
+		case 1:	    initializeGrid(field);
 			printField();
 			break;
 			/*
@@ -176,16 +275,16 @@ int gordorMovesBattle()
 			printf("Units\n");
 			showGondorUnits(gordPlayer);
 			break;*/
-			
-		case 3: 			
-			placingBaseG(gPlayer);			
+
+		case 3:
+			placingBaseG(gPlayer);
 			break;
 		case 4: placingMineG(gPlayer);
 			break;
 		case 5:placingBarrackG(gPlayer);
 			break;
 		case 6:placingStableG(gPlayer);
-			break;			
+			break;
 		case 7:placingInfantryG(gPlayer);
 			break;
 		case 8:placingCavalryG(gPlayer);
@@ -201,43 +300,40 @@ int gordorMovesBattle()
 			/*
 		case 11: showCoinsGondor(gordPLayer, mordPlayer);
 			break;
-
-		case 112: NewGame();
-			break;
 			*/
+		case 12: NewGame();
+			break;
+			
 		case 0: printf("Leaving...!!!\n");
 			break;
 		}
-		
+
 	} while (opcaoMoves != 0);
 }
 
-int mordorMenu() {
-
-}
 
 
 /**
  *
  * \function name- gordorBuildingBattle
  * \brief- Escolher quais os edificios que queremos adicionar
- *  
+ *
  */
-/*
-gordorBuildingBattle() 
-{
-	gordorPlayer player1 = { "Player 1", 100, 0, 0, 0,};
-	char building_type;
-	char unit_type;
+ /*
+ gordorBuildingBattle()
+ {
+	 gordorPlayer player1 = { "Player 1", 100, 0, 0, 0,};
+	 char building_type;
+	 char unit_type;
 
-	printf("Enter building type (B/M/R/S/A):\n ");
-	scanf_s(" %c", &building_type);
+	 printf("Enter building type (B/M/R/S/A):\n ");
+	 scanf_s(" %c", &building_type);
 
-	buildBuilding(&player1, building_type);
+	 buildBuilding(&player1, building_type);
 
-}
-*/
-	#pragma endregion
+ }
+ */
+#pragma endregion
 
 
 #pragma endregion
@@ -264,4 +360,5 @@ int Settings() {
 
 }
 #pragma endregion
+
 
