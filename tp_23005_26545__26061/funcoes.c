@@ -211,7 +211,11 @@ void createBaseGondor(int row, int col, gordorPlayer* gordPlayer) {
         field[row + 1][col].symbol == ' ' &&
         field[row + 1][col + 1].symbol == ' ') {
         field[row][col].symbol = BASE_SYMB_G;
+        field[row][col + 1].symbol = BASE_SYMB_G1;
+        field[row][col + 2].symbol = BASE_SYMB_G2;
+        field[row][col - 1].symbol = BASE_SYMB_G3;
 
+        //gordPlayer->coins -= 30;
 
         printf("Base created at [%d][%d]!\n", row, col);
         //printf("Coins after base creation: %d\n", gordPlayer->coins);
@@ -261,6 +265,7 @@ void createMineGondor(int row, int col, gordorPlayer* gordPlayer) {
         field[row + 1][col].symbol == ' ' &&
         field[row + 1][col + 1].symbol == ' ') {
         field[row][col].symbol = MINE_SYMB_G;
+        field[row][col + 1].symbol = MINE_SYMB_G1;
 
 
         printf("Base created at [%d][%d]!\n", row, col);
@@ -312,6 +317,7 @@ void createBarrackGondor(int row, int col, gordorPlayer* gordPlayer) {
         field[row + 1][col].symbol == ' ' &&
         field[row + 1][col + 1].symbol == ' ') {
         field[row][col].symbol = BARRACK_SYMB_G;
+        field[row][col].symbol = BARRACK_SYMB_G1;
 
 
         printf("Barrack created at [%d][%d]!\n", row, col);
@@ -365,6 +371,7 @@ void createStablesGondor(int row, int col, gordorPlayer* gordPlayer) {
         field[row + 1][col].symbol == ' ' &&
         field[row + 1][col + 1].symbol == ' ') {
         field[row][col].symbol = STABLES_SYMB_G;
+        field[row][col].symbol = STABLES_SYMB_G1;
 
 
         printf("Stables created at [%d][%d]!\n", row, col);
@@ -417,6 +424,7 @@ void createArmouryGondor(int row, int col, gordorPlayer* gordPlayer) {
         field[row + 1][col].symbol == ' ' &&
         field[row + 1][col + 1].symbol == ' ') {
         field[row][col].symbol = ARMOURY_SYMB_G;
+        field[row][col + 1].symbol = ARMOURY_SYMB_G1;
 
 
         printf("Armoury created at [%d][%d]!\n", row, col);
@@ -515,6 +523,7 @@ void createCavalryGondor(int row, int col, gordorPlayer* gordPlayer) {
         field[row + 1][col].symbol == ' ' &&
         field[row + 1][col + 1].symbol == ' ') {
         field[row][col].symbol = CAVALARY_SYMB_G;
+        field[row][col + 1].symbol = CAVALARY_SYMB_G1;
 
 
         printf("Cavalry created at [%d][%d]!\n", row, col);
@@ -558,7 +567,6 @@ void createArtilleryGondor(int row, int col, gordorPlayer* gordPlayer) {
         field[row + 1][col].symbol == ' ' &&
         field[row + 1][col + 1].symbol == ' ') {
         field[row][col].symbol = ARTILLERY_SYMB_G;
-
 
         printf("Artillery created at [%d][%d]!\n", row, col);
         //printf("Coins after base creation: %d\n", gordPlayer->coins);
@@ -657,8 +665,10 @@ void moveArtilleryGondor(int originRow, int originCol, int destRow, int destCol)
  *
  *
  */
-void moveGordorUnits(gordorPlayer* player, char unitType, int cells, int originRow, int originCol, int destRow, int destCol, gordorPlayer* gordPlayer) {
+void moveGordorUnits(char unitType, int cells, int originRow, int originCol, int destRow, int destCol, gordorPlayer* gordPlayer) {
     int costPerCell;
+    printf("Wich unit you wanna move(I / C/ A)? \n");
+    scanf_s("%s", &unitType);
 
     switch (unitType) {
     case 'I':
@@ -683,12 +693,12 @@ void moveGordorUnits(gordorPlayer* player, char unitType, int cells, int originR
 
     int totalCost = costPerCell * cells;
 
-    if (totalCost > player->coins) {
+    if (totalCost > gordPlayer->coins) {
         printf("Not enough coins to make the move.\n");
     }
     else {
-        player->coins -= totalCost;
-        printf("Moved %c %d cells. Remaining coins: %d\n", unitType, cells, player->coins);
+        gordPlayer->coins -= totalCost;
+        printf("Moved %c %d cells. Remaining coins: %d\n", unitType, cells, gordPlayer->coins);
     }
 }
 
@@ -766,7 +776,10 @@ void createBaseMordor(int row, int col, mordorPlayer* mordPLayer) {
         field[row][col + 1].symbol == ' ' &&
         field[row + 1][col].symbol == ' ' &&
         field[row + 1][col + 1].symbol == ' ') {
-        field[row][col].symbol = BASE_SYMB_G;
+        field[row][col].symbol = BASE_SYMB_M;
+        field[row][col + 1].symbol = BASE_SYMB_M1;
+        field[row][col + 2].symbol = BASE_SYMB_M2;
+        field[row][col - 1].symbol = BASE_SYMB_M3;
 
 
         printf("Base created at [%d][%d]!\n", row, col);
@@ -822,8 +835,8 @@ void createMineMordor(int row, int col, mordorPlayer* mordPlayer) {
         field[row][col + 1].symbol == ' ' &&
         field[row + 1][col].symbol == ' ' &&
         field[row + 1][col + 1].symbol == ' ') {
-        field[row][col].symbol = MINE_SYMB_G;
-
+        field[row][col].symbol = MINE_SYMB_M;
+        field[row][col].symbol = MINE_SYMB_G1;
 
         printf("Mine created at [%d][%d]!\n", row, col);
         //printf("Coins after base creation: %d\n", gordPlayer->coins);
@@ -872,7 +885,8 @@ void createBarrackMordor(int row, int col, mordorPlayer* mordPlayer) {
         field[row][col + 1].symbol == ' ' &&
         field[row + 1][col].symbol == ' ' &&
         field[row + 1][col + 1].symbol == ' ') {
-        field[row][col].symbol = BARRACK_SYMB_G;
+        field[row][col].symbol = BARRACK_SYMB_M;
+        field[row][col + 1].symbol = BARRACK_SYMB_M1;
 
 
         printf("Barrack created at [%d][%d]!\n", row, col);
@@ -923,7 +937,8 @@ void createStablesMordor(int row, int col, mordorPlayer* mordPlayer) {
         field[row][col + 1].symbol == ' ' &&
         field[row + 1][col].symbol == ' ' &&
         field[row + 1][col + 1].symbol == ' ') {
-        field[row][col].symbol = STABLES_SYMB_G;
+        field[row][col].symbol = STABLES_SYMB_M;
+        field[row][col + 1].symbol = STABLES_SYMB_M1;
 
 
         printf("Stables created at [%d][%d]!\n", row, col);
@@ -975,7 +990,8 @@ void createArmouryMordor(int row, int col, mordorPlayer* mordPlayer) {
         field[row][col + 1].symbol == ' ' &&
         field[row + 1][col].symbol == ' ' &&
         field[row + 1][col + 1].symbol == ' ') {
-        field[row][col].symbol = ARMOURY_SYMB_G;
+        field[row][col].symbol = ARMOURY_SYMB_M;
+        field[row][col].symbol = ARMOURY_SYMB_M1;
 
 
         printf("Armoury created at [%d][%d]!\n", row, col);
@@ -1028,11 +1044,11 @@ void createInfantryMordor(int row, int col, mordorPlayer* mordPLayer) {
         field[row][col + 1].symbol == ' ' &&
         field[row + 1][col].symbol == ' ' &&
         field[row + 1][col + 1].symbol == ' ') {
-        field[row][col].symbol = INFANTARY_SYMB_G;
+        field[row][col].symbol = INFANTARY_SYMB_M;
+        field[row][col].symbol = INFANTARY_SYMB_M1;
 
 
         printf("Infantry created at [%d][%d]!\n", row, col);
-        //printf("Coins after base creation: %d\n", gordPlayer->coins);
     }
     else {
         printf("Cannot create Infantry at [%d][%d]!!!!\n", row, col);
@@ -1071,7 +1087,7 @@ void createCavalryMordor(int row, int col, mordorPlayer* mordPlayer) {
         field[row][col + 1].symbol == ' ' &&
         field[row + 1][col].symbol == ' ' &&
         field[row + 1][col + 1].symbol == ' ') {
-        field[row][col].symbol = CAVALARY_SYMB_G;
+        field[row][col].symbol = CAVALARY_SYMB_M;
 
 
         printf("Cavalry created at [%d][%d]!\n", row, col);
@@ -1114,7 +1130,8 @@ void createArtilleryMordor(int row, int col, mordorPlayer* mordPlayer) {
         field[row][col + 1].symbol == ' ' &&
         field[row + 1][col].symbol == ' ' &&
         field[row + 1][col + 1].symbol == ' ') {
-        field[row][col].symbol = ARTILLERY_SYMB_G;
+        field[row][col].symbol = ARTILLERY_SYMB_M;
+        field[row][col].symbol = ARTILLERY_SYMB_M1;
 
 
         printf("Artillery created at [%d][%d]!\n", row, col);
@@ -1154,10 +1171,10 @@ void placingArtilleryM(mordorPlayer* mordPLayer) {
  */
 void moveInfantryMordor(int originRow, int originCol, int destRow, int destCol)
 {
-    if (field[destRow][destCol].symbol == '.' && !(checkEmptyPosition(destRow, destCol))) {
+    if (field[destRow][destCol].symbol == ' ' && !(checkEmptyPosition(destRow, destCol))) {
         field[destRow][destCol].symbol == field[originRow][originCol].symbol;
         //depois de mover a unit, a celula de onde esta a unit fica vazia, logo temos de dizer que a linha e coluna de origem fica assim '.'
-        field[originRow][originCol].symbol == '.';
+        field[originRow][originCol].symbol == ' ';
     }
 }
 
@@ -1173,10 +1190,10 @@ void moveInfantryMordor(int originRow, int originCol, int destRow, int destCol)
  *
  */
 void moveCavalryMordor(int originRow, int originCol, int destRow, int destCol) {
-    if (field[destRow][destCol].symbol == '.' && !(checkEmptyPosition(destRow, destCol))) {
+    if (field[destRow][destCol].symbol == ' ' && !(checkEmptyPosition(destRow, destCol))) {
         field[destRow][destCol].symbol == field[originRow][originCol].symbol;
         //depois de mover a unit, a celula de onde esta a unit fica vazia, logo temos de dizer que a linha e coluna de origem fica assim '.'
-        field[originRow][originCol].symbol == '.';
+        field[originRow][originCol].symbol == ' ';
     }
 }
 
@@ -1192,10 +1209,10 @@ void moveCavalryMordor(int originRow, int originCol, int destRow, int destCol) {
  *
  */
 void moveArtilleryMordor(int originRow, int originCol, int destRow, int destCol) {
-    if (field[destRow][destCol].symbol == '.' && !(checkEmptyPosition(destRow, destCol))) {
+    if (field[destRow][destCol].symbol == ' ' && !(checkEmptyPosition(destRow, destCol))) {
         field[destRow][destCol].symbol == field[originRow][originCol].symbol;
         //depois de mover a unit, a celula de onde esta a unit fica vazia, logo temos de dizer que a linha e coluna de origem fica assim '.'
-        field[originRow][originCol].symbol == '.';
+        field[originRow][originCol].symbol == ' ';
     }
 }
 
@@ -1211,20 +1228,24 @@ void moveArtilleryMordor(int originRow, int originCol, int destRow, int destCol)
  */
 void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int originRow, int originCol, int destRow, int destCol) {
     int costPerCell;
+    printf("Wich unit you wanna move(I / C/ A)? \n");
 
     switch (unitType) {
     case 'I':
     case 'i':
+        getGridCords(originRow, originCol);
         moveInfantryMordor(originRow, originCol, destRow, destCol, mordPlayer);
         costPerCell = 2; //custo de uma peça de infantaria
         break;
     case 'C':
     case 'c':
+        getGridCords(originRow, originCol);
         moveCavalryMordor(originRow, originCol, destRow, destCol, mordPlayer);
         costPerCell = 1;//custo de uma peça de cavalaria
         break;
     case 'A':
     case 'a':
+        getGridCords(originRow, originCol);
         moveArtilleryMordor(originRow, originCol, destRow, destCol, mordPlayer);
         costPerCell = 3; //custo de uma peça de artilharia
         break;
@@ -1243,11 +1264,41 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         printf("Moved %c %d cells. Remaining coins: %d\n", unitType, cells, mordPlayer->coins);
     }
 }
+
+
+
 #pragma endregion
 
 #pragma endregion
 
 #pragma region funcoes Gravar ficheiro
+void saveFileGondor(gordorPlayer* gordPlayer, char unitType, int cells, int originRow, int originCol, int destRow, int destCol) {
+    FILE* arquivo;
+
+    // Abrir o arquivo para escrita
+    arquivo = fopen("dadosGondor.txt", "w");
+
+    if (arquivo == NULL) {
+        fprintf(stderr, "Erro ao abrir o arquivo\n");
+        return;
+    }
+    // Write player details to the file
+    fprintf(arquivo, "Player: %s\n", gordPlayer->name);
+    fprintf(arquivo, "Coins: %d\n", gordPlayer->coins);
+    fprintf(arquivo, "Infantry: %d | Cavalry: %d | Artillery: %d\n", gordPlayer->infantry, gordPlayer->cavalry, gordPlayer->artillery);
+
+    // Write unit movement details to the file
+    fprintf(arquivo, "Moved %c %d cells from (%d, %d) to (%d, %d).\n", unitType, cells, originRow, originCol, destRow, destCol);
+
+    // Write remaining coins to the file
+    fprintf(arquivo, "Remaining coins: %d\n", gordPlayer->coins);
+
+    // Close the file
+    fclose(arquivo);
+}
+
+
+
 
 #pragma endregion
 

@@ -11,26 +11,62 @@
 #define ROWS 17
 #define COLS 26
 #define PLAYER 2 //numero de jogadores do jogo
-
+/*------------------- DEFINIR PARA GORDOR---------------*/
+//definir para a base
 #define BASE_SYMB_G 'G' 
-#define MINE_SYMB_G 'M'
+#define BASE_SYMB_G1 'G' 
+#define BASE_SYMB_G2 'G' 
+#define BASE_SYMB_G3 'G' 
+//definir para a mina
+#define MINE_SYMB_G 'S'
+#define MINE_SYMB_G1 'S'
+//definir para a barrack
 #define BARRACK_SYMB_G 'R'
-#define STABLES_SYMB_G 'S' 
-#define ARMOURY_SYMB_G 'A'
+#define BARRACK_SYMB_G1 'R'
+//definir para o estabulo 
+#define STABLES_SYMB_G 'L' 
+#define STABLES_SYMB_G1 'L' 
+//definir para a armoury
+#define ARMOURY_SYMB_G 'G'
+#define ARMOURY_SYMB_G1 'F'
 
-#define INFANTARY_SYMB_G 'IF' 
-#define CAVALARY_SYMB_G 'CV'
-#define ARTILLERY_SYMB_G 'AT'
+//definir para a infantaria
+#define INFANTARY_SYMB_G 'G' 
+//definir para a cavalaria
+#define CAVALARY_SYMB_G 'S'
+#define CAVALARY_SYMB_G1 'K'
+//definir para a artilharia
+#define ARTILLERY_SYMB_G 'T'
 
-#define BASE_SYMB_M 'G' 
-#define MINE_SYMB_M 'M'
-#define BARRACK_SYMB_M 'R'
-#define STABLES_SYMB_M 'S' 
-#define ARMOURY_SYMB_M 'A'
 
-#define INFANTARY_SYMB_M 'IF' 
-#define CAVALARY_SYMB_M 'CV'
-#define ARTILLERY_SYMB_M 'AT'
+/* ----------------------DEFINIR PARA GORDOR--------------------*/
+//definir para a base
+#define BASE_SYMB_M 'M' 
+#define BASE_SYMB_M1 'M' 
+#define BASE_SYMB_M2 'M' 
+#define BASE_SYMB_M3 'M' 
+//definir para a mina
+#define MINE_SYMB_M 'E'
+#define MINE_SYMB_M1 'E'
+//definir para a barrack
+#define BARRACK_SYMB_M 'I'
+#define BARRACK_SYMB_M1 'I'
+//definir para o estabulo 
+#define STABLES_SYMB_M 'M' 
+#define STABLES_SYMB_M1 'K' 
+//definir para a armoury
+#define ARMOURY_SYMB_M 'D'
+#define ARMOURY_SYMB_M1 'F'
+
+
+//definir para a infantaria
+#define INFANTARY_SYMB_M 'O' 
+#define INFANTARY_SYMB_M1 'W' 
+//definir para a cavalaria
+#define CAVALARY_SYMB_M 'W'
+//definir para a artilharia
+#define ARTILLERY_SYMB_M 'S'
+#define ARTILLERY_SYMB_M1 'T'
 
  //entity base;
  //entity mine;
@@ -212,6 +248,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
 #pragma endregion 
 
 #pragma region funcoes gravar
+void saveFileGondor(gordorPlayer* gordPlayer, char unitType, int cells, int originRow, int originCol, int destRow, int destCol);
 
 #pragma endregion
 
