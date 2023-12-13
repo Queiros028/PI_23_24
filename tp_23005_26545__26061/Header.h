@@ -226,6 +226,7 @@ void moveCavalryGondor(int originRow, int originCol, int destRow, int destCol);
 void moveArtilleryGondor(int originRow, int originCol, int destRow, int destCol);
 */
 void moveGordorUnits(gordorPlayer* player, char unitType, int cells, int originRow, int originCol, int destRow, int destCol, gordorPlayer* gordPlayer);
+void moveInfantryMordor(mordorPlayer* mordPlayer, int row, int col);
 #pragma endregion	
 
 

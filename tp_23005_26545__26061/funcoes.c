@@ -1169,12 +1169,47 @@ void placingArtilleryM(mordorPlayer* mordPLayer) {
  *
  *
  */
-void moveInfantryMordor(int originRow, int originCol, int destRow, int destCol)
+void moveInfantryMordor(mordorPlayer *mordPlayer,int row, int col)
 {
-    if (field[destRow][destCol].symbol == ' ' && !(checkEmptyPosition(destRow, destCol))) {
-        field[destRow][destCol].symbol == field[originRow][originCol].symbol;
-        //depois de mover a unit, a celula de onde esta a unit fica vazia, logo temos de dizer que a linha e coluna de origem fica assim '.'
-        field[originRow][originCol].symbol == ' ';
+    int r, c, r1, c1;
+
+    printf("\nInsert the row where is the Gondor Infantry (Gondor): ");
+    scanf_s("%d", &r1);
+    printf("\nInsert the column where is the Gondor Infantry (Gondor): ");
+    scanf_s("%d", &c1);
+
+    printf("\nEnter the row to move the Gondor Infantry (Gondor): ");
+    scanf_s("%d", &r);
+    printf("\nEnter the column to move the Gondor Infantry (Gondor): ");
+    scanf_s("%d", &c);
+    checkEmptyPosition(r, c);
+
+    row = r;
+    col = c;
+    if (!(field[r][c].symbol == " ")) {
+        printf("You cant move your unit to that position!!!!\n");
+        return;
+    }
+
+    if (row >= 0 && row < ROWS && col >= 0 && col < COLS && !(field[r1][c1].symbol == ' ')) {
+
+        if (mordPlayer->coins >= 2) {
+
+            mordPlayer->coins -= 2;
+
+            field[r1][c1].symbol = ' ';
+
+            field[row][col].symbol = INFANTARY_SYMB_M;
+            field[row][col].symbol = INFANTARY_SYMB_M1;
+
+            printf("\Mordor Infantry moved successfully.\n");
+        }
+        else {
+            printf("\nYou dont have coins to this operation!!!!!\n");
+        }
+    }
+    else {
+        printf("You cant put your unit on that position!!!!\n");
     }
 }
 
@@ -1226,6 +1261,7 @@ void moveArtilleryMordor(int originRow, int originCol, int destRow, int destCol)
  *
  *
  */
+
 void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int originRow, int originCol, int destRow, int destCol) {
     int costPerCell;
     printf("Wich unit you wanna move(I / C/ A)? \n");

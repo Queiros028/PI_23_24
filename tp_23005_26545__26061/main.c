@@ -163,8 +163,8 @@ int mordorMovesBattle()
 	//gordorPlayer *gordPlayer = NULL;
 
 	//***********************************************
-	int baseRow;
-	char baseCol; //variaveis para escolher onde o utilizador quer inserir a base
+	int row;
+	char col; //variaveis para escolher onde o utilizador quer inserir a base
 
 	int barrackRow;
 	char barrackCol;
@@ -172,7 +172,7 @@ int mordorMovesBattle()
 	do {
 		opcaoMoves = mordorMovesMenu();
 		switch (opcaoMoves) {
-		case 1:	    initializeGrid(field);
+		case 1:	initializeGrid(field);
 			printField();
 			break;
 			/*
@@ -199,7 +199,6 @@ int mordorMovesBattle()
 			break;
 			
 		case 10:
-			
 			break;
 			
 			/*
