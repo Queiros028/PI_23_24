@@ -128,8 +128,8 @@ int mordorMenu() {
 
 }
 
-#pragma region Moves/buildings
-
+#pragma region Moves/buildings 
+#pragma region Moves/buildings - mordor
 int mordorMovesMenu()
 {
 	int mordorSecOption;
@@ -139,12 +139,15 @@ int mordorMovesMenu()
 	printf("4- Insert Mine Mordor: \n");
 	printf("5- Insert Barrack\n");
 	printf("6- Insert Stable\n");
-	printf("7- Insert Infantry\n");
-	printf("8- Insert Cavalry\n");
-	printf("9- Insert Artillhery\n");
-	printf("10- Move Units\n"); // I -> infantry, C-> cavalry, A -> artillery
-	printf("11- Show my coins: \n"); //podemos ou nao ter isto, dps vê-se
-	printf("12- Back to the New Game Menu: \n");
+	printf("7- Insert Armourty\n");
+	printf("8- Insert Infantry\n");
+	printf("9- Insert Cavalry\n");
+	printf("10- Insert Artillhery\n");
+	printf("11- Move Units\n"); // I -> infantry, C-> cavalry, A -> artillery
+	printf("12- Atack\n");
+	printf("13- Show my coins: \n"); //podemos ou nao ter isto, dps vê-se
+	printf("14- Back to the New Game Menu: \n");
+	printf("15- SAVE!!!\n");
 	printf("0- Exit\n");
 	printf("***********************\n");
 	printf("Opcao: \n");
@@ -191,21 +194,23 @@ int mordorMovesBattle()
 			break;
 		case 6:placingStableM(mPlayer);
 			break;
-		case 7:placingInfantryM(mPlayer);
+		case 7: placingArmouryM(mPlayer);
 			break;
-		case 8:placingCavalryM(mPlayer);
+		case 8:placingInfantryM(mPlayer);
 			break;
-		case 9:placingArtilleryM(mPlayer);
+		case 9:placingCavalryM(mPlayer);
+			break;
+		case 10:placingArtilleryM(mPlayer);
 			break;
 			
-		case 10:
+		case 11:
 			break;
 			
 			/*
 		case 11: showCoinsGondor(gordPLayer, mordPlayer);
 			break;
 			*/
-		case 12: NewGame();
+		case 14: NewGame();
 			break;
 			
 		case 0: printf("Leaving...!!!\n");
@@ -214,7 +219,10 @@ int mordorMovesBattle()
 
 	} while (opcaoMoves != 0);
 }
-#pragma region Moves/buildings
+#pragma endregion
+
+
+#pragma region Moves/buildings gondor
 
 int gordorMovesMenu()
 {
@@ -225,13 +233,15 @@ int gordorMovesMenu()
 	printf("4- Insert Mine Gondor: \n");
 	printf("5- Insert Barrack\n");
 	printf("6- Insert Stable\n");
-	printf("7- Insert Infantry\n");
-	printf("8- Insert Cavalry\n");
-	printf("9- Insert Artillhery\n");
-	printf("10- Move Units\n"); // I -> infantry, C-> cavalry, A -> artillery
-	printf("11- Show my coins: \n"); //podemos ou nao ter isto, dps vê-se
-	printf("12- Back to the New Game Menu: \n");
-	printf("13- SAVE!\n");
+	printf("7- Insert Armourty\n");
+	printf("8- Insert Infantry\n");
+	printf("9- Insert Cavalry\n");
+	printf("10- Insert Artillhery\n");
+	printf("11- Move Units\n"); // I -> infantry, C-> cavalry, A -> artillery
+	printf("12- Atack\n");
+	printf("13- Show my coins: \n"); //podemos ou nao ter isto, dps vê-se
+	printf("14- Back to the New Game Menu: \n");
+	printf("15- SAVE!\n");
 	printf("0- Exit\n");
 	printf("***********************\n");
 	printf("Opcao: \n");
@@ -265,8 +275,7 @@ int gordorMovesBattle()
 			showGondorUnits(gordPlayer);
 			break;*/
 
-		case 3:
-			placingBaseG(gPlayer);
+		case 3:placingBaseG(gPlayer);
 			break;
 		case 4: placingMineG(gPlayer);
 			break;
@@ -274,14 +283,16 @@ int gordorMovesBattle()
 			break;
 		case 6:placingStableG(gPlayer);
 			break;
-		case 7:placingInfantryG(gPlayer);
+		case 7: placingArmouryG(gPlayer);
 			break;
-		case 8:placingCavalryG(gPlayer);
+		case 8:placingInfantryG(gPlayer);
 			break;
-		case 9:placingArtilleryG(gPlayer);
+		case 9:placingCavalryG(gPlayer);
+			break;
+		case 10:placingArtilleryG(gPlayer);
 			break;
 			
-		case 10:
+		case 11:
 			/*
 			moveGordorUnits(gPlayer);
 			break;
@@ -291,7 +302,7 @@ int gordorMovesBattle()
 		case 11: showCoinsGondor(gordPLayer, mordPlayer);
 			break;
 			*/
-		case 12: NewGame();
+		case 14: NewGame();
 			break;
 			
 		case 0: printf("Leaving...!!!\n");
@@ -328,6 +339,7 @@ int gordorMovesBattle()
 
 #pragma endregion
 
+#pragma endregion
 #pragma region Load Game
 
 int LoadGameMenu()

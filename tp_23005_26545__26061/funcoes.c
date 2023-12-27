@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include "Header.h"
 #pragma warning(disable: 4996)
+#pragma warning(disable: 6386)
 #define ROWS 17
 #define COLS 26
 
@@ -704,6 +705,335 @@ void moveGordorUnits(char unitType, int cells, int originRow, int originCol, int
 
 #pragma endregion
 
+#pragma region ATTACK
+
+    #pragma region Gondor units vs MordorBase
+
+void GondorInfantryVSMordBase(int row, int col, gordorPlayer *gordPlayer, mordorPlayer* mordPlayer) 
+{
+    int rowAtack, colAtack;
+
+    printf("ATTACKING WITH GONDOR INFANTRY\n");
+    printf("Select the row where mordor base is positioned: \n");
+    scanf_s("%d", &rowAtack);
+    printf("Select the column where mordor base is positioned: \n");
+    scanf_s("%d", &colAtack);
+
+    row = rowAtack;
+    col = colAtack;
+
+    if (row >= 0 && row < ROWS && col >= 0 && col >= COLS) 
+    {
+        if (((field[row][col].symbol = BASE_SYMB_M) && (field[row][col + 1].symbol = BASE_SYMB_M1) &&
+            (field[row][col + 2].symbol = BASE_SYMB_M2) && (field[row][col - 1].symbol = BASE_SYMB_M3)) && gordPlayer->coins >= 30)
+        {
+            gordPlayer->coins -= 30;
+
+            mordPlayer->mBaseHealth -= 5; //dano que a infantaria vai dar ao atacar a base
+            printf("Mordor base health after attack: %d\n ", mordPlayer->mBaseHealth);
+            
+            if (mordPlayer->mBaseHealth <= 0) {
+                ((field[row][col].symbol = " ") && (field[row][col + 1].symbol = " ") &&
+                    (field[row][col + 2].symbol = " ") && (field[row][col - 1].symbol = " "));
+                printf("Mordor base was destroyed!\n");
+                printf("You won the game!!!\n");
+                printf("Gondor is safed because of you!!\n");
+            }
+
+
+        }
+        else {
+            printf("Mordor base not found!!\n");
+        }
+
+
+    }
+    else {
+        printf("Invalid position!!\n");
+    }
+
+}
+
+
+void GondorCavalryVSMordBase(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer) 
+{
+    int rowAtack, colAtack;
+    printf("ATTACKING WITH GONDOR CAVALRY\n");
+    printf("Select the row where mordor base is positioned: \n");
+    scanf_s("%d", &rowAtack);
+    printf("Select the column where mordor base is positioned: \n");
+    scanf_s("%d", &colAtack);
+
+    row = rowAtack;
+    col = colAtack;
+
+    if (row >= 0 && row < ROWS && col >= 0 && col >= COLS)
+    {
+        if (((field[row][col].symbol = BASE_SYMB_M) && (field[row][col + 1].symbol = BASE_SYMB_M1) &&
+            (field[row][col + 2].symbol = BASE_SYMB_M2) && (field[row][col - 1].symbol = BASE_SYMB_M3)) && gordPlayer->coins >= 30)
+        {
+            gordPlayer->coins -= 30;
+
+            mordPlayer->mBaseHealth -= 7; //dano que a cavalaria vai dar ao atacar a base
+            printf("Mordor base health after attack: %d\n ", mordPlayer->mBaseHealth);
+
+            if (mordPlayer->mBaseHealth <= 0) {
+                ((field[row][col].symbol = " ") && (field[row][col + 1].symbol = " ") &&
+                    (field[row][col + 2].symbol = " ") && (field[row][col - 1].symbol = " "));
+                printf("Mordor base was destroyed!\n");
+                printf("You won the game!!!\n");
+                printf("Gondor is safed because of you!!\n");
+            }
+
+
+        }
+        else {
+            printf("Mordor base not found!!\n");
+        }
+
+
+    }
+    else {
+        printf("Invalid position!!\n");
+    }
+
+}
+
+
+void GondorArtilleryVSMordBase(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer)
+{
+    int rowAtack, colAtack;
+    printf("ATTACKING WITH GONDOR ARTILLERY\n");
+    printf("Select the row where mordor base is positioned: \n");
+    scanf_s("%d", &rowAtack);
+    printf("Select the column where mordor base is positioned: \n");
+    scanf_s("%d", &colAtack);
+
+    row = rowAtack;
+    col = colAtack;
+
+    if (row >= 0 && row < ROWS && col >= 0 && col >= COLS)
+    {
+        if (((field[row][col].symbol = BASE_SYMB_M) && (field[row][col + 1].symbol = BASE_SYMB_M1) &&
+            (field[row][col + 2].symbol = BASE_SYMB_M2) && (field[row][col - 1].symbol = BASE_SYMB_M3)) && gordPlayer->coins >= 30)
+        {
+            gordPlayer->coins -= 30;
+
+            mordPlayer->mBaseHealth -= 10; //dano que a cavalaria vai dar ao atacar a base
+            printf("Mordor base health after attack: %d\n ", mordPlayer->mBaseHealth);
+
+            if (mordPlayer->mBaseHealth <= 0) {
+                ((field[row][col].symbol = " ") && (field[row][col + 1].symbol = " ") &&
+                    (field[row][col + 2].symbol = " ") && (field[row][col - 1].symbol = " "));
+                printf("Mordor base was destroyed!\n");
+                printf("You won the game!!!\n");
+                printf("Gondor is safed because of you!!\n");
+            }
+
+
+        }
+        else {
+            printf("Mordor base not found!!\n");
+        }
+
+
+    }
+    else {
+        printf("Invalid position!!\n");
+    }
+
+}
+
+#pragma endregion
+
+    #pragma region Gondor Units vs Mordor Mine
+
+
+void GondorInfantryVSMordMine(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer)
+{
+    int rowAtack, colAtack;
+
+    printf("ATTACKING WITH GONDOR INFANTRY\n");
+    printf("Select the row where mordor mine is positioned: \n");
+    scanf_s("%d", &rowAtack);
+    printf("Select the column where mordor mine is positioned: \n");
+    scanf_s("%d", &colAtack);
+
+    row = rowAtack;
+    col = colAtack;
+
+    if (row >= 0 && row < ROWS && col >= 0 && col >= COLS)
+    {
+        if (((field[row][col].symbol = MINE_SYMB_M)  && (field[row][col + 1].symbol = MINE_SYMB_M1)) && gordPlayer->coins >= 20)
+        {
+            gordPlayer->coins -= 20;
+
+            mordPlayer->mMineHealth -= 5; //dano que a infantaria vai dar ao atacar a mina
+            printf("Mordor mine health after attack: %d\n ", mordPlayer->mMineHealth);
+
+            if (mordPlayer->mMineHealth <= 0) {
+                ((field[row][col].symbol = " ") && (field[row][col + 1].symbol = " "));
+                printf("Mordor mine was destroyed!\n");
+            }
+
+
+        }
+        else {
+            printf("Mordor mine not found!!\n");
+        }
+
+
+    }
+    else {
+        printf("Invalid position!!\n");
+    }
+
+}
+
+
+void GondorCavalryVSMordMine(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer)
+{
+    int rowAtack, colAtack;
+
+    printf("ATTACKING WITH GONDOR CAVALRY\n");
+    printf("Select the row where mordor mine is positioned: \n");
+    scanf_s("%d", &rowAtack);
+    printf("Select the column where mordor mine is positioned: \n");
+    scanf_s("%d", &colAtack);
+
+    row = rowAtack;
+    col = colAtack;
+
+    if (row >= 0 && row < ROWS && col >= 0 && col >= COLS)
+    {
+        if (((field[row][col].symbol = MINE_SYMB_M) && (field[row][col + 1].symbol = MINE_SYMB_M1)) && gordPlayer->coins >= 20)
+        {
+            gordPlayer->coins -= 20;
+
+            mordPlayer->mMineHealth -= 7; //dano que a cavalaria vai dar ao atacar a mina
+            printf("Mordor mine health after attack: %d\n ", mordPlayer->mMineHealth);
+
+            if (mordPlayer->mMineHealth <= 0) {
+                ((field[row][col].symbol = " ") && (field[row][col + 1].symbol = " "));
+                printf("Mordor mine was destroyed!\n");
+            }
+
+
+        }
+        else {
+            printf("Mordor mine not found!!\n");
+        }
+
+
+    }
+    else {
+        printf("Invalid position!!\n");
+    }
+
+}
+
+void GondorArtilleryVSMordMine(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer)
+{
+    int rowAtack, colAtack;
+
+    printf("ATTACKING WITH GONDOR ARTILLERY\n");
+    printf("Select the row where mordor mine is positioned: \n");
+    scanf_s("%d", &rowAtack);
+    printf("Select the column where mordor mine is positioned: \n");
+    scanf_s("%d", &colAtack);
+
+    row = rowAtack;
+    col = colAtack;
+
+    if (row >= 0 && row < ROWS && col >= 0 && col >= COLS)
+    {
+        if (((field[row][col].symbol = MINE_SYMB_M) && (field[row][col + 1].symbol = MINE_SYMB_M1)) && gordPlayer->coins >= 20)
+        {
+            gordPlayer->coins -= 20;
+
+            mordPlayer->mMineHealth -= 10; //dano que a cavalaria vai dar ao atacar a mina
+            printf("Mordor mine health after attack: %d\n ", mordPlayer->mMineHealth);
+
+            if (mordPlayer->mMineHealth <= 0) {
+                ((field[row][col].symbol = " ") && (field[row][col + 1].symbol = " "));
+                printf("Mordor mine was destroyed!\n");
+            }
+
+
+        }
+        else {
+            printf("Mordor mine not found!!\n");
+        }
+
+
+    }
+    else {
+        printf("Invalid position!!\n");
+    }
+
+}
+
+    #pragma endregion
+
+#pragma region Gondor Units vs Mordor Barrack
+
+void GondorInfantrVSMordBarrack(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer)
+{
+    int rowAtack, colAtack;
+
+    printf("ATTACKING WITH GONDOR INFANTRY\n");
+    printf("Select the row where mordor barrack is positioned: \n");
+    scanf_s("%d", &rowAtack);
+    printf("Select the column where mordor mine is positioned: \n");
+    scanf_s("%d", &colAtack);
+
+    row = rowAtack;
+    col = colAtack;
+
+    if (row >= 0 && row < ROWS && col >= 0 && col >= COLS)
+    {
+        if (((field[row][col].symbol = MINE_SYMB_M) && (field[row][col + 1].symbol = MINE_SYMB_M1)) && gordPlayer->coins >= 20)
+        {
+            gordPlayer->coins -= 20;
+
+            mordPlayer->mMineHealth -= 5; //dano que a infantaria vai dar ao atacar a mina
+            printf("Mordor mine health after attack: %d\n ", mordPlayer->mMineHealth);
+
+            if (mordPlayer->mMineHealth <= 0) {
+                ((field[row][col].symbol = " ") && (field[row][col + 1].symbol = " "));
+                printf("Mordor mine was destroyed!\n");
+            }
+
+
+        }
+        else {
+            printf("Mordor mine not found!!\n");
+        }
+
+
+    }
+    else {
+        printf("Invalid position!!\n");
+    }
+
+}
+
+
+
+
+#pragma endregion
+
+
+
+
+
+
+#pragma region 
+
+
+
+
+
 #pragma endregion
 
 #pragma region mordor Functions
@@ -808,7 +1138,7 @@ void placingBaseM(mordorPlayer* mordPlayer) {
 
     // Obtendo as coordenadas antes de chamar createBaseMordor
     getGridCords(&baseRow, &baseCol);
-    printf("Creating the Artillery at [%d][%d]!!!!\n", baseRow, baseCol);
+    printf("Creating the Base at [%d][%d]!!!!\n", baseRow, baseCol);
 
     // Chamando createBaseMordor com as novas coordenadas
     createBaseMordor(baseRow, baseCol, mordPlayer);
@@ -836,7 +1166,7 @@ void createMineMordor(int row, int col, mordorPlayer* mordPlayer) {
         field[row + 1][col].symbol == ' ' &&
         field[row + 1][col + 1].symbol == ' ') {
         field[row][col].symbol = MINE_SYMB_M;
-        field[row][col].symbol = MINE_SYMB_G1;
+        field[row][col+1].symbol = MINE_SYMB_M1;
 
         printf("Mine created at [%d][%d]!\n", row, col);
         //printf("Coins after base creation: %d\n", gordPlayer->coins);
@@ -859,7 +1189,7 @@ void placingMineM(mordorPlayer* mordPlayer) {
 
     // Obtendo as coordenadas antes de chamar createMineMordor
     getGridCords(&baseRow, &baseCol);
-    printf("Creating the Artillery at [%d][%d]!!!!\n", baseRow, baseCol);
+    printf("Creating the Mine at [%d][%d]!!!!\n", baseRow, baseCol);
 
     // Chamando createMineMordor com as novas coordenadas
     createMineMordor(baseRow, baseCol, mordPlayer);

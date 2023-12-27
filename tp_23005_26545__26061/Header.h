@@ -144,34 +144,39 @@ typedef struct gordorPlayer {
 	char name[20];
 	int coins;
 	int infantry;
+	int infantryHealth;
 	int cavalry;
+	int cavalryHealth;
 	int artillery;
+	int artilleryHealth;
+	int gBaseHealth;
+	int gMineHealth;
+	int gBarrackHealth;
+	int gStableHealth;
+	int gArmouryHealth;
 	building buildingsGordor;
+	//building buildingMordor;
 	gondorUnits gUnits;
-	/*
-	int mines;
-	int base;
-	int barracks;
-	int stables;
-	int armoury;
-	*/
+
 } gordorPlayer;
 
 typedef struct mordorPlayer {
 	char name[20];
 	int coins;
 	int infantry;
+	int infantryHealth;
 	int cavalry;
+	int cavalryHealth;
 	int artillery;
+	int artilleryHealth;
+	int mBaseHealth;
+	int mMineHealth;
+	int mBarrackHealth;
+	int mStableHealth;
+	int mArmouryHealth;
 	building buildingsMordor;
 	mordorUnits mUnits;
-	/*
-	int mines;
-	int base;
-	int barracks;
-	int stables;
-	int armoury;
-	*/
+
 } mordorPlayer;
 
 typedef struct cell {
@@ -183,7 +188,8 @@ typedef struct cell {
 #pragma endregion
 
 #pragma region Funcoes
-#pragma region funcaoes gerais
+
+	#pragma region funcaoes gerais
 void startGame();
 //void printfField(const gordorPlayer* gordPlayer, const mordorPlayer* mordPlayer);
 void printField();
@@ -193,9 +199,9 @@ int checkEmptyPosition(int row, int col);
 void printStatusGondor(gordorPlayer* player);
 void printMordorStatus(mordorPlayer* mordPlayer);
 void getGridCords(int* row, int* col);
-#pragma endregion
+	#pragma endregion
 
-#pragma region funcoes gordor
+	#pragma region funcoes gordor
 void showGondorFactory();
 void showGondorUnits();
 void createBaseGondor(int row, int col, gordorPlayer* gordPlayer);
@@ -210,6 +216,9 @@ void placingMineG(gordorPlayer* gordPlayer);
 
 void createStables(int row, int col, building stable, gordorPlayer* gordPlayer);
 void placingStableG(gordorPlayer* gordPlayer);
+
+void createArmouryGondor(int row, int col, gordorPlayer* gordPlayer);
+void placingArmouryG(gordorPlayer* gordPlayer);
 
 void createInfantry(int row, int col, gondorUnits infantry, gordorPlayer* gordPLayer);
 void placingInfantryG(gordorPlayer* gordPlayer);
@@ -227,26 +236,44 @@ void moveArtilleryGondor(int originRow, int originCol, int destRow, int destCol)
 */
 void moveGordorUnits(gordorPlayer* player, char unitType, int cells, int originRow, int originCol, int destRow, int destCol, gordorPlayer* gordPlayer);
 void moveInfantryMordor(mordorPlayer* mordPlayer, int row, int col);
-#pragma endregion	
+	#pragma endregion	
 
 
-#pragma region funcoes mordor
+	#pragma region funcoes mordor
 void showMordorFactory();
 void showMordorUnits();
+
 void createBaseMordor(int row, int col, mordorPlayer* mordPLayer, building base);
+void placingBaseM(mordorPlayer* mordPlayer);
+
 void createMineMordor(int row, int col, building mine, mordorPlayer* mordPlayer);
+void placingMineM(mordorPlayer* mordPlayer);
+
 void createBarrackMordor(int row, int col, building barrack, mordorPlayer* mordPlayer);
+void placingBarrackM(mordorPlayer* mordPlayer);
+
 void createStablesMordor(int row, int col, building stable, mordorPlayer* mordPlayer);
+void placingStableM(mordorPlayer* mordPlayer);
+
+void createArmouryMordor(int row, int col, mordorPlayer* mordPlayer);
+void placingArmouryM(mordorPlayer* mordPlayer);
+
 void createInfantryMordor(int row, int col, mordorUnits infantry, mordorPlayer* mordPLayer);
+void placingInfantryM(mordorPlayer* mordPLayer);
+
 void createCavalryMordor(int row, int col, mordorUnits cavalry, mordorPlayer* mordPlayer);
+void placingCavalryM(mordorPlayer* mordPLayer);
+
 void createArtilleryMordor(int row, int col, mordorUnits artillery, mordorPlayer* mordPlayer);
+void placingArtilleryM(mordorPlayer* mordPLayer);
+
 /*
 void moveInfantryMordor(int originRow, int originCol, int destRow, int destCol);
 void moveCavalryMordor(int originRow, int originCol, int destRow, int destCol);
 void moveArtilleryMordor(int originRow, int originCol, int destRow, int destCol);
 */
 void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int originRow, int originCol, int destRow, int destCol);
-#pragma endregion 
+	#pragma endregion 
 
 #pragma region funcoes gravar
 void saveFileGondor(gordorPlayer* gordPlayer, char unitType, int cells, int originRow, int originCol, int destRow, int destCol);
