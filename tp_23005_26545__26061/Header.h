@@ -188,6 +188,9 @@ typedef struct cell {
 #pragma endregion
 
 #pragma region Funcoes
+void saadasdsa();
+int mordorMovesBattle();
+int gordorAttackBattle();
 
 	#pragma region funcaoes gerais
 void startGame();
@@ -204,6 +207,7 @@ void getGridCords(int* row, int* col);
 	#pragma region funcoes gordor
 void showGondorFactory();
 void showGondorUnits();
+	#pragma region CRIAR
 void createBaseGondor(int row, int col, gordorPlayer* gordPlayer);
 void placingBaseG(gordorPlayer* gordPlayer);
 
@@ -212,7 +216,6 @@ void placingBarrackG(gordorPlayer* gordPlayer);
 
 void createMineGondor(int row, int col, building mine, gordorPlayer* gordPlayer);
 void placingMineG(gordorPlayer* gordPlayer);
-
 
 void createStables(int row, int col, building stable, gordorPlayer* gordPlayer);
 void placingStableG(gordorPlayer* gordPlayer);
@@ -228,14 +231,53 @@ void placingCavalryG(gordorPlayer* gordPlayer);
 
 void createArtillery(int row, int col, gondorUnits artillery, gordorPlayer* gordPlayer);
 void placingArtilleryG(gordorPlayer* gordPlayer);
-
+	#pragma endregion
 /*
 void moveInfantryGondor(int originRow, int originCol, int destRow, int destCol);
 void moveCavalryGondor(int originRow, int originCol, int destRow, int destCol);
 void moveArtilleryGondor(int originRow, int originCol, int destRow, int destCol);
 */
+	#pragma region MOVER
 void moveGordorUnits(gordorPlayer* player, char unitType, int cells, int originRow, int originCol, int destRow, int destCol, gordorPlayer* gordPlayer);
 void moveInfantryMordor(mordorPlayer* mordPlayer, int row, int col);
+
+	#pragma endregion
+
+	#pragma region ATACAR
+void GondorInfantryVSMordBase(int row, int col,mordorPlayer* mordPlayer);
+void GondorCavalryVSMordBase(int row, int col, mordorPlayer* mordPlayer);
+void GondorArtilleryVSMordBase(int row, int col, mordorPlayer* mordPlayer);
+
+void GondorInfantryVSMordMine(int row, int col, mordorPlayer* mordPlayer);
+void GondorCavalryVSMordMine(int row, int col,mordorPlayer* mordPlayer);
+void GondorArtilleryVSMordMine(int row, int col, mordorPlayer* mordPlayer);
+
+void GondorInfantrVSMordBarrack(int row, int col, mordorPlayer* mordPlayer);
+void GondorCavalryVSMordBarrack(int row, int col, mordorPlayer* mordPlayer);
+void GondorArtilleryVSMordBarrack(int row, int col, mordorPlayer* mordPlayer);
+
+void GondorInfantrVSMordStable(int row, int col,  mordorPlayer* mordPlayer);
+void GondorCavalryVSMordStable(int row, int col, mordorPlayer* mordPlayer);
+void GondorArtilleryVSMordStable(int row, int col, mordorPlayer* mordPlayer);
+
+void GondorInfantrVSMordArmoury(int row, int col,  mordorPlayer* mordPlayer);
+void GondorCavalryVSMordArmoury(int row, int col, mordorPlayer* mordPlayer);
+void GondorArtilleryVSMordArmoury(int row, int col, mordorPlayer* mordPlayer);
+
+void GondorInfantrVSMordInfantry(int row, int col, mordorPlayer* mordPlayer);
+void GondorCavalryVSMordInfantry(int row, int col, mordorPlayer* mordPlayer);
+void GondorArtilleryVSMordInfantry(int row, int col, mordorPlayer* mordPlayer);
+
+void GondorInfantryVSMordCavalry(int row, int col,  mordorPlayer* mordPlayer);
+void GondorCavalryVSMordCavalry(int row, int col,  mordorPlayer* mordPlayer);
+void GondorArtillheryVSMordCavalry(int row, int col, mordorPlayer* mordPlayer);
+
+void GondorInfantryVSMordArtillhery(int row, int col, mordorPlayer* mordPlayer);
+void GondorCavalryVSMordArtillhery(int row, int col, mordorPlayer* mordPlayer);
+void GondorArtilleryVSMordArtillhery(int row, int col, mordorPlayer* mordPlayer);
+
+	#pragma endregion
+
 	#pragma endregion	
 
 
@@ -243,6 +285,7 @@ void moveInfantryMordor(mordorPlayer* mordPlayer, int row, int col);
 void showMordorFactory();
 void showMordorUnits();
 
+	#pragma region CRIAR
 void createBaseMordor(int row, int col, mordorPlayer* mordPLayer, building base);
 void placingBaseM(mordorPlayer* mordPlayer);
 
@@ -266,19 +309,57 @@ void placingCavalryM(mordorPlayer* mordPLayer);
 
 void createArtilleryMordor(int row, int col, mordorUnits artillery, mordorPlayer* mordPlayer);
 void placingArtilleryM(mordorPlayer* mordPLayer);
+	#pragma endregion
 
 /*
 void moveInfantryMordor(int originRow, int originCol, int destRow, int destCol);
 void moveCavalryMordor(int originRow, int originCol, int destRow, int destCol);
 void moveArtilleryMordor(int originRow, int originCol, int destRow, int destCol);
 */
+	#pragma region MOVER
 void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int originRow, int originCol, int destRow, int destCol);
 	#pragma endregion 
 
-#pragma region funcoes gravar
-void saveFileGondor(gordorPlayer* gordPlayer, char unitType, int cells, int originRow, int originCol, int destRow, int destCol);
+	#pragma region ATACAR
+void MordorInfantryVSGondBase(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+void MordorCavalryVSGondBase(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+void MordorArtilleryVSGondBase(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+
+void MordorInfantryVSGondMine(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+void MordorCavalryVSGondMine(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+void MordorArtilleryVSGondMine(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+
+void MordorInfantrVSGondBarrack(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+void MordorCavalryVSGondBarrack(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+void MordorArtilleryVSGondBarrack(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+
+void MordorInfantrVSGondStable(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+void MordorCavalryVSGondStable(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+void MordorArtilleryVSGondStable(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+
+void MordorInfantrVSGondArmoury(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+void MordorCavalryVSGondArmoury(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+void MordorArtilleryVSGondArmoury(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+
+void MordorInfantrVSGondInfantry(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+void MordorCavalryVSGondInfantry(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+void MordorArtilleryVSGondInfantry(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+
+void MordInfantryVSGondCavalry(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+void MordCavalryVSGondCavalry(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+void MordArtilleryVSGondCavalry(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+
+void MordorInfantryVSGondArtillhery(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+void MordorCavalryVSGondArtillhery(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+void MordorArtilleryVSGondArtillhery(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+
+
+	#pragma endregion
 
 #pragma endregion
+
+#pragma region funcoes gravar
+void saveFileGondor(gordorPlayer* gordPlayer, char unitType, int cells, int originRow, int originCol, int destRow, int destCol);
 
 #pragma endregion
 

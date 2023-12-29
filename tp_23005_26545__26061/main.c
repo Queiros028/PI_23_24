@@ -91,6 +91,12 @@ int NewGame()
  */
 int StartNewGameMenu()
 {
+	gordorPlayer gordPlayer;
+	mordorPlayer mordPlayer;
+
+	gordPlayer.coins = 100;
+	mordPlayer.coins = 100;
+
 	int newOption; //opcao para escolher o que fazer quando se começa um novo jogo
 	printf("CHOOSE YOUR SIDE\n");
 	printf("1- Gondor/Rivendell\n");
@@ -157,7 +163,18 @@ int mordorMovesMenu()
 
 int mordorMovesBattle()
 {
-	mordorPlayer* mPlayer = NULL;
+	mordorPlayer mPlayer;
+	mPlayer.coins = 100;
+
+	mPlayer.infantryHealth = 100;
+	mPlayer.cavalryHealth = 100;
+	mPlayer.artilleryHealth = 100;
+
+	mPlayer.mBaseHealth = 100;
+	mPlayer.mMineHealth = 100;
+	mPlayer.mBarrackHealth = 100;
+	mPlayer.mStableHealth = 100;
+	mPlayer.mArmouryHealth = 100;
 
 	int opcaoMoves;
 	int resultado;
@@ -171,12 +188,12 @@ int mordorMovesBattle()
 
 	int barrackRow;
 	char barrackCol;
+	initializeGrid(field);
 
 	do {
 		opcaoMoves = mordorMovesMenu();
 		switch (opcaoMoves) {
-		case 1:	initializeGrid(field);
-			printField();
+		case 1:	printField();
 			break;
 			/*
 		case 2:printf("Factory\n");
@@ -186,26 +203,61 @@ int mordorMovesBattle()
 			break;*/
 
 		case 3:
-			placingBaseM(mPlayer);
+			placingBaseM(&mPlayer);
+			if (mPlayer.coins == 0) {
+				printf("YOUR DONT HAVE ANY MORE COINS, ENDING SHIFT!!!\n");
+				gordorMenu();
+			}
 			break;
-		case 4: placingMineM(mPlayer);
+		case 4: placingMineM(&mPlayer);
+			if (mPlayer.coins == 0) {
+				printf("YOUR DONT HAVE ANY MORE COINS, ENDING SHIFT!!!\n");
+				gordorMenu();
+			}
 			break;
-		case 5:placingBarrackM(mPlayer);
+		case 5:placingBarrackM(&mPlayer);
+			if (mPlayer.coins == 0) {
+				printf("YOUR DONT HAVE ANY MORE COINS, ENDING SHIFT!!!\n");
+				gordorMenu();
+			}
 			break;
-		case 6:placingStableM(mPlayer);
+		case 6:placingStableM(&mPlayer);
+			if (mPlayer.coins == 0) {
+				printf("YOUR DONT HAVE ANY MORE COINS, ENDING SHIFT!!!\n");
+				gordorMenu();
+			}
 			break;
-		case 7: placingArmouryM(mPlayer);
+		case 7: placingArmouryM(&mPlayer);
+			if (mPlayer.coins == 0) {
+				printf("YOUR DONT HAVE ANY MORE COINS, ENDING SHIFT!!!\n");
+				gordorMenu();
+			}
 			break;
-		case 8:placingInfantryM(mPlayer);
+		case 8:placingInfantryM(&mPlayer);
+			if (mPlayer.coins == 0) {
+				printf("YOUR DONT HAVE ANY MORE COINS, ENDING SHIFT!!!\n");
+				gordorMenu();
+			}
 			break;
-		case 9:placingCavalryM(mPlayer);
+		case 9:placingCavalryM(&mPlayer);
+			if (mPlayer.coins == 0) {
+				printf("YOUR DONT HAVE ANY MORE COINS, ENDING SHIFT!!!\n");
+				gordorMenu();
+			}
 			break;
-		case 10:placingArtilleryM(mPlayer);
+		case 10:placingArtilleryM(&mPlayer);
+			if (mPlayer.coins == 0) {
+				printf("YOUR DONT HAVE ANY MORE COINS, ENDING SHIFT!!!\n");
+				gordorMenu();
+			}
 			break;
 			
 		case 11:
 			break;
-			
+		case 12: 
+			break;		
+		case 13: showCoinsMordor(&mPlayer);
+			break;
 			/*
 		case 11: showCoinsGondor(gordPLayer, mordPlayer);
 			break;
@@ -257,15 +309,38 @@ int gordorMovesMenu()
  */
 int gordorMovesBattle()
 {
-	gordorPlayer* gPlayer = NULL;
+	gordorPlayer gPlayer;
+	mordorPlayer mPlayer;
+	gPlayer.coins = 100;
+
+	gPlayer.infantryHealth = 100;
+	gPlayer.cavalryHealth = 100;
+	gPlayer.artilleryHealth = 100;
+
+	gPlayer.gBaseHealth = 100;
+	gPlayer.gMineHealth = 100;
+	gPlayer.gBarrackHealth = 100;
+	gPlayer.gStableHealth = 100;
+	gPlayer.gArmouryHealth = 100;
+
+	mPlayer.infantryHealth = 100;
+	mPlayer.cavalryHealth = 100;
+	mPlayer.artilleryHealth = 100;
+
+	mPlayer.mBaseHealth = 100;
+	mPlayer.mMineHealth = 100;
+	mPlayer.mBarrackHealth = 100;
+	mPlayer.mStableHealth = 100;
+	mPlayer.mArmouryHealth = 100;
 
 	int opcaoMoves;
 	int resultado;
+	initializeGrid(field);
 
 	do {
 		opcaoMoves = gordorMovesMenu();
 		switch (opcaoMoves) {
-		case 1:	initializeGrid(field);
+		case 1:	
 			printField();
 			break;
 			/*
@@ -275,21 +350,21 @@ int gordorMovesBattle()
 			showGondorUnits(gordPlayer);
 			break;*/
 
-		case 3:placingBaseG(gPlayer);
+		case 3:placingBaseG(&gPlayer);
 			break;
-		case 4: placingMineG(gPlayer);
+		case 4: placingMineG(&gPlayer);
 			break;
-		case 5:placingBarrackG(gPlayer);
+		case 5:placingBarrackG(&gPlayer);
 			break;
-		case 6:placingStableG(gPlayer);
+		case 6:placingStableG(&gPlayer);
 			break;
-		case 7: placingArmouryG(gPlayer);
+		case 7: placingArmouryG(&gPlayer);
 			break;
-		case 8:placingInfantryG(gPlayer);
+		case 8:placingInfantryG(&gPlayer);
 			break;
-		case 9:placingCavalryG(gPlayer);
+		case 9:placingCavalryG(&gPlayer);
 			break;
-		case 10:placingArtilleryG(gPlayer);
+		case 10:placingArtilleryG(&gPlayer);
 			break;
 			
 		case 11:
@@ -297,11 +372,14 @@ int gordorMovesBattle()
 			moveGordorUnits(gPlayer);
 			break;
 			*/
-			
+		case 12:gondorAtackOption();
+			break;
 			/*
 		case 11: showCoinsGondor(gordPLayer, mordPlayer);
 			break;
 			*/
+		case 13: showCoinsGondor(&gPlayer);
+			break;
 		case 14: NewGame();
 			break;
 			
@@ -336,10 +414,134 @@ int gordorMovesBattle()
  */
 #pragma endregion
 
+#pragma region atack from gondor to mordor
+int gondorAtackOption()
+{
+	mordorPlayer mordplayer;
+
+	mordplayer.mBaseHealth = 100;
+
+
+
+	int gordorSecOption;
+	printf("--------------------------------------------------------\n");
+	printf("1- Attack mordor base with infantry \n");
+	printf("2- Attack mordor base with cavalry \n");
+	printf("3- Attack mordor base with artillery \n");
+	printf("4- Attack mordor mine with infantry \n");
+	printf("5- Attack mordor mine with cavalry \n");
+	printf("6- Attack mordor mine with artillery \n");
+	printf("7- Attack mordor barrack with infantry\n");
+	printf("8- Attack mordor barrack with cavalry\n");
+	printf("9- Attack mordor barrack with artillery\n");
+	printf("10- Attack mordor stable with infantry\n");
+	printf("11- Attack mordor stable with cavalry\n");
+	printf("12- Attack mordor stable with artillery\n");
+	printf("13- Attack mordor armoury with infantry \n");
+	printf("14- Attack mordor armoury with cavalry \n");
+	printf("15- Attack mordor armoury with artillery \n");
+	printf("16- Attack mordor infantry with gondor infantry \n");
+	printf("17- Attack mordor infantry with gondor cavalry \n");
+	printf("18- Attack mordor infantry with gondor artillery \n");
+	printf("19- Attack mordor cavalry with gondor infantry \n");
+	printf("20- Attack mordor cavalry with gondor cavalry \n");
+	printf("21- Attack mordor cavalry with gondor artillery \n");
+	printf("22- Attack mordor artillery with gondor infantry\n");
+	printf("23- Attack mordor artillery with gondor cavalry \n");
+	printf("24- Attack mordor artillery with gondor artillery \n");
+	printf("0- Return\n");
+	printf("--------------------------------------------------------\n");
+	printf("Opcao: \n");
+	scanf_s("%d", &gordorSecOption);
+	return(gordorSecOption);
+}
+/**
+ *
+ * \function name- gordorMovesBattle
+ * \brief- Para realizar o que fzr dps de escolher mos o que fzr
+
+ *
+ */
+int gordorAttackBattle()
+{
+	gordorPlayer gPlayer;
+	mordorPlayer mPlayer;
+
+	
+
+	int row = 0;
+	int col = 0;
+
+	int opcaoAttack;
+	int resultado;
+
+	do {
+		opcaoAttack = gordorMovesMenu();
+		switch (opcaoAttack) {
+		case 1:	GondorInfantryVSMordBase(row, col, &mPlayer);
+			/* saadasdsa();*/
+			break;
+			 case 2:GondorCavalryVSMordBase(row, col, &mPlayer);
+				 break;
+			 case 3: GondorArtilleryVSMordBase(row, col, &mPlayer);
+				 break;
+			 case 4:GondorInfantryVSMordMine(row, col, &mPlayer);
+				 break;
+			 case 5:GondorCavalryVSMordMine(row, col, &mPlayer);
+				 break;
+			 case 6: GondorArtilleryVSMordMine(row, col, &mPlayer);
+				 break;
+			 case 7:GondorInfantrVSMordBarrack(row, col,&mPlayer);
+				 break;
+			 case 8:GondorCavalryVSMordBarrack(row, col,&mPlayer);
+				 break;
+			 case 9:GondorArtilleryVSMordBarrack(row, col, &mPlayer);
+				 break;
+			 case 10: GondorInfantrVSMordStable(row, col, &mPlayer);
+				 break;
+			 case 11: GondorCavalryVSMordStable(row, col, &mPlayer);
+				 break;
+			 case 12: GondorArtilleryVSMordStable(row, col, &mPlayer);
+				 break;
+			 case 13: GondorInfantrVSMordArmoury(row, col, &mPlayer);
+				 break;
+			 case 14: GondorCavalryVSMordArmoury(row, col, &mPlayer);
+				 break;
+			 case 15: GondorArtilleryVSMordArmoury(row, col, &mPlayer);
+				 break;
+			 case 16: GondorInfantrVSMordInfantry(row, col, &mPlayer);
+				 break;
+			 case 17: GondorCavalryVSMordInfantry(row, col, &mPlayer);
+				 break;
+		case 18: GondorArtilleryVSMordInfantry(row, col,&mPlayer);
+			break;
+			
+		case 19: GondorInfantryVSMordCavalry(row, col, &mPlayer);
+			break;
+		case 20: GondorCavalryVSMordCavalry(row, col, &mPlayer);
+			break;
+		case 21: GondorArtillheryVSMordCavalry(row, col, &mPlayer);
+			break;
+		case 22: GondorInfantryVSMordArtillhery(row, col, &mPlayer);
+			break;
+		case 23: GondorCavalryVSMordArtillhery(row, col, &mPlayer);
+			break;
+		case 24: GondorArtilleryVSMordArtillhery(row, col, &mPlayer);
+			break;
+		case 0: printf("Returning...!!!\n");
+			mordorMovesBattle();
+			break;
+		}
+
+	} while (opcaoAttack != 0);
+}
+#pragma endregion
+
 
 #pragma endregion
 
 #pragma endregion
+
 #pragma region Load Game
 
 int LoadGameMenu()
