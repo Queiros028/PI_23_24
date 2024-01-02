@@ -128,7 +128,7 @@ int mordorMenu() {
 
 	int mordorOption;
 
-	printf("WELCOME TO GORDOR SIDE\n");
+	printf("WELCOME TO MORDOR SIDE\n");
 
 	mordorOption = mordorMovesBattle();
 
@@ -372,7 +372,7 @@ int gordorMovesBattle()
 			moveGordorUnits(gPlayer);
 			break;
 			*/
-		case 12:gondorAtackOption();
+		case 12:gordorAttackBattle();
 			break;
 			/*
 		case 11: showCoinsGondor(gordPLayer, mordPlayer);
@@ -466,19 +466,46 @@ int gordorAttackBattle()
 {
 	gordorPlayer gPlayer;
 	mordorPlayer mPlayer;
-
-	
-
 	int row = 0;
 	int col = 0;
 
 	int opcaoAttack;
 	int resultado;
 
+	printf("--------------------------------------------------------\n");
+	printf("1- Attack mordor base with infantry \n");
+	printf("2- Attack mordor base with cavalry \n");
+	printf("3- Attack mordor base with artillery \n");
+	printf("4- Attack mordor mine with infantry \n");
+	printf("5- Attack mordor mine with cavalry \n");
+	printf("6- Attack mordor mine with artillery \n");
+	printf("7- Attack mordor barrack with infantry\n");
+	printf("8- Attack mordor barrack with cavalry\n");
+	printf("9- Attack mordor barrack with artillery\n");
+	printf("10- Attack mordor stable with infantry\n");
+	printf("11- Attack mordor stable with cavalry\n");
+	printf("12- Attack mordor stable with artillery\n");
+	printf("13- Attack mordor armoury with infantry \n");
+	printf("14- Attack mordor armoury with cavalry \n");
+	printf("15- Attack mordor armoury with artillery \n");
+	printf("16- Attack mordor infantry with gondor infantry \n");
+	printf("17- Attack mordor infantry with gondor cavalry \n");
+	printf("18- Attack mordor infantry with gondor artillery \n");
+	printf("19- Attack mordor cavalry with gondor infantry \n");
+	printf("20- Attack mordor cavalry with gondor cavalry \n");
+	printf("21- Attack mordor cavalry with gondor artillery \n");
+	printf("22- Attack mordor artillery with gondor infantry\n");
+	printf("23- Attack mordor artillery with gondor cavalry \n");
+	printf("24- Attack mordor artillery with gondor artillery \n");
+	printf("0- Return\n");
+	printf("--------------------------------------------------------\n");
+	printf("Opcao: \n");
+	scanf_s("%d", &opcaoAttack);
+
 	do {
-		opcaoAttack = gordorMovesMenu();
+		//opcaoAttack = gondorAtackOption();
 		switch (opcaoAttack) {
-		case 1:	GondorInfantryVSMordBase(row, col, &mPlayer);
+			case 1:	GondorInfantryVSMordBase(row, col, &mPlayer);
 			/* saadasdsa();*/
 			break;
 			 case 2:GondorCavalryVSMordBase(row, col, &mPlayer);

@@ -218,12 +218,15 @@ void createBaseGondor(int row, int col, gordorPlayer* gordPlayer) {
             field[row][col - 1].symbol = BASE_SYMB_G3;
             gordPlayer->coins -= 30;   
             showCoinsGondor(gordPlayer);
+            printf("Base created at [%d][%d]!\n", row, col);
             if (gordPlayer->coins <= 30) {
                 printf("WARNING!!!! YOU ONLY HAVE %d REMAINING COINS!!!\n", gordPlayer->coins);
             }
+            else if (gordPlayer->coins > 30) {
+                printf("Coins after base creation: %d\n", gordPlayer->coins);
+
+            }
                     
-        printf("Base created at [%d][%d]!\n", row, col);
-        printf("Coins after base creation: %d\n", gordPlayer->coins);
     }
     else {
         printf("Cannot create base at [%d][%d]!!!!\n", row, col);
@@ -272,12 +275,14 @@ void createMineGondor(int row, int col, gordorPlayer* gordPlayer) {
         field[row][col + 1].symbol = MINE_SYMB_G1;
         gordPlayer->coins -= 20;
         showCoinsGondor(gordPlayer);
+        printf("Mine created at [%d][%d]!\n", row, col);
         if (gordPlayer->coins <= 30) {
             printf("WARNING!!!! YOU ONLY HAVE %d REMAINING COINS!!!\n", gordPlayer->coins);
         }
+        else if (gordPlayer->coins > 30) {
+            printf("Coins after  creation: %d\n", gordPlayer->coins);
 
-        printf("Base created at [%d][%d]!\n", row, col);
-        printf("Coins after base creation: %d\n", gordPlayer->coins);
+        }
     }
     else {
         printf("Cannot create Mine at [%d][%d]!!!!\n", row, col);
@@ -327,11 +332,14 @@ void createBarrackGondor(int row, int col, gordorPlayer* gordPlayer) {
         field[row][col].symbol = BARRACK_SYMB_G1;
         gordPlayer->coins -= 25;
         showCoinsGondor(gordPlayer);
+        printf("Barrack created at [%d][%d]!\n", row, col);
         if (gordPlayer->coins <= 30) {
             printf("WARNING!!!! YOU ONLY HAVE %d REMAINING COINS!!!\n", gordPlayer->coins);
         }
-        printf("Barrack created at [%d][%d]!\n", row, col);
-        printf("Coins after base creation: %d\n", gordPlayer->coins);
+        else if (gordPlayer->coins > 30){
+            printf("Coins after  creation: %d\n", gordPlayer->coins);
+
+        }
     }
     else {
         printf("Cannot create Barrack at [%d][%d]!!!!\n", row, col);
@@ -383,11 +391,13 @@ void createStablesGondor(int row, int col, gordorPlayer* gordPlayer) {
         field[row][col].symbol = STABLES_SYMB_G1;
         gordPlayer->coins -= 25;
         showCoinsGondor(gordPlayer);
+        printf("Stables created at [%d][%d]!\n", row, col);
         if (gordPlayer->coins <= 30) {
             printf("WARNING!!!! YOU ONLY HAVE %d REMAINING COINS!!!\n", gordPlayer->coins);
         }
-        printf("Stables created at [%d][%d]!\n", row, col);
-        printf("Coins after base creation: %d\n", gordPlayer->coins);
+        else if (gordPlayer->coins > 30) {
+            printf("Coins after  creation: %d\n", gordPlayer->coins);
+        }
     }
     else {
         printf("Cannot create Stables at [%d][%d]!!!!\n", row, col);
@@ -438,12 +448,14 @@ void createArmouryGondor(int row, int col, gordorPlayer* gordPlayer) {
         field[row][col + 1].symbol = ARMOURY_SYMB_G1;
         gordPlayer -= 30;
         showCoinsGondor(gordPlayer);
+        printf("Armoury created at [%d][%d]!\n", row, col);
         if (gordPlayer->coins <= 30) {
             printf("WARNING!!!! YOU ONLY HAVE %d REMAINING COINS!!!\n", gordPlayer->coins);
         }
-        printf("Armoury created at [%d][%d]!\n", row, col);
-        printf("Coins after base creation: %d\n", gordPlayer->coins);
-    }
+        else if (gordPlayer->coins > 30) {
+            printf("Coins after  creation: %d\n", gordPlayer->coins);
+        }
+           }
     else {
         printf("Cannot create Armoury at [%d][%d]!!!!\n", row, col);
     }
@@ -492,11 +504,13 @@ void createInfantryGondor(int row, int col, gordorPlayer* gordPLayer) {
         field[row][col].symbol = INFANTARY_SYMB_G;
         gordPLayer->coins -= 10;
         showCoinsGondor(gordPLayer);
+        printf("Infantry created at [%d][%d]!\n", row, col);
         if (gordPLayer->coins <= 30) {
             printf("WARNING!!!! YOU ONLY HAVE %d REMAINING COINS!!!\n", gordPLayer->coins);
         }
-        printf("Infantry created at [%d][%d]!\n", row, col);
-        printf("Coins after base creation: %d\n", gordPLayer->coins);
+        else if (gordPLayer->coins > 30) {
+            printf("Coins after creation: %d\n", gordPLayer->coins);
+        }
     }
     else {
         printf("Cannot create Infantry at [%d][%d]!!!!\n", row, col);
@@ -541,11 +555,13 @@ void createCavalryGondor(int row, int col, gordorPlayer* gordPlayer) {
         gordPlayer->coins -= 15;
 
         showCoinsGondor(gordPlayer);
+        printf("Cavalry created at [%d][%d]!\n", row, col);
         if (gordPlayer->coins <= 30) {
             printf("WARNING!!!! YOU ONLY HAVE %d REMAINING COINS!!!\n", gordPlayer->coins);
         }
-        printf("Cavalry created at [%d][%d]!\n", row, col);
-        printf("Coins after base creation: %d\n", gordPlayer->coins);
+        else if (gordPlayer->coins > 30) {
+            printf("Coins after creation: %d\n", gordPlayer->coins);
+        }
     }
     else {
         printf("Cannot create Cavalry at [%d][%d]!!!!\n", row, col);
@@ -585,11 +601,13 @@ void createArtilleryGondor(int row, int col, gordorPlayer* gordPlayer) {
         field[row][col].symbol = ARTILLERY_SYMB_G;
         gordPlayer->coins -= 20;
         showCoinsGondor(gordPlayer);
+        printf("Artillery created at [%d][%d]!\n", row, col);
         if (gordPlayer->coins <= 30) {
             printf("WARNING!!!! YOU ONLY HAVE %d REMAINING COINS!!!\n", gordPlayer->coins);
         }
-        printf("Artillery created at [%d][%d]!\n", row, col);
-        printf("Coins after base creation: %d\n", gordPlayer->coins);
+        else if (gordPlayer->coins > 30) {
+            printf("Coins after creation: %d\n", gordPlayer->coins);
+        }
     }
     else {
         printf("Cannot create base at [%d][%d]!!!!\n", row, col);
@@ -734,14 +752,15 @@ void moveGordorUnits(char unitType, int cells, int originRow, int originCol, int
 void GondorInfantryVSMordBase(int row, int col, mordorPlayer* mordPlayer) 
 {
     int rowAtack, colAtack;
-    int rowPosition, colPosition;
+    int rowPosition;
+    char colPosition;
 
-    printf("ATTACKING WITH GONDOR INFANTRY\n");
+    printf("ATTACKING WITH GONDOR INFANTRY\n");    
     printf("Select the row where gondor infantry is positioned: \n");
     scanf_s("%d", &rowPosition);
     printf("Select the column where gondor infantry is positioned: \n");
-    scanf_s("%d", &colPosition);
-
+    scanf_s(" %c", &colPosition);
+  
 
     printf("Select the row where mordor base is positioned: \n");
     scanf_s("%d", &rowAtack);
@@ -756,8 +775,8 @@ void GondorInfantryVSMordBase(int row, int col, mordorPlayer* mordPlayer)
         if (field[rowAtack][colAtack].symbol == INFANTARY_SYMB_G) 
         {
 
-            if ((field[row][col].symbol = BASE_SYMB_M) && (field[row][col + 1].symbol = BASE_SYMB_M1) &&
-            (field[row][col + 2].symbol = BASE_SYMB_M2) && (field[row][col - 1].symbol = BASE_SYMB_M3))
+            if ((field[row][col].symbol == BASE_SYMB_M) && (field[row][col + 1].symbol == BASE_SYMB_M1) &&
+            (field[row][col + 2].symbol == BASE_SYMB_M2) && (field[row][col - 1].symbol == BASE_SYMB_M3))
             {
             mordPlayer->mBaseHealth -= 5; //dano que a infantaria vai dar ao atacar a base
             printf("Mordor base health after attack: %d\n ", mordPlayer->mBaseHealth);
@@ -808,8 +827,8 @@ void GondorCavalryVSMordBase(int row, int col, mordorPlayer* mordPlayer)
     if (row >= 0 && row < ROWS && col >= 0 && col < COLS && rowPosition >= 0 && rowPosition < ROWS && colPosition >= 0 && colPosition < COLS)
     {
         if (field[rowAtack][colAtack].symbol == CAVALARY_SYMB_G) {
-            if ((field[row][col].symbol = BASE_SYMB_M) && (field[row][col + 1].symbol = BASE_SYMB_M1) &&
-                (field[row][col + 2].symbol = BASE_SYMB_M2) && (field[row][col - 1].symbol = BASE_SYMB_M3))
+            if ((field[row][col].symbol == BASE_SYMB_M) && (field[row][col + 1].symbol == BASE_SYMB_M1) &&
+                (field[row][col + 2].symbol == BASE_SYMB_M2) && (field[row][col - 1].symbol == BASE_SYMB_M3))
             {
                 mordPlayer->mBaseHealth -= 7; //dano que a cavalaria vai dar ao atacar a base
                 printf("Mordor base health after attack: %d\n ", mordPlayer->mBaseHealth);
@@ -863,8 +882,8 @@ void GondorArtilleryVSMordBase(int row, int col, mordorPlayer* mordPlayer)
     {
         if (field[rowAtack][colAtack].symbol == ARTILLERY_SYMB_G) {
 
-            if ((field[row][col].symbol = BASE_SYMB_M) && (field[row][col + 1].symbol = BASE_SYMB_M1) &&
-                (field[row][col + 2].symbol = BASE_SYMB_M2) && (field[row][col - 1].symbol = BASE_SYMB_M3))
+            if ((field[row][col].symbol == BASE_SYMB_M) && (field[row][col + 1].symbol == BASE_SYMB_M1) &&
+                (field[row][col + 2].symbol == BASE_SYMB_M2) && (field[row][col - 1].symbol == BASE_SYMB_M3))
             {
 
                 mordPlayer->mBaseHealth -= 10; //dano que a artilharia vai dar ao atacar a base
@@ -923,7 +942,7 @@ void GondorInfantryVSMordMine(int row, int col, mordorPlayer* mordPlayer)
         if (field[rowAtack][colAtack].symbol == INFANTARY_SYMB_G) 
         {
 
-            if ((field[row][col].symbol = MINE_SYMB_M) && (field[row][col + 1].symbol = MINE_SYMB_M1))
+            if ((field[row][col].symbol == MINE_SYMB_M) && (field[row][col + 1].symbol == MINE_SYMB_M1))
             {
 
                 mordPlayer->mMineHealth -= 5; //dano que a infantaria vai dar ao atacar a mina
@@ -973,7 +992,7 @@ void GondorCavalryVSMordMine(int row, int col, mordorPlayer* mordPlayer)
     {
         if (field[rowAtack][colAtack].symbol == CAVALARY_SYMB_G)
         {
-            if ((field[row][col].symbol = MINE_SYMB_M) && (field[row][col + 1].symbol = MINE_SYMB_M1))
+            if ((field[row][col].symbol == MINE_SYMB_M) && (field[row][col + 1].symbol == MINE_SYMB_M1))
             {
 
                 mordPlayer->mMineHealth -= 7; //dano que a cavalaria vai dar ao atacar a mina
@@ -1023,7 +1042,7 @@ void GondorArtilleryVSMordMine(int row, int col, mordorPlayer* mordPlayer)
     {
         if (field[rowAtack][colAtack].symbol == ARTILLERY_SYMB_G)
         {
-            if ((field[row][col].symbol = MINE_SYMB_M) && (field[row][col + 1].symbol = MINE_SYMB_M1))
+            if ((field[row][col].symbol == MINE_SYMB_M) && (field[row][col + 1].symbol == MINE_SYMB_M1))
             {
 
                 mordPlayer->mMineHealth -= 10; //dano que a cavalaria vai dar ao atacar a mina
@@ -1040,9 +1059,7 @@ void GondorArtilleryVSMordMine(int row, int col, mordorPlayer* mordPlayer)
                 printf("Mordor mine not found!!\n");
             }
 
-        }
-
-        
+        }    
 
     }
     else {
@@ -1078,7 +1095,7 @@ void GondorInfantrVSMordBarrack(int row, int col, mordorPlayer* mordPlayer)
     {
         if (field[rowAtack][colAtack].symbol ==  INFANTARY_SYMB_G)
         {
-            if ((field[row][col].symbol = BARRACK_SYMB_M) && (field[row][col + 1].symbol = BARRACK_SYMB_M1))
+            if ((field[row][col].symbol == BARRACK_SYMB_M) && (field[row][col + 1].symbol == BARRACK_SYMB_M1))
             {
 
                 mordPlayer->mBarrackHealth -= 5; //dano que a infantaria vai dar ao atacar a barrack
@@ -1129,7 +1146,7 @@ void GondorCavalryVSMordBarrack(int row, int col, mordorPlayer* mordPlayer)
         if (field[rowAtack][colAtack].symbol == CAVALARY_SYMB_G) 
         {
 
-            if ((field[row][col].symbol = BARRACK_SYMB_M) && (field[row][col + 1].symbol = BARRACK_SYMB_M1))
+            if ((field[row][col].symbol == BARRACK_SYMB_M) && (field[row][col + 1].symbol == BARRACK_SYMB_M1))
             {
 
                 mordPlayer->mBarrackHealth -= 7; //dano que a cavalaria vai dar ao atacar a barrack
@@ -1180,7 +1197,7 @@ void GondorArtilleryVSMordBarrack(int row, int col, mordorPlayer* mordPlayer)
     {
         if (field[rowAtack][colAtack].symbol == ARTILLERY_SYMB_G) 
         {
-            if ((field[row][col].symbol = BARRACK_SYMB_M) && (field[row][col + 1].symbol = BARRACK_SYMB_M1))
+            if ((field[row][col].symbol == BARRACK_SYMB_M) && (field[row][col + 1].symbol == BARRACK_SYMB_M1))
             {
 
                 mordPlayer->mBarrackHealth -= 10; //dano que a artilharia vai dar ao atacar a barrack
@@ -1235,7 +1252,7 @@ void GondorInfantrVSMordStable(int row, int col, mordorPlayer* mordPlayer)
     {
         if (field[rowAtack][colAtack].symbol == INFANTARY_SYMB_G)
         {
-            if ((field[row][col].symbol = STABLES_SYMB_M) && (field[row][col + 1].symbol = STABLES_SYMB_M1))
+            if ((field[row][col].symbol == STABLES_SYMB_M) && (field[row][col + 1].symbol == STABLES_SYMB_M1))
             {
 
                 mordPlayer->mStableHealth -= 5; //dano que a infantaria vai dar ao atacar a stable
@@ -1285,7 +1302,7 @@ void GondorCavalryVSMordStable(int row, int col,  mordorPlayer* mordPlayer)
     {
         if (field[rowAtack][colAtack].symbol == CAVALARY_SYMB_G)
         {
-            if ((field[row][col].symbol = STABLES_SYMB_M) && (field[row][col + 1].symbol = STABLES_SYMB_M1))
+            if ((field[row][col].symbol == STABLES_SYMB_M) && (field[row][col + 1].symbol == STABLES_SYMB_M1))
             {
 
                 mordPlayer->mStableHealth -= 7; //dano que a cavalaria vai dar ao atacar a stable
@@ -1335,7 +1352,7 @@ void GondorArtilleryVSMordStable(int row, int col,  mordorPlayer* mordPlayer)
     {
         if (field[rowAtack][colAtack].symbol == ARTILLERY_SYMB_G)
         {
-            if ((field[row][col].symbol = STABLES_SYMB_M) && (field[row][col + 1].symbol = STABLES_SYMB_M1))
+            if ((field[row][col].symbol == STABLES_SYMB_M) && (field[row][col + 1].symbol == STABLES_SYMB_M1))
             {
 
                 mordPlayer->mStableHealth -= 10; //dano que a artilharia vai dar ao atacar a stable
@@ -1390,7 +1407,7 @@ void GondorInfantrVSMordArmoury(int row, int col, mordorPlayer* mordPlayer)
     {
         if(field[rowAtack][colAtack].symbol == INFANTARY_SYMB_G)
         {
-            if ((field[row][col].symbol = ARMOURY_SYMB_M) && (field[row][col + 1].symbol = ARMOURY_SYMB_M1))
+            if ((field[row][col].symbol == ARMOURY_SYMB_M) && (field[row][col + 1].symbol == ARMOURY_SYMB_M1))
             {
 
                 mordPlayer->mArmouryHealth -= 5; //dano que a infantaria vai dar ao atacar a stable
@@ -1440,7 +1457,7 @@ void GondorCavalryVSMordArmoury(int row, int col, mordorPlayer* mordPlayer)
     {
         if (field[rowAtack][colAtack].symbol == CAVALARY_SYMB_G)
         {
-            if ((field[row][col].symbol = ARMOURY_SYMB_M) && (field[row][col + 1].symbol = ARMOURY_SYMB_M1))
+            if ((field[row][col].symbol == ARMOURY_SYMB_M) && (field[row][col + 1].symbol == ARMOURY_SYMB_M1))
             {
 
                 mordPlayer->mArmouryHealth -= 7; //dano que a cavalaria vai dar ao atacar a stable
@@ -1489,7 +1506,7 @@ void GondorArtilleryVSMordArmoury(int row, int col, mordorPlayer* mordPlayer)
     {
         if (field[rowAtack][colAtack].symbol == ARTILLERY_SYMB_G)
         {
-            if ((field[row][col].symbol = ARMOURY_SYMB_M) && (field[row][col + 1].symbol = ARMOURY_SYMB_M1))
+            if ((field[row][col].symbol == ARMOURY_SYMB_M) && (field[row][col + 1].symbol == ARMOURY_SYMB_M1))
             {
 
                 mordPlayer->mArmouryHealth -= 10; //dano que a artilharia vai dar ao atacar a stable
@@ -1543,7 +1560,7 @@ void GondorInfantrVSMordInfantry(int row, int col, mordorPlayer* mordPlayer)
     {
         if (field[rowAtack][colAtack].symbol == INFANTARY_SYMB_G)
         {
-            if ((field[row][col].symbol = INFANTARY_SYMB_M) && (field[row][col + 1].symbol = INFANTARY_SYMB_M1))
+            if ((field[row][col].symbol == INFANTARY_SYMB_M) && (field[row][col + 1].symbol == INFANTARY_SYMB_M1))
             {
 
                 mordPlayer->infantryHealth -= 5; //dano que a infantariaGondor vai dar ao atacar a infantariaMordor
@@ -1589,7 +1606,7 @@ void GondorCavalryVSMordInfantry(int row, int col, mordorPlayer* mordPlayer)
     {
         if (field[rowAtack][colAtack].symbol == CAVALARY_SYMB_G)
         {
-            if ((field[row][col].symbol = INFANTARY_SYMB_M) && (field[row][col + 1].symbol = INFANTARY_SYMB_M1))
+            if ((field[row][col].symbol == INFANTARY_SYMB_M) && (field[row][col + 1].symbol == INFANTARY_SYMB_M1))
             {
 
                 mordPlayer->infantryHealth -= 7; //dano que a cavalaria Gondor vai dar ao atacar a cavalaria Mordor
@@ -1636,7 +1653,7 @@ void GondorArtilleryVSMordInfantry(int row, int col, mordorPlayer* mordPlayer)
     {
         if (field[rowAtack][colAtack].symbol == ARTILLERY_SYMB_G)
         {
-            if ((field[row][col].symbol = INFANTARY_SYMB_M) && (field[row][col + 1].symbol = INFANTARY_SYMB_M1))
+            if ((field[row][col].symbol == INFANTARY_SYMB_M) && (field[row][col + 1].symbol == INFANTARY_SYMB_M1))
             {
 
                 mordPlayer->infantryHealth -= 10; //dano que a artilharia Gondor vai dar ao atacar a artilharia Mordor
@@ -1688,7 +1705,7 @@ void GondorInfantryVSMordCavalry(int row, int col, mordorPlayer* mordPlayer)
     {
         if (field[rowAtack][colAtack].symbol == INFANTARY_SYMB_G) 
         {
-            if ((field[row][col].symbol = CAVALARY_SYMB_M))
+            if ((field[row][col].symbol == CAVALARY_SYMB_M))
             {
 
                 mordPlayer->cavalryHealth -= 5; //dano que a infantaria Gondor vai dar ao atacar a cavalaria Mordor
@@ -1736,7 +1753,7 @@ void GondorCavalryVSMordCavalry(int row, int col, mordorPlayer* mordPlayer)
     {
         if (field[rowAtack][colAtack].symbol == CAVALARY_SYMB_G)
         {
-            if ((field[row][col].symbol = CAVALARY_SYMB_M))
+            if ((field[row][col].symbol == CAVALARY_SYMB_M))
             {
 
                 mordPlayer->cavalryHealth -= 7; //dano que a cavalaria Gondor vai dar ao atacar a cavalaria Mordor
@@ -1782,7 +1799,7 @@ void GondorArtillheryVSMordCavalry(int row, int col, mordorPlayer* mordPlayer)
     {
         if (field[rowAtack][colAtack].symbol == ARTILLERY_SYMB_G)
         {
-            if ((field[row][col].symbol = CAVALARY_SYMB_M))
+            if ((field[row][col].symbol == CAVALARY_SYMB_M))
             {
 
                 mordPlayer->cavalryHealth -= 10; //dano que a artilharia Gondor vai dar ao atacar a cavalaria Mordor
@@ -1833,7 +1850,7 @@ void GondorInfantryVSMordArtillhery(int row, int col, mordorPlayer* mordPlayer)
     {
         if (field[rowAtack][colAtack].symbol == INFANTARY_SYMB_G)
         {
-            if ((field[row][col].symbol = ARTILLERY_SYMB_M) && (field[row][col + 1].symbol = ARTILLERY_SYMB_M1))
+            if ((field[row][col].symbol == ARTILLERY_SYMB_M) && (field[row][col + 1].symbol == ARTILLERY_SYMB_M1))
             {
 
                 mordPlayer->artilleryHealth -= 5; //dano que a infantaria Gondor vai dar ao atacar a artilharia Mordor
@@ -1881,7 +1898,7 @@ void GondorCavalryVSMordArtillhery(int row, int col, mordorPlayer* mordPlayer)
     {
         if (field[rowAtack][colAtack].symbol == CAVALARY_SYMB_G)
         {
-            if ((field[row][col].symbol = ARTILLERY_SYMB_M) && (field[row][col + 1].symbol = ARTILLERY_SYMB_M1))
+            if ((field[row][col].symbol == ARTILLERY_SYMB_M) && (field[row][col + 1].symbol == ARTILLERY_SYMB_M1))
             {
 
                 mordPlayer->artilleryHealth -= 7; //dano que a infantaria Gondor vai dar ao atacar a artilharia Mordor
@@ -1928,7 +1945,7 @@ void GondorArtilleryVSMordArtillhery(int row, int col, mordorPlayer* mordPlayer)
     {
         if (field[rowAtack][colAtack].symbol == ARTILLERY_SYMB_G)
         {
-            if ((field[row][col].symbol = ARTILLERY_SYMB_M) && (field[row][col + 1].symbol = ARTILLERY_SYMB_M1))
+            if ((field[row][col].symbol == ARTILLERY_SYMB_M) && (field[row][col + 1].symbol == ARTILLERY_SYMB_M1))
             {
 
                 mordPlayer->artilleryHealth -= 10; //dano que a infantaria Gondor vai dar ao atacar a artilharia Mordor
@@ -2036,12 +2053,14 @@ void createBaseMordor(int row, int col, mordorPlayer* mordPLayer) {
         field[row][col - 1].symbol = BASE_SYMB_M3;
         mordPLayer->coins -= 30;
         showCoinsMordor(mordPLayer);
+        printf("Base created at [%d][%d]!\n", row, col);
         if (mordPLayer->coins <= 30) {
             printf("WARNING!!!! YOU ONLY HAVE %d REMAINING COINS!!!", mordPLayer->coins);
         }
+        else if (mordPLayer->coins > 30) {
+            printf("Coins after base creation: %d\n", mordPLayer->coins);
+        }
         
-        printf("Base created at [%d][%d]!\n", row, col);
-        printf("Coins after base creation: %d\n", mordPLayer->coins);
     }
     else {
         printf("Cannot create base at [%d][%d]!!!!\n", row, col);
@@ -2092,11 +2111,12 @@ void createMineMordor(int row, int col, mordorPlayer* mordPlayer) {
         field[row][col+1].symbol = MINE_SYMB_M1;
         mordPlayer->coins -= 20;
         showCoinsMordor(mordPlayer);
+        printf("Mine created at [%d][%d]!\n", row, col);
         if (mordPlayer->coins <= 30) {
             printf("WARNING!!!! YOU ONLY HAVE %d REMAINING COINS!!!", mordPlayer->coins);
+        }else if (mordPlayer->coins > 30) {
+            printf("Coins after  creation: %d\n", mordPlayer->coins);
         }
-        printf("Mine created at [%d][%d]!\n", row, col);
-        printf("Coins after base creation: %d\n", mordPlayer->coins);
     }
     else {
         printf("Cannot create Mine at [%d][%d]!!!!\n", row, col);
@@ -2145,12 +2165,14 @@ void createBarrackMordor(int row, int col, mordorPlayer* mordPlayer) {
         field[row][col + 1].symbol = BARRACK_SYMB_M1;
         mordPlayer->coins -= 25;
         showCoinsMordor(mordPlayer);
+        printf("Barrack created at [%d][%d]!\n", row, col);
         if (mordPlayer->coins <= 30) {
             printf("WARNING!!!! YOU ONLY HAVE %d REMAINING COINS!!!", mordPlayer->coins);
         }
+        else if (mordPlayer->coins > 30) {
+            printf("Coins after  creation: %d\n", mordPlayer->coins);
+        }
 
-        printf("Barrack created at [%d][%d]!\n", row, col);
-        printf("Coins after base creation: %d\n", mordPlayer->coins);
     }
     else {
         printf("Cannot create Barrack at [%d][%d]!!!!\n", row, col);
@@ -2200,11 +2222,13 @@ void createStablesMordor(int row, int col, mordorPlayer* mordPlayer) {
         field[row][col + 1].symbol = STABLES_SYMB_M1;
         mordPlayer->coins -= 25;
         showCoinsMordor(mordPlayer);
+        printf("Stables created at [%d][%d]!\n", row, col);
         if (mordPlayer->coins <= 30) {
             printf("WARNING!!!! YOU ONLY HAVE %d REMAINING COINS!!!", mordPlayer->coins);
         }
-        printf("Stables created at [%d][%d]!\n", row, col);
-        printf("Coins after base creation: %d\n", mordPlayer->coins);
+        else if (mordPlayer->coins > 30) {
+            printf("Coins after  creation: %d\n", mordPlayer->coins);
+        }
     }
     else {
         printf("Cannot create Stables at [%d][%d]!!!!\n", row, col);
@@ -2255,11 +2279,13 @@ void createArmouryMordor(int row, int col, mordorPlayer* mordPlayer) {
         field[row][col+1].symbol = ARMOURY_SYMB_M1;
         mordPlayer->coins -= 30;
         showCoinsMordor(mordPlayer);
+        printf("Armoury created at [%d][%d]!\n", row, col);
         if (mordPlayer->coins <= 30) {
             printf("WARNING!!!! YOU ONLY HAVE %d REMAINING COINS!!!", mordPlayer->coins);
         }
-        printf("Armoury created at [%d][%d]!\n", row, col);
-        printf("Coins after base creation: %d\n", mordPlayer->coins);
+        else if (mordPlayer->coins > 30) {
+            printf("Coins after  creation: %d\n", mordPlayer->coins);
+        }
     }
     else {
         printf("Cannot create Armoury at [%d][%d]!!!!\n", row, col);
@@ -2311,11 +2337,13 @@ void createInfantryMordor(int row, int col, mordorPlayer* mordPLayer) {
         field[row][col+1].symbol = INFANTARY_SYMB_M1;
         mordPLayer->coins -= 10;
         showCoinsMordor(mordPLayer);
+        printf("Infantry created at [%d][%d]!\n", row, col);
         if (mordPLayer->coins <= 30) {
             printf("WARNING!!!! YOU ONLY HAVE %d REMAINING COINS!!!", mordPLayer->coins);
         }
-        printf("Infantry created at [%d][%d]!\n", row, col);
-        printf("Coins after base creation: %d\n", mordPLayer->coins);
+        else if (mordPLayer->coins > 30) {
+            printf("Coins after  creation: %d\n", mordPLayer->coins);
+        }
 
     }
 
@@ -2357,11 +2385,13 @@ void createCavalryMordor(int row, int col, mordorPlayer* mordPlayer) {
         field[row][col].symbol = CAVALARY_SYMB_M;
         mordPlayer->coins -= 15;
         showCoinsMordor(mordPlayer);
+        printf("Cavalry created at [%d][%d]!\n", row, col);
         if (mordPlayer->coins <= 30) {
             printf("WARNING!!!! YOU ONLY HAVE %d REMAINING COINS!!!", mordPlayer->coins);
         }
-        printf("Cavalry created at [%d][%d]!\n", row, col);
-        printf("Coins after base creation: %d\n", mordPlayer->coins);
+        else if (mordPlayer->coins > 30) {
+            printf("Coins after  creation: %d\n", mordPlayer->coins);
+        }
     }
     else {
         printf("Cannot create Cavalry at [%d][%d]!!!!\n", row, col);
@@ -2403,11 +2433,13 @@ void createArtilleryMordor(int row, int col, mordorPlayer* mordPlayer) {
         field[row][col+1].symbol = ARTILLERY_SYMB_M1;
         mordPlayer->coins -= 20;
         showCoinsMordor(mordPlayer);
+        printf("Artillery created at [%d][%d]!\n", row, col);
         if (mordPlayer->coins <= 30) {
             printf("WARNING!!!! YOU ONLY HAVE %d REMAINING COINS!!!", mordPlayer->coins);
         }
-        printf("Artillery created at [%d][%d]!\n", row, col);
-        printf("Coins after base creation: %d\n", mordPlayer->coins);
+        else if (mordPlayer->coins > 30) {
+            printf("Coins after creation: %d\n", mordPlayer->coins);
+        }
     }
     else {
         printf("Cannot create Artillery at [%d][%d]!!!!\n", row, col);
@@ -2605,8 +2637,8 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if (field[rowAtack][colAtack].symbol == INFANTARY_SYMB_M)
             {
-                if ((field[row][col].symbol = BASE_SYMB_G) && (field[row][col + 1].symbol = BASE_SYMB_G1) &&
-                    (field[row][col + 2].symbol = BASE_SYMB_G2) && (field[row][col - 1].symbol = BASE_SYMB_G3))
+                if ((field[row][col].symbol == BASE_SYMB_G) && (field[row][col + 1].symbol == BASE_SYMB_G1) &&
+                    (field[row][col + 2].symbol == BASE_SYMB_G2) && (field[row][col - 1].symbol == BASE_SYMB_G3))
                 {
                     gordPlayer->gBaseHealth -= 5; //dano que a infantaria vai dar ao atacar a base
                     printf("Gondor base health after attack: %d\n ", gordPlayer->gBaseHealth);
@@ -2655,8 +2687,8 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if (field[rowAtack][colAtack].symbol == CAVALARY_SYMB_M)
             {
-                if ((field[row][col].symbol = BASE_SYMB_G) && (field[row][col + 1].symbol = BASE_SYMB_G1) &&
-                    (field[row][col + 2].symbol = BASE_SYMB_G2) && (field[row][col - 1].symbol = BASE_SYMB_G3))
+                if ((field[row][col].symbol == BASE_SYMB_G) && (field[row][col + 1].symbol == BASE_SYMB_G1) &&
+                    (field[row][col + 2].symbol == BASE_SYMB_G2) && (field[row][col - 1].symbol == BASE_SYMB_G3))
                 {
                     gordPlayer->gBaseHealth -= 7; //dano que a cavalaria vai dar ao atacar a base
                     printf("Gondor base health after attack: %d\n ", gordPlayer->gBaseHealth);
@@ -2707,8 +2739,8 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if (field[rowAtack][colAtack].symbol == ARTILLERY_SYMB_M) 
             {
-                if ((field[row][col].symbol = BASE_SYMB_G) && (field[row][col + 1].symbol = BASE_SYMB_G1) &&
-                    (field[row][col + 2].symbol = BASE_SYMB_G2) && (field[row][col - 1].symbol = BASE_SYMB_G3))
+                if ((field[row][col].symbol == BASE_SYMB_G) && (field[row][col + 1].symbol == BASE_SYMB_G1) &&
+                    (field[row][col + 2].symbol == BASE_SYMB_G2) && (field[row][col - 1].symbol == BASE_SYMB_G3))
                 {
                     gordPlayer->gBaseHealth -= 10; //dano que a cavalaria vai dar ao atacar a base
                     printf("Gondor base health after attack: %d\n ", gordPlayer->gBaseHealth);
@@ -2762,7 +2794,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if (field[rowAtack][colAtack].symbol == INFANTARY_SYMB_M) 
             {
-                if ((field[row][col].symbol = MINE_SYMB_G) && (field[row][col + 1].symbol = MINE_SYMB_G1))
+                if ((field[row][col].symbol == MINE_SYMB_G) && (field[row][col + 1].symbol == MINE_SYMB_G1))
                 {
 
                     gordPlayer->gMineHealth -= 5; //dano que a infantaria vai dar ao atacar a mina
@@ -2811,7 +2843,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if(field[rowAtack][colAtack].symbol == CAVALARY_SYMB_M)
             {
-                if ((field[row][col].symbol = MINE_SYMB_G) && (field[row][col + 1].symbol = MINE_SYMB_G1))
+                if ((field[row][col].symbol == MINE_SYMB_G) && (field[row][col + 1].symbol == MINE_SYMB_G1))
                 {
 
                     gordPlayer->gMineHealth -= 7; //dano que a cavalaria vai dar ao atacar a mina
@@ -2861,7 +2893,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if (field[rowAtack][colAtack].symbol == ARTILLERY_SYMB_M)
             {
-                if ((field[row][col].symbol = MINE_SYMB_G) && (field[row][col + 1].symbol = MINE_SYMB_G1))
+                if ((field[row][col].symbol == MINE_SYMB_G) && (field[row][col + 1].symbol == MINE_SYMB_G1))
                 {
 
                     gordPlayer->gMineHealth -= 10; //dano que a artilharia vai dar ao atacar a mina
@@ -2912,7 +2944,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if (field[rowAtack][colAtack].symbol == INFANTARY_SYMB_M)
             {
-                if ((field[row][col].symbol = BARRACK_SYMB_G) && (field[row][col + 1].symbol = BARRACK_SYMB_G1))
+                if ((field[row][col].symbol == BARRACK_SYMB_G) && (field[row][col + 1].symbol == BARRACK_SYMB_G1))
                 {
 
                     gordPlayer->gBarrackHealth -= 5; //dano que a infantaria vai dar ao atacar a barrack
@@ -2960,7 +2992,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if (field[rowAtack][colAtack].symbol == CAVALARY_SYMB_M)
             {
-                if ((field[row][col].symbol = BARRACK_SYMB_G) && (field[row][col + 1].symbol = BARRACK_SYMB_G1))
+                if ((field[row][col].symbol == BARRACK_SYMB_G) && (field[row][col + 1].symbol == BARRACK_SYMB_G1))
                 {
 
                     gordPlayer->gBarrackHealth -= 7; //dano que a cavalaria vai dar ao atacar a barrack
@@ -3007,7 +3039,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if (field[rowAtack][colAtack].symbol == ARTILLERY_SYMB_M)
             {
-                if ((field[row][col].symbol = BARRACK_SYMB_G) && (field[row][col + 1].symbol = BARRACK_SYMB_G1))
+                if ((field[row][col].symbol == BARRACK_SYMB_G) && (field[row][col + 1].symbol == BARRACK_SYMB_G1))
                 {
 
                     gordPlayer->gBarrackHealth -= 10; //dano que a cavalaria vai dar ao atacar a barrack
@@ -3058,7 +3090,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if (field[rowAtack][colAtack].symbol == INFANTARY_SYMB_M)
             {
-                if ((field[row][col].symbol = STABLES_SYMB_G) && (field[row][col + 1].symbol = STABLES_SYMB_G1))
+                if ((field[row][col].symbol == STABLES_SYMB_G) && (field[row][col + 1].symbol == STABLES_SYMB_G1))
                 {
 
                     gordPlayer->gStableHealth -= 5; //dano que a infantaria vai dar ao atacar a stable
@@ -3108,7 +3140,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if (field[rowAtack][colAtack].symbol == CAVALARY_SYMB_M) 
             {
-                if ((field[row][col].symbol = STABLES_SYMB_M) && (field[row][col + 1].symbol = STABLES_SYMB_M1))
+                if ((field[row][col].symbol == STABLES_SYMB_M) && (field[row][col + 1].symbol == STABLES_SYMB_M1))
                 {
 
                     mordPlayer->mStableHealth -= 7; //dano que a cavalaria vai dar ao atacar a stable
@@ -3156,7 +3188,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if (field[rowAtack][colAtack].symbol == ARTILLERY_SYMB_M) 
             {
-                if ((field[row][col].symbol = STABLES_SYMB_M) && (field[row][col + 1].symbol = STABLES_SYMB_M1))
+                if ((field[row][col].symbol == STABLES_SYMB_M) && (field[row][col + 1].symbol == STABLES_SYMB_M1))
                 {
 
                     mordPlayer->mStableHealth -= 10; //dano que a artilharia vai dar ao atacar a stable
@@ -3210,7 +3242,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if (field[rowAtack][colAtack].symbol == INFANTARY_SYMB_M) 
             {
-                if ((field[row][col].symbol = ARMOURY_SYMB_G) && (field[row][col + 1].symbol = ARMOURY_SYMB_G1))
+                if ((field[row][col].symbol == ARMOURY_SYMB_G) && (field[row][col + 1].symbol == ARMOURY_SYMB_G1))
                 {
 
                     gordPlayer->gArmouryHealth -= 5; //dano que a infantaria vai dar ao atacar a armoury
@@ -3258,7 +3290,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if (field[rowAtack][colAtack].symbol == CAVALARY_SYMB_M)
             {
-                if ((field[row][col].symbol = ARMOURY_SYMB_G) && (field[row][col + 1].symbol = ARMOURY_SYMB_G1))
+                if ((field[row][col].symbol == ARMOURY_SYMB_G) && (field[row][col + 1].symbol == ARMOURY_SYMB_G1))
                 {
 
                     gordPlayer->gArmouryHealth -= 7; //dano que a cavalaria vai dar ao atacar a armoury
@@ -3307,7 +3339,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if (field[rowAtack][colAtack].symbol == ARTILLERY_SYMB_M)
             {
-                if ((field[row][col].symbol = ARMOURY_SYMB_G) && (field[row][col + 1].symbol = ARMOURY_SYMB_G1))
+                if ((field[row][col].symbol == ARMOURY_SYMB_G) && (field[row][col + 1].symbol == ARMOURY_SYMB_G1))
                 {
 
                     gordPlayer->gArmouryHealth -= 10; //dano que a artilharia vai dar ao atacar a armoury
@@ -3360,7 +3392,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if (field[rowAtack][colAtack].symbol == INFANTARY_SYMB_M)
             {
-                if ((field[row][col].symbol = INFANTARY_SYMB_G))
+                if ((field[row][col].symbol == INFANTARY_SYMB_G))
                 {
                     gordPlayer->infantryHealth -= 5; //dano que a infantaria Mordor vai dar ao atacar a infantaria Gondor
                     printf("Mordor infantry health after attack: %d\n ", gordPlayer->infantryHealth);
@@ -3405,7 +3437,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if (field[rowAtack][colAtack].symbol == CAVALARY_SYMB_M)
             {
-                if ((field[row][col].symbol = INFANTARY_SYMB_G))
+                if ((field[row][col].symbol == INFANTARY_SYMB_G))
                 {
                     gordPlayer->infantryHealth -= 7; //dano que a cavalaria Mordor vai dar ao atacar a infantaria Gondor
                     printf("Mordor infantry health after attack: %d\n ", gordPlayer->infantryHealth);
@@ -3451,7 +3483,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if (field[rowAtack][colAtack].symbol == ARTILLERY_SYMB_M)
             {
-                if ((field[row][col].symbol = INFANTARY_SYMB_G))
+                if ((field[row][col].symbol == INFANTARY_SYMB_G))
                 {
 
                     gordPlayer->infantryHealth -= 10; //dano que a artilharia Mordor vai dar ao atacar a infantaria Gondor
@@ -3501,7 +3533,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if (field[rowAtack][colAtack].symbol == INFANTARY_SYMB_M)
             {
-                if ((field[row][col].symbol = CAVALARY_SYMB_G) && (field[row][col + 1].symbol = CAVALARY_SYMB_G1))
+                if ((field[row][col].symbol == CAVALARY_SYMB_G) && (field[row][col + 1].symbol == CAVALARY_SYMB_G1))
                 {
                     gordPlayer->cavalryHealth -= 5;
                     printf("Gondor cavalry health after attack: %d\n ", gordPlayer->cavalryHealth);
@@ -3547,7 +3579,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if (field[rowAtack][colAtack].symbol == CAVALARY_SYMB_M)
             {
-                if ((field[row][col].symbol = CAVALARY_SYMB_G) && (field[row][col + 1].symbol = CAVALARY_SYMB_G1))
+                if ((field[row][col].symbol == CAVALARY_SYMB_G) && (field[row][col + 1].symbol == CAVALARY_SYMB_G1))
                 {
 
                     gordPlayer->cavalryHealth -= 7;
@@ -3594,7 +3626,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if (field[rowAtack][colAtack].symbol == ARTILLERY_SYMB_M)
             {
-                if ((field[row][col].symbol = CAVALARY_SYMB_G) && (field[row][col + 1].symbol = CAVALARY_SYMB_G1))
+                if ((field[row][col].symbol == CAVALARY_SYMB_G) && (field[row][col + 1].symbol == CAVALARY_SYMB_G1))
                 {
                     gordPlayer->cavalryHealth -= 10;
                     printf("Gondor cavalry health after attack: %d\n ", gordPlayer->cavalryHealth);
@@ -3644,7 +3676,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if(field[rowAtack][colAtack].symbol == INFANTARY_SYMB_M)
             {
-                if (field[row][col].symbol = ARTILLERY_SYMB_G)
+                if (field[row][col].symbol == ARTILLERY_SYMB_G)
                 {
 
                     gordPlayer->artilleryHealth -= 5;
@@ -3690,7 +3722,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if (field[rowAtack][colAtack].symbol == CAVALARY_SYMB_M)
             {
-                if (field[row][col].symbol = ARTILLERY_SYMB_G)
+                if (field[row][col].symbol == ARTILLERY_SYMB_G)
                 {
 
                     gordPlayer->artilleryHealth -= 7;
@@ -3735,7 +3767,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         {
             if(field[rowAtack][colAtack].symbol == ARTILLERY_SYMB_M)
             {
-                if (field[row][col].symbol = ARTILLERY_SYMB_G)
+                if (field[row][col].symbol == ARTILLERY_SYMB_G)
                 {
 
                     gordPlayer->artilleryHealth -= 10;
@@ -3758,9 +3790,6 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
 
     }
     #pragma endregion
-
-
-
 
     #pragma endregion
 
