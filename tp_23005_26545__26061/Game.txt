@@ -1,0 +1,25 @@
+Gondor Coins: -858993460
+Base : -858993460 | Mine: -858993460 | Barrack: -858993460 | Stable: -858993460 | Armoury: -858993460
+Infantry: -858993460 | Cavalry: -858993460 | Artillery: -858993460
+Mordor Coins: 70
+Base : 100 | Mine: 100 | Barrack: 100 | Stable: 100 | Armoury: 100
+Infantry: 100 | Cavalry: 100 | Artillery: 100
+Remaining coins gondor: -858993460
+Remaining coins mordor: 70
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+          M M M M                                   
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    

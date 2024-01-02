@@ -238,9 +238,9 @@ void moveCavalryGondor(int originRow, int originCol, int destRow, int destCol);
 void moveArtilleryGondor(int originRow, int originCol, int destRow, int destCol);
 */
 	#pragma region MOVER
-void moveGordorUnits(gordorPlayer* player, char unitType, int cells, int originRow, int originCol, int destRow, int destCol, gordorPlayer* gordPlayer);
-void moveInfantryMordor(mordorPlayer* mordPlayer, int row, int col);
-
+void moveInfantryGondor(gordorPlayer* gordPlayer);
+void moveCavalryGondor(gordorPlayer* gordPlayer);
+void moveArtilleryGondor(gordorPlayer* gordPlayer);
 	#pragma endregion
 
 	#pragma region ATACAR
@@ -317,7 +317,9 @@ void moveCavalryMordor(int originRow, int originCol, int destRow, int destCol);
 void moveArtilleryMordor(int originRow, int originCol, int destRow, int destCol);
 */
 	#pragma region MOVER
-void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int originRow, int originCol, int destRow, int destCol);
+void moveInfantryMordor(mordorPlayer* mordorPlayer);
+void moveCavalryMordor(mordorPlayer* mordorPlayer);
+void moveArtilleryMordor(mordorPlayer* mordorPlayer);
 	#pragma endregion 
 
 	#pragma region ATACAR
@@ -346,7 +348,7 @@ void MordorCavalryVSGondInfantry(int row, int col, gordorPlayer* gordPlayer, mor
 void MordorArtilleryVSGondInfantry(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
 
 void MordInfantryVSGondCavalry(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
-void MordCavalryVSGondCavalry(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+void MordCavalryVSGondCavalry(int row, int col, gordorPlayer* gordPlayer);
 void MordArtilleryVSGondCavalry(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
 
 void MordorInfantryVSGondArtillhery(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
@@ -359,7 +361,9 @@ void MordorArtilleryVSGondArtillhery(int row, int col, gordorPlayer* gordPlayer,
 #pragma endregion
 
 #pragma region funcoes gravar
-void saveFileGondor(gordorPlayer* gordPlayer, char unitType, int cells, int originRow, int originCol, int destRow, int destCol);
+void save(const char* filename, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+void load(const char* filename, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
+
 
 #pragma endregion
 

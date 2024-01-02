@@ -646,12 +646,75 @@ void placingArtilleryG(gordorPlayer* gordPlayer) {
  *
  *
  */
-void moveInfantryGondor(int originRow, int originCol, int destRow, int destCol)
-{
-    if (field[destRow][destCol].symbol == '.' && !(checkEmptyPosition(destRow, destCol))) {
-        field[destRow][destCol].symbol == field[originRow][originCol].symbol;
-        //depois de mover a unit, a celula de onde esta a unit fica vazia, logo temos de dizer que a linha e coluna de origem fica assim '.'
-        field[originRow][originCol].symbol == '.';
+void moveInfantryGondor(gordorPlayer* gordPlayer) {
+    int sourceRow, destRow;
+    char sourceCol[2], destCol[2];
+    showCoinsGondor(gordPlayer);
+
+    // Get source position
+    printf("\nEnter the row where the Gondor Infantry is located: ");
+    scanf_s("%d", &sourceRow, sizeof(sourceRow));
+    printf("Enter the column where the Gondor Infantry is located (A-Z): ");
+    scanf_s("%s", &sourceCol, sizeof(sourceCol));
+
+    // Get destination position
+    printf("\nEnter the row to move the Gondor Infantry: ");
+    scanf_s("%1d", &destRow, sizeof(destRow));
+    printf("Enter the column to move the Gondor Infantry (A-Z): ");
+    scanf_s("%1s", destCol, sizeof(destCol));
+
+    // Convert column characters to uppercase for consistency
+    sourceCol[0] = toupper(sourceCol[0]);
+    destCol[0] = toupper(destCol[0]);
+
+    // Convert column characters to 0-based index
+    int sourceColumn = sourceCol[0] - 'A';
+    int destColumn = destCol[0] - 'A';
+
+    // Debug information
+    printf("DEBUG: Moving Gondor Infantry from [%d][%s] to [%d][%s]\n", sourceRow, sourceCol, destRow, destCol);
+
+    // Check if the source cell is out of bounds
+    if (sourceRow < 0 || sourceRow >= ROWS || sourceColumn < 0 || sourceColumn >= COLS) {
+        printf("\nDEBUG: Invalid source position for the Gondor Infantry.\n");
+        return;
+    }
+
+    // Check if the source cell is occupied by 'F'
+    if (field[sourceRow][sourceColumn].symbol != INFANTARY_SYMB_G) {
+        printf("\nDEBUG: No Gondor Infantry found at the specified source position.\n");
+        return;
+    }
+
+    // Check if the destination cell is within bounds
+    if (destRow >= 0 && destRow < ROWS && destColumn >= 0 && destColumn < COLS) {
+        // Deduct 2 coins for each cell moved horizontally
+        int cellsMoved = abs(destColumn - sourceColumn) + 1;  // Adding 1 to include the destination cell
+        int totalCost = 2 * cellsMoved;
+
+        // Check if the player has enough coins for the movement
+        if (gordPlayer->coins >= totalCost) {
+            // Update the positions of Gondor Infantry
+            field[destRow][destColumn].symbol = INFANTARY_SYMB_G;  // New position
+            field[sourceRow][sourceColumn].symbol = ' ';  // Clear the old position
+
+            // Deduct coins from the player
+            gordPlayer->coins -= totalCost;
+
+            printf("\nDEBUG: Gondor Infantry moved successfully to the intended place.\n");
+            printf("\nCoins before movement: %d\n", gordPlayer->coins + totalCost);  // Display coins before the movement
+            printf("\nCoins after movement: %d\n", gordPlayer->coins);
+
+            // Ensure to print the updated field
+            printField(field);
+        }
+        else {
+            printf("\nDEBUG: Insufficient coins to move Gondor Infantry.\n");
+            return;
+        }
+    }
+    else {
+        printf("\nDEBUG: Invalid destination position for Gondor Infantry.\n");
     }
 }
 
@@ -666,13 +729,88 @@ void moveInfantryGondor(int originRow, int originCol, int destRow, int destCol)
  *
  *
  */
-void moveCavalryGondor(int originRow, int originCol, int destRow, int destCol) {
-    if (field[destRow][destCol].symbol == '.' && !(checkEmptyPosition(destRow, destCol))) {
-        field[destRow][destCol].symbol == field[originRow][originCol].symbol;
-        //depois de mover a unit, a celula de onde esta a unit fica vazia, logo temos de dizer que a linha e coluna de origem fica assim '.'
-        field[originRow][originCol].symbol == '.';
+void moveCavalryGondor(gordorPlayer* gordPlayer) {
+    int sourceRow, destRow;
+    char sourceCol[2], destCol[2];
+    showCoinsGondor(gordPlayer);
+
+    // Get source position
+    printf("\nEnter the row where the Gondor Cavalry is located: ");
+    scanf_s("%d", &sourceRow, sizeof(sourceRow));
+    printf("Enter the column where the Gondor Cavalry is located (A-Z): ");
+    scanf_s("%s", sourceCol, sizeof(sourceCol));
+
+    // Get destination position
+    printf("\nEnter the row to move the Gondor Cavalry: ");
+    scanf_s("%d", &destRow, sizeof(destRow));
+    printf("Enter the column to move the Gondor Cavalry (A-Z): ");
+    scanf_s("%s", destCol, sizeof(destCol));
+
+    // Convert column characters to uppercase for consistency
+    sourceCol[0] = toupper(sourceCol[0]);
+    destCol[0] = toupper(destCol[0]);
+
+    // Convert column characters to 0-based index
+    int sourceColumn = sourceCol[0] - 'A';
+    int destColumn = destCol[0] - 'A';
+
+    // Debug information
+    printf("DEBUG: Moving Gondor Cavalry from [%d][%s] to [%d][%s]\n", sourceRow, sourceCol, destRow, destCol);
+
+    // Check if the source cell is out of bounds
+    if (sourceRow < 0 || sourceRow >= ROWS || sourceColumn < 0 || sourceColumn >= COLS) {
+        printf("\nDEBUG: Invalid source position for the Gondor Cavalry.\n");
+        return;
     }
+
+    // Check if the source cell is occupied by 'S' or 'K'
+    if (field[sourceRow][sourceColumn].symbol != CAVALARY_SYMB_G &&
+        field[sourceRow][sourceColumn].symbol != CAVALARY_SYMB_G1) {
+        printf("\nDEBUG: No Gondor Cavalry found at the specified source position.\n");
+        return;
+    }
+
+    // Check if the destination cells are within bounds
+    if (destRow >= 0 && destRow < ROWS && destColumn >= 0 && destColumn + 1 < COLS) {
+        // Check if the destination cells are empty
+        if (field[destRow][destColumn].symbol == ' ' &&
+            field[destRow][destColumn + 1].symbol == ' ') {
+
+            // Calculate the distance moved by Gondor Cavalry
+            int cellsMoved = abs(destRow - sourceRow) + 1;  // Adding 1 to include the destination cell
+            int totalCost = 2 * cellsMoved;  // Deduct 2 coins for each cell moved
+
+            // Check if the player has enough coins for the movement
+            if (gordPlayer->coins >= totalCost) {
+                // Update the positions of Gondor Cavalry
+                field[destRow][destColumn].symbol = CAVALARY_SYMB_G;      // New position
+                field[destRow][destColumn + 1].symbol = CAVALARY_SYMB_G1;  // New position
+                field[sourceRow][sourceColumn].symbol = ' ';               // Clear the old position
+                field[sourceRow][sourceColumn + 1].symbol = ' ';           // Clear the old position
+
+                // Deduct coins from the player
+                gordPlayer->coins -= totalCost;
+
+                printf("\nDEBUG: Gondor Cavalry moved successfully to the intended place.\n");
+                printf("\nCoins before movement: %d\n", gordPlayer->coins + totalCost);  // Display coins before the movement
+                printf("\nCoins after movement: %d\n", gordPlayer->coins);
+
+                printField(field);  // Ensure to print the updated field
+            }
+            else {
+                printf("\nDEBUG: Insufficient coins to move Gondor Cavalry.\n");
+            }
+
+            return;
+        }
+        else {
+            printf("\nDEBUG: Destination cells are occupied.\n");
+        }
+    }
+
+    printf("\nDEBUG: Invalid destination position for Gondor Cavalry.\n");
 }
+
 
 /**
  *
@@ -685,60 +823,78 @@ void moveCavalryGondor(int originRow, int originCol, int destRow, int destCol) {
  *
  *
  */
-void moveArtilleryGondor(int originRow, int originCol, int destRow, int destCol) {
-    if (field[destRow][destCol].symbol == '.' && !(checkEmptyPosition(destRow, destCol))) {
-        field[destRow][destCol].symbol == field[originRow][originCol].symbol;
-        //depois de mover a unit, a celula de onde esta a unit fica vazia, logo temos de dizer que a linha e coluna de origem fica assim '.'
-        field[originRow][originCol].symbol == '.';
-    }
-}
+void moveArtilleryGondor(gordorPlayer* gordPlayer) {
+    int sourceRow, destRow;
+    char sourceCol[2], destCol[2];
+    showCoinsGondor(gordPlayer);
 
-/**
- *
- * \function name- move
- * \params- player
- * \params- unitType
- * \params- cells
- * \brief- Movimento das units e calcula respetivo custo
- *
- *
- */
-void moveGordorUnits(char unitType, int cells, int originRow, int originCol, int destRow, int destCol, gordorPlayer* gordPlayer) {
-    int costPerCell;
-    printf("Wich unit you wanna move(I / C/ A)? \n");
-    scanf_s("%s", &unitType);
+    // Get source position
+    printf("\nEnter the row where the Gondor Artillery is located: ");
+    scanf_s("%d", &sourceRow, sizeof(sourceRow));
+    printf("Enter the column where the Gondor Artillery is located (A-Z): ");
+    scanf_s("%s", sourceCol, sizeof(sourceCol));
 
-    switch (unitType) {
-    case 'I':
-    case 'i':
-        moveInfantryGondor(originRow, originCol, destRow, destCol, gordPlayer);
-        costPerCell = 2; //custo de uma peça de infantaria
-        break;
-    case 'C':
-    case 'c':
-        moveCavalryGondor(originRow, originCol, destRow, destCol, gordPlayer);
-        costPerCell = 1;//custo de uma peça de cavalaria
-        break;
-    case 'A':
-    case 'a':
-        moveArtilleryGondor(originRow, originCol, destRow, destCol, gordPlayer);
-        costPerCell = 3; //custo de uma peça de artilharia
-        break;
-    default:
-        printf("Invalid unit type.\n");
+    // Get destination position
+    printf("\nEnter the row to move the Gondor Artillery: ");
+    scanf_s("%d", &destRow, sizeof(destRow));
+    printf("Enter the column to move the Gondor Artillery (A-Z): ");
+    scanf_s("%s", destCol, sizeof(destCol));
+
+    // Convert column characters to uppercase for consistency
+    sourceCol[0] = toupper(sourceCol[0]);
+    destCol[0] = toupper(destCol[0]);
+
+    // Convert column characters to 0-based index
+    int sourceColumn = sourceCol[0] - 'A';
+    int destColumn = destCol[0] - 'A';
+
+    // Debug information
+    printf("DEBUG: Moving Gondor Artillery from [%d][%s] to [%d][%s]\n", sourceRow, sourceCol, destRow, destCol);
+
+    // Check if the source cell is out of bounds
+    if (sourceRow < 0 || sourceRow >= ROWS || sourceColumn < 0 || sourceColumn >= COLS) {
+        printf("\nDEBUG: Invalid source position for the Gondor Artillery.\n");
         return;
     }
 
-    int totalCost = costPerCell * cells;
+    // Check if the source cell is occupied by Artillery
+    if (field[sourceRow][sourceColumn].symbol != ARTILLERY_SYMB_G) {
+        printf("\nDEBUG: No Gondor Artillery found at the specified source position.\n");
+        return;
+    }
 
-    if (totalCost > gordPlayer->coins) {
-        printf("Not enough coins to make the move.\n");
+    // Check if the destination cell is within bounds
+    if (destRow >= 0 && destRow < ROWS && destColumn >= 0 && destColumn < COLS) {
+        // Deduct 2 coins for each cell moved horizontally
+        int cellsMoved = abs(destColumn - sourceColumn) + 1;  // Adding 1 to include the destination cell
+        int totalCost = 3 * cellsMoved;
+
+        // Check if the player has enough coins for the movement
+        if (gordPlayer->coins >= totalCost) {
+            // Update the positions of Gondor Infantry
+            field[destRow][destColumn].symbol = ARTILLERY_SYMB_G;  // New position
+            field[sourceRow][sourceColumn].symbol = ' ';  // Clear the old position
+
+            // Deduct coins from the player
+            gordPlayer->coins -= totalCost;
+
+            printf("\nDEBUG: Gondor Artillery moved successfully to the intended place.\n");
+            printf("\nCoins before movement: %d\n", gordPlayer->coins + totalCost);  // Display coins before the movement
+            printf("\nCoins after movement: %d\n", gordPlayer->coins);
+
+            // Ensure to print the updated field
+            printField(field);
+        }
+        else {
+            printf("\nDEBUG: Insufficient coins to move Gondor Artillery.\n");
+            return;
+        }
     }
     else {
-        gordPlayer->coins -= totalCost;
-        printf("Moved %c %d cells. Remaining coins: %d\n", unitType, cells, gordPlayer->coins);
+        printf("\nDEBUG: Invalid destination position for Gondor Artillery.\n");
     }
 }
+
 
 #pragma endregion
 
@@ -749,61 +905,56 @@ void moveGordorUnits(char unitType, int cells, int originRow, int originCol, int
 
     #pragma region Gondor units vs MordorBase
 
-void GondorInfantryVSMordBase(int row, int col, mordorPlayer* mordPlayer) 
+void GondorInfantryVSMordBase(int row, int col, mordorPlayer* mordPlayer)
 {
-    int rowAtack, colAtack;
+    int rowAtack;
     int rowPosition;
     char colPosition;
+    char colAtack;
 
-    printf("ATTACKING WITH GONDOR INFANTRY\n");    
+    printf("ATTACKING WITH GONDOR INFANTRY\n");
     printf("Select the row where gondor infantry is positioned: \n");
     scanf_s("%d", &rowPosition);
     printf("Select the column where gondor infantry is positioned: \n");
     scanf_s(" %c", &colPosition);
-  
+
 
     printf("Select the row where mordor base is positioned: \n");
     scanf_s("%d", &rowAtack);
     printf("Select the column where mordor base is positioned: \n");
-    scanf_s("%d", &colAtack);
+    scanf_s("%c", &colAtack);
 
-    row = rowAtack;
-    col = colAtack;
+    if (rowPosition >= 0 && rowPosition < ROWS && colPosition >= 0 && colPosition < COLS &&
+        rowAtack >= 0 && rowAtack < ROWS && rowAtack >= 0 && colAtack < COLS) {
 
-    if (row >= 0 && row < ROWS && col >= 0 && col < COLS && rowPosition >= 0 && rowPosition < ROWS && colPosition >= 0 && colPosition < COLS)
-    {
-        if (field[rowAtack][colAtack].symbol == INFANTARY_SYMB_G) 
-        {
+        if (field[rowAtack][colAtack].symbol == INFANTARY_SYMB_G) {
+            // Verifique se a posição da infantaria é adjacente à posição da base
+            if ((abs(rowPosition - rowAtack) <= 1 && abs(colPosition - colAtack) == 0) ||
+                (abs(rowPosition - rowAtack) == 0 && abs(colPosition - colAtack) <= 1)) {
 
-            if ((field[row][col].symbol == BASE_SYMB_M) && (field[row][col + 1].symbol == BASE_SYMB_M1) &&
-            (field[row][col + 2].symbol == BASE_SYMB_M2) && (field[row][col - 1].symbol == BASE_SYMB_M3))
-            {
-            mordPlayer->mBaseHealth -= 5; //dano que a infantaria vai dar ao atacar a base
-            printf("Mordor base health after attack: %d\n ", mordPlayer->mBaseHealth);
-            
-            if (mordPlayer->mBaseHealth <= 0) {
-                ((field[row][col].symbol = ' ') && (field[row][col + 1].symbol = ' ') &&
-                    (field[row][col + 2].symbol = ' ') && (field[row][col - 1].symbol = ' '));
-                printf("Mordor base was destroyed!\n");
-                printf("You won the game!!!\n");
-                printf("Gondor is safed because of you!!\n");
+                mordPlayer->mBaseHealth -= 5; // Dano que a infantaria causa à base
+                printf("Mordor base health after attack: %d\n", mordPlayer->mBaseHealth);
+
+                if (mordPlayer->mBaseHealth <= 0) {
+                    // Defina os símbolos como espaço em branco para representar a destruição da base
+                    field[rowAtack][colAtack].symbol = ' ';
+                    printf("Mordor base was destroyed!\n");
+                    printf("You won the game!!!\n");
+                    printf("Gondor is safe because of you!!\n");
+                }
             }
-
-
+            else {
+                printf("Mordor base not adjacent to Gondor infantry!!\n");
+            }
         }
         else {
             printf("Mordor base not found!!\n");
         }
-
-        }    
-
     }
     else {
         printf("Invalid position!!\n");
     }
-
 }
-
 
 void GondorCavalryVSMordBase(int row, int col, mordorPlayer* mordPlayer) 
 {
@@ -1975,6 +2126,7 @@ void GondorArtilleryVSMordArtillhery(int row, int col, mordorPlayer* mordPlayer)
 #pragma endregion
 
 
+#pragma endregion
 
 #pragma region mordor Functions
 
@@ -2462,6 +2614,7 @@ void placingArtilleryM(mordorPlayer* mordPLayer) {
 #pragma endregion
 
     #pragma region MOVE UNITS
+
 /**
  *
  * \function name- moveGondorInfantry
@@ -2473,48 +2626,86 @@ void placingArtilleryM(mordorPlayer* mordPLayer) {
  *
  *
  */
-void moveInfantryMordor(mordorPlayer *mordPlayer,int row, int col)
-{
-    int r, c, r1, c1;
+void moveInfantryMordor(mordorPlayer* mordPlayer) {
+    int sourceRow, destRow;
+    char sourceCol[2], destCol[2];
+    showCoinsMordor(mordPlayer);
 
-    printf("\nInsert the row where is the Gondor Infantry (Gondor): ");
-    scanf_s("%d", &r1);
-    printf("\nInsert the column where is the Gondor Infantry (Gondor): ");
-    scanf_s("%d", &c1);
+    // Get source position
+    printf("\nEnter the row where the Mordor Infantry is located: ");
+    scanf_s("%d", &sourceRow, sizeof(sourceRow));
+    printf("Enter the column where the Mordor Infantry is located (A-Z): ");
+    scanf_s("%s", sourceCol, sizeof(sourceCol));
 
-    printf("\nEnter the row to move the Gondor Infantry (Gondor): ");
-    scanf_s("%d", &r);
-    printf("\nEnter the column to move the Gondor Infantry (Gondor): ");
-    scanf_s("%d", &c);
-    checkEmptyPosition(r, c);
+    // Get destination position
+    printf("\nEnter the row to move the Mordor Infantry: ");
+    scanf_s("%d", &destRow, sizeof(destRow));
+    printf("Enter the column to move the Mordor Infantry (A-Z): ");
+    scanf_s("%s", destCol, sizeof(destCol));
 
-    row = r;
-    col = c;
-    if (!(field[r][c].symbol == " ")) {
-        printf("You cant move your unit to that position!!!!\n");
+    // Convert column characters to uppercase for consistency
+    sourceCol[0] = toupper(sourceCol[0]);
+    destCol[0] = toupper(destCol[0]);
+
+    // Convert column characters to 0-based index
+    int sourceColumn = sourceCol[0] - 'A';
+    int destColumn = destCol[0] - 'A';
+
+    // Debug information
+    printf("DEBUG: Moving Mordor Infantry from [%d][%s] to [%d][%s]\n", sourceRow, sourceCol, destRow, destCol);
+
+    // Check if the source cell is out of bounds
+    if (sourceRow < 0 || sourceRow >= ROWS || sourceColumn < 0 || sourceColumn >= COLS) {
+        printf("\nDEBUG: Invalid source position for the Mordor Infantry.\n");
         return;
     }
 
-    if (row >= 0 && row < ROWS && col >= 0 && col < COLS && !(field[r1][c1].symbol == ' ')) {
+    // Check if the source cell is occupied by 'O' or 'W'
+    if (field[sourceRow][sourceColumn].symbol != INFANTARY_SYMB_M &&
+        field[sourceRow][sourceColumn].symbol != INFANTARY_SYMB_M1) {
+        printf("\nDEBUG: No Mordor Infantry found at the specified source position.\n");
+        return;
+    }
 
-        if (mordPlayer->coins >= 2) {
+    // Check if the destination cells are within bounds
+    if (destRow >= 0 && destRow < ROWS && destColumn >= 0 && destColumn + 1 < COLS) {
+        // Check if the destination cells are empty
+        if (field[destRow][destColumn].symbol == ' ' &&
+            field[destRow][destColumn + 1].symbol == ' ') {
 
-            mordPlayer->coins -= 2;
+            // Calculate the distance moved by Mordor Infantr
+            int cellsMoved = abs(destRow - sourceRow) + 1;  // Adding 1 to include the destination cell
+            int totalCost = 2 * cellsMoved;  // Deduct 2 coins for each cell moved
 
-            field[r1][c1].symbol = ' ';
+            // Check if the player has enough coins for the movement
+            if (mordPlayer->coins >= totalCost) {
+                // Update the positions of Mordor Infantr
+                field[destRow][destColumn].symbol = INFANTARY_SYMB_M;      // New position
+                field[destRow][destColumn + 1].symbol = INFANTARY_SYMB_M1;  // New position
+                field[sourceRow][sourceColumn].symbol = ' ';               // Clear the old position
+                field[sourceRow][sourceColumn + 1].symbol = ' ';           // Clear the old position
 
-            field[row][col].symbol = INFANTARY_SYMB_M;
-            field[row][col].symbol = INFANTARY_SYMB_M1;
+                // Deduct coins from the player
+                mordPlayer->coins -= totalCost;
 
-            printf("\Mordor Infantry moved successfully.\n");
+                printf("\nDEBUG: Mordor Infantry moved successfully to the intended place.\n");
+                printf("\nCoins before movement: %d\n", mordPlayer->coins + totalCost);  // Display coins before the movement
+                printf("\nCoins after movement: %d\n", mordPlayer->coins);
+
+                printField(field);  // Ensure to print the updated field
+            }
+            else {
+                printf("\nDEBUG: Insufficient coins to move Mordor Infantry.\n");
+            }
+
+            return;
         }
         else {
-            printf("\nYou dont have coins to this operation!!!!!\n");
+            printf("\nDEBUG: Destination cells are occupied.\n");
         }
     }
-    else {
-        printf("You cant put your unit on that position!!!!\n");
-    }
+
+    printf("\nDEBUG: Invalid destination position for Gondor Cavalry.\n");
 }
 
 /**
@@ -2528,13 +2719,78 @@ void moveInfantryMordor(mordorPlayer *mordPlayer,int row, int col)
  *
  *
  */
-void moveCavalryMordor(int originRow, int originCol, int destRow, int destCol) {
-    if (field[destRow][destCol].symbol == ' ' && !(checkEmptyPosition(destRow, destCol))) {
-        field[destRow][destCol].symbol == field[originRow][originCol].symbol;
-        //depois de mover a unit, a celula de onde esta a unit fica vazia, logo temos de dizer que a linha e coluna de origem fica assim '.'
-        field[originRow][originCol].symbol == ' ';
+void moveCavalryMordor(mordorPlayer* mordPlayer) {
+    int sourceRow, destRow;
+    char sourceCol[2], destCol[2];
+    showCoinsMordor(mordPlayer);
+
+    // Get source position
+    printf("\nEnter the row where the Mordor Cavalry is located: ");
+    scanf_s("%d", &sourceRow, sizeof(sourceRow));
+    printf("Enter the column where the Mordor Cavalry is located (A-Z): ");
+    scanf_s("%s", sourceCol, sizeof(sourceCol));
+
+    // Get destination position
+    printf("\nEnter the row to move the Mordor Cavalry: ");
+    scanf_s("%d", &destRow, sizeof(destRow));
+    printf("Enter the column to move the Mordor Cavalry (A-Z): ");
+    scanf_s("%s", destCol, sizeof(destCol));
+
+    // Convert column characters to uppercase for consistency
+    sourceCol[0] = toupper(sourceCol[0]);
+    destCol[0] = toupper(destCol[0]);
+
+    // Convert column characters to 0-based index
+    int sourceColumn = sourceCol[0] - 'A';
+    int destColumn = destCol[0] - 'A';
+
+    // Debug information
+    printf("DEBUG: Moving Mordor Cavalry from [%d][%s] to [%d][%s]\n", sourceRow, sourceCol, destRow, destCol);
+
+    // Check if the source cell is out of bounds
+    if (sourceRow < 0 || sourceRow >= ROWS || sourceColumn < 0 || sourceColumn >= COLS) {
+        printf("\nDEBUG: Invalid source position for the Mordor Cavalry.\n");
+        return;
+    }
+
+    // Check if the source cell is occupied by 'W'
+    if (field[sourceRow][sourceColumn].symbol != CAVALARY_SYMB_M) {
+        printf("\nDEBUG: No Mordor Cavalry found at the specified source position.\n");
+        return;
+    }
+
+    // Check if the destination cell is within bounds
+    if (destRow >= 0 && destRow < ROWS && destColumn >= 0 && destColumn < COLS) {
+        // Deduct 2 coins for each cell moved horizontally
+        int cellsMoved = abs(destColumn - sourceColumn) + 1;  // Adding 1 to include the destination cell
+        int totalCost = 2 * cellsMoved;
+
+        // Check if the player has enough coins for the movement
+        if (mordPlayer->coins >= totalCost) {
+            // Update the positions of Mordor Cavalry
+            field[destRow][destColumn].symbol = CAVALARY_SYMB_M;  // New position
+            field[sourceRow][sourceColumn].symbol = ' ';  // Clear the old position
+
+            // Deduct coins from the player
+            mordPlayer->coins -= totalCost;
+
+            printf("\nDEBUG: Mordor Cavalry moved successfully to the intended place.\n");
+            printf("\nCoins before movement: %d\n", mordPlayer->coins + totalCost);  // Display coins before the movement
+            printf("\nCoins after movement: %d\n", mordPlayer->coins);
+
+            // Ensure to print the updated field
+            printField(field);
+        }
+        else {
+            printf("\nDEBUG: Insufficient coins to move Mordor Cavalry.\n");
+            return;
+        }
+    }
+    else {
+        printf("\nDEBUG: Invalid destination position for Mordor Cavalry.\n");
     }
 }
+
 
 /**
  *
@@ -2547,65 +2803,87 @@ void moveCavalryMordor(int originRow, int originCol, int destRow, int destCol) {
  *
  *
  */
-void moveArtilleryMordor(int originRow, int originCol, int destRow, int destCol) {
-    if (field[destRow][destCol].symbol == ' ' && !(checkEmptyPosition(destRow, destCol))) {
-        field[destRow][destCol].symbol == field[originRow][originCol].symbol;
-        //depois de mover a unit, a celula de onde esta a unit fica vazia, logo temos de dizer que a linha e coluna de origem fica assim '.'
-        field[originRow][originCol].symbol == ' ';
-    }
-}
+void moveArtilleryMordor(mordorPlayer* mordPlayer) {
+    int sourceRow, destRow;
+    char sourceCol[2], destCol[2];
+    showCoinsMordor(mordPlayer);
 
-/**
- *
- * \function name- move
- * \params- player
- * \params- unitType
- * \params- cells
- * \brief- Movimento das units e calcula respetivo custo
- *
- *
- */
+    // Get source position
+    printf("\nEnter the row where the Mordor Artillery is located: ");
+    scanf_s("%d", &sourceRow, sizeof(sourceRow));
+    printf("Enter the column where the Mordor Artillery is located (A-Z): ");
+    scanf_s("%s", sourceCol, sizeof(sourceCol));
 
-void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int originRow, int originCol, int destRow, int destCol) {
-    int costPerCell;
-    printf("Wich unit you wanna move(I / C/ A)? \n");
+    // Get destination position
+    printf("\nEnter the row to move the Mordor Artillery: ");
+    scanf_s("%d", &destRow, sizeof(destRow));
+    printf("Enter the column to move the Mordor Artillery (A-Z): ");
+    scanf_s("%s", destCol, sizeof(destCol));
 
-    switch (unitType) {
-    case 'I':
-    case 'i':
-        getGridCords(originRow, originCol);
-        moveInfantryMordor(originRow, originCol, destRow, destCol, mordPlayer);
-        costPerCell = 2; //custo de uma peça de infantaria
-        break;
-    case 'C':
-    case 'c':
-        getGridCords(originRow, originCol);
-        moveCavalryMordor(originRow, originCol, destRow, destCol, mordPlayer);
-        costPerCell = 1;//custo de uma peça de cavalaria
-        break;
-    case 'A':
-    case 'a':
-        getGridCords(originRow, originCol);
-        moveArtilleryMordor(originRow, originCol, destRow, destCol, mordPlayer);
-        costPerCell = 3; //custo de uma peça de artilharia
-        break;
-    default:
-        printf("Invalid unit type.\n");
+    // Convert column characters to uppercase for consistency
+    sourceCol[0] = toupper(sourceCol[0]);
+    destCol[0] = toupper(destCol[0]);
+
+    // Convert column characters to 0-based index
+    int sourceColumn = sourceCol[0] - 'A';
+    int destColumn = destCol[0] - 'A';
+
+    // Debug information
+    printf("DEBUG: Moving Mordor Artillery from [%d][%s] to [%d][%s]\n", sourceRow, sourceCol, destRow, destCol);
+
+    // Check if the source cell is out of bounds
+    if (sourceRow < 0 || sourceRow >= ROWS || sourceColumn < 0 || sourceColumn >= COLS) {
+        printf("\nDEBUG: Invalid source position for the Mordor Artillery.\n");
         return;
     }
 
-    int totalCost = costPerCell * cells;
+    // Check if the source cell is occupied by 'S' or 'T'
+    if (field[sourceRow][sourceColumn].symbol != ARTILLERY_SYMB_M &&
+        field[sourceRow][sourceColumn].symbol != ARTILLERY_SYMB_M1) {
+        printf("\nDEBUG: No Mordor Artillery found at the specified source position.\n");
+        return;
+    }
 
-    if (totalCost > mordPlayer->coins) {
-        printf("Not enough coins to make the move.\n");
+    // Check if the destination cells are within bounds
+    if (destRow >= 0 && destRow < ROWS && destColumn >= 0 && destColumn + 1 < COLS) {
+        // Check if the destination cells are empty
+        if (field[destRow][destColumn].symbol == ' ' &&
+            field[destRow][destColumn + 1].symbol == ' ') {
+
+            // Calculate the distance moved by Mordor Artillery
+            int cellsMoved = abs(destRow - sourceRow) + 1;  // Adding 1 to include the destination cell
+            int totalCost = 2 * cellsMoved;  // Deduct 2 coins for each cell moved
+
+            // Check if the player has enough coins for the movement
+            if (mordPlayer->coins >= totalCost) {
+                // Update the positions of Mordor Artillery
+                field[destRow][destColumn].symbol = ARTILLERY_SYMB_M;      // New position
+                field[destRow][destColumn + 1].symbol = ARTILLERY_SYMB_M1;  // New position
+                field[sourceRow][sourceColumn].symbol = ' ';               // Clear the old position
+                field[sourceRow][sourceColumn + 1].symbol = ' ';           // Clear the old position
+
+                // Deduct coins from the player
+                mordPlayer->coins -= totalCost;
+
+                printf("\nDEBUG: Mordor Artillery moved successfully to the intended place.\n");
+                printf("\nCoins before movement: %d\n", mordPlayer->coins + totalCost);  // Display coins before the movement
+                printf("\nCoins after movement: %d\n", mordPlayer->coins);
+
+                printField(field);  // Ensure to print the updated field
+            }
+            else {
+                printf("\nDEBUG: Insufficient coins to move Mordor Artillery.\n");
+            }
+
+            return;
+        }
+        else {
+            printf("\nDEBUG: Destination cells are occupied.\n");
+        }
     }
-    else {
-        mordPlayer->coins -= totalCost;
-        printf("Moved %c %d cells. Remaining coins: %d\n", unitType, cells, mordPlayer->coins);
-    }
+
+    printf("\nDEBUG: Invalid destination position for Gondor Artillery.\n");
 }
-
-
 
 #pragma endregion
 
@@ -3556,7 +3834,7 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
 
     }
 
-    void MordCavalryVSGondCavalry(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer)
+    void MordCavalryVSGondCavalry(int row, int col, gordorPlayer* gordPlayer)
     {
         int rowAtack, colAtack;
         int rowPosition, colPosition;
@@ -3564,12 +3842,12 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
         printf("ATTACKING WITH MORDOR CAVALRY\n");
         printf("Select the row where mordor cavalry is positioned: \n");
         scanf_s("%d", &rowPosition);
-        printf("Select the column where mordor cavalry is positioned: \n");
+        printf("Select the column where mordor cavalry is positioned(0-26): \n");
         scanf_s("%d", &colPosition);
 
         printf("Select the row where gondor cavalry is positioned: \n");
         scanf_s("%d", &rowAtack);
-        printf("Select the column where gondor cavalry is positioned: \n");
+        printf("Select the column where gondor cavalry is positioned(0-26): \n");
         scanf_s("%d", &colAtack);
 
         row = rowAtack;
@@ -3577,16 +3855,16 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
 
         if (row >= 0 && row < ROWS && col >= 0 && col < COLS && rowPosition >= 0 && rowPosition < ROWS && colPosition >= 0 && colPosition < COLS)
         {
-            if (field[rowAtack][colAtack].symbol == CAVALARY_SYMB_M)
+            if (field[rowPosition][colPosition].symbol == CAVALARY_SYMB_M)
             {
-                if ((field[row][col].symbol == CAVALARY_SYMB_G) && (field[row][col + 1].symbol == CAVALARY_SYMB_G1))
+                if ((field[rowPosition][colPosition].symbol == CAVALARY_SYMB_G) && (field[rowPosition][colPosition + 1].symbol == CAVALARY_SYMB_G1))
                 {
 
                     gordPlayer->cavalryHealth -= 7;
                     printf("Gondor cavalry health after attack: %d\n ", gordPlayer->cavalryHealth);
 
                     if (gordPlayer->cavalryHealth <= 0) {
-                        ((field[row][col].symbol = ' ') && (field[row][col + 1].symbol = ' '));
+                        ((field[rowAtack][colAtack].symbol = ' ') && (field[row][colAtack + 1].symbol = ' '));
                         printf("Gondor cavalry was destroyed!\n");
                     }
                 }
@@ -3595,10 +3873,13 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
                 }
 
             }
+            else {
+                printf("Does not exist mordor cavalry at that position\n");
+            }
            
         }
         else {
-            printf("Invalid position!!\n");
+            printf("Invalid position for mordor cavalry atack!!\n");
         }
 
     }
@@ -3798,30 +4079,80 @@ void moveMordorUnits(mordorPlayer* mordPlayer, char unitType, int cells, int ori
 #pragma endregion
 
 #pragma region funcoes Gravar ficheiro
-void saveFileGondor(gordorPlayer* gordPlayer, char unitType, int cells, int originRow, int originCol, int destRow, int destCol) {
-    FILE* arquivo;
-
-    // Abrir o arquivo para escrita
-    arquivo = fopen("dadosGondor.txt", "w");
+void save(const char* filename,gordorPlayer* gordPlayer, mordorPlayer * mordPlayer) {
+    FILE* arquivo = fopen(filename, "w");  
 
     if (arquivo == NULL) {
         fprintf(stderr, "Erro ao abrir o arquivo\n");
         return;
     }
     // Write player details to the file
-    fprintf(arquivo, "Player: %s\n", gordPlayer->name);
-    fprintf(arquivo, "Coins: %d\n", gordPlayer->coins);
-    fprintf(arquivo, "Infantry: %d | Cavalry: %d | Artillery: %d\n", gordPlayer->infantry, gordPlayer->cavalry, gordPlayer->artillery);
+    fprintf(arquivo, "Gondor Coins: %d\n", gordPlayer->coins);
+    fprintf(arquivo, "Base : %d | Mine: %d | Barrack: %d | Stable: %d | Armoury: %d\n", gordPlayer->gBaseHealth, gordPlayer->gMineHealth, gordPlayer->gBarrackHealth,
+        gordPlayer->gStableHealth, gordPlayer->gArmouryHealth);
+    fprintf(arquivo, "Infantry: %d | Cavalry: %d | Artillery: %d\n", gordPlayer->infantryHealth, gordPlayer->cavalryHealth, gordPlayer->artilleryHealth);
+
+    fprintf(arquivo, "Mordor Coins: %d\n", mordPlayer->coins);
+    fprintf(arquivo, "Base : %d | Mine: %d | Barrack: %d | Stable: %d | Armoury: %d\n", mordPlayer->mBaseHealth, mordPlayer->mMineHealth, mordPlayer->mBarrackHealth,
+        mordPlayer->mStableHealth, mordPlayer->mArmouryHealth);
+    fprintf(arquivo, "Infantry: %d | Cavalry: %d | Artillery: %d\n", mordPlayer->infantryHealth, mordPlayer->cavalryHealth, mordPlayer->artilleryHealth);
 
     // Write unit movement details to the file
-    fprintf(arquivo, "Moved %c %d cells from (%d, %d) to (%d, %d).\n", unitType, cells, originRow, originCol, destRow, destCol);
+    //fprintf(arquivo, "Moved %c %d cells from (%d, %d) to (%d, %d).\n", unitType, cells, originRow, originCol, destRow, destCol);
 
     // Write remaining coins to the file
-    fprintf(arquivo, "Remaining coins: %d\n", gordPlayer->coins);
+    fprintf(arquivo, "Remaining coins gondor: %d\n", gordPlayer->coins);
+    fprintf(arquivo, "Remaining coins mordor: %d\n", mordPlayer->coins);
+
+    //Save battle field
+    for (int i = 0; i < ROWS; ++i) {
+        for (int j = 0; j < COLS; ++j) {
+            fprintf(arquivo, "%c ", field[i][j].symbol);
+        }
+        fprintf(arquivo, "\n");
+    }
 
     // Close the file
     fclose(arquivo);
 }
+
+void load(const char* filename, gordorPlayer* gordPlayer, mordorPlayer *mordPlayer)
+{
+    FILE* arquivo = fopen(filename, "r");
+    
+    if (arquivo == NULL) {
+        perror("Error opening file for reading!!\n");
+        return;
+    }
+
+    char buffer[256];
+
+    if (fgets(buffer, sizeof(buffer), arquivo) != NULL) {
+        sscanf_s(buffer, "Gondor Base : %d | Mine: %d | Barrack: %d | Stable: %d | Armoury: %d", &gordPlayer->gBaseHealth, &gordPlayer->gMineHealth, &gordPlayer->gBarrackHealth,
+            &gordPlayer->gStableHealth, &gordPlayer->gArmouryHealth);
+        sscanf_s(buffer, "Infantry: %d | Cavalry: %d | Artillery: %d\n", &gordPlayer->infantryHealth, &gordPlayer->cavalryHealth, &gordPlayer->artilleryHealth);
+
+        sscanf_s(buffer, "Mordor Base : %d | Mine: %d | Barrack: %d | Stable: %d | Armoury: %d", &mordPlayer->mBaseHealth, &mordPlayer->mMineHealth, &mordPlayer->mBarrackHealth,
+            &mordPlayer->mStableHealth, &mordPlayer->mArmouryHealth);
+        sscanf_s(buffer, "Infantry: %d | Cavalry: %d | Artillery: %d\n", &mordPlayer->infantryHealth, &mordPlayer->cavalryHealth, &mordPlayer->artilleryHealth);
+    }
+
+    //Read battle field
+    for (int i = 0; i < ROWS; ++i) {
+        if (fgets(buffer, sizeof(buffer), arquivo) != NULL) {
+            for (int j = 0; j < COLS; ++j) {
+                sscanf_s(buffer + (2 * j), "%c", &field[i][j].symbol, sizeof(field[i][j].symbol));
+            }
+        }
+    }
+        fclose(arquivo);
+
+        printf("Load game from : %s", arquivo);
+        printField();
+
+
+}
+
 
 
 
