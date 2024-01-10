@@ -3834,55 +3834,61 @@ void moveArtilleryMordor(mordorPlayer* mordPlayer) {
 
     }
 
-    void MordCavalryVSGondCavalry(int row, int col, gordorPlayer* gordPlayer)
-    {
-        int rowAtack, colAtack;
-        int rowPosition, colPosition;
+    void MordCavalryVSGondCavalry(int row, int col, gordorPlayer* gordPlayer, mordorPlayer *mordPlayer)
+{
+        int r, c, r1, c1;
 
-        printf("ATTACKING WITH MORDOR CAVALRY\n");
-        printf("Select the row where mordor cavalry is positioned: \n");
-        scanf_s("%d", &rowPosition);
-        printf("Select the column where mordor cavalry is positioned(0-26): \n");
-        scanf_s("%d", &colPosition);
+    printf("\nInsert the row to where is the Mordor Cavalry: ");
+    scanf_s("%d", &r1);
+    printf("\nInsert the column where is the Mordor Cavalry: ");
+    scanf_s("%d", &c1);
 
-        printf("Select the row where gondor cavalry is positioned: \n");
-        scanf_s("%d", &rowAtack);
-        printf("Select the column where gondor cavalry is positioned(0-26): \n");
-        scanf_s("%d", &colAtack);
 
-        row = rowAtack;
-        col = colAtack;
+    printf("\nInsert the row to where is the Gondor Cavalry: ");
+    scanf_s("%d", &r);
+    printf("\nInsert the column where is the Gondor Cavalry: ");
+    scanf_s("%d", &c);
 
-        if (row >= 0 && row < ROWS && col >= 0 && col < COLS && rowPosition >= 0 && rowPosition < ROWS && colPosition >= 0 && colPosition < COLS)
-        {
-            if (field[rowPosition][colPosition].symbol == CAVALARY_SYMB_M)
+    row = r;
+    col = c;
+
+    if (row >= 0 && row < ROWS && col >= 0 && col < COLS && r1 >= 0 && r1 < ROWS && c1 >= 0 && c1 < COLS) {
+
+
+        if (field[r1][c1].symbol == 'W') {
+
+            if ((r - 1 >= 0 && field[r - 1][c].symbol == 'W') ||
+                (r + 1 < ROWS && field[r + 1][c].symbol == 'W') ||
+                (c - 1 >= 0 && field[r][c - 1].symbol == 'W') ||
+                (c + 1 < COLS && field[r][c + 1].symbol == 'W')) 
             {
-                if ((field[rowPosition][colPosition].symbol == CAVALARY_SYMB_G) && (field[rowPosition][colPosition + 1].symbol == CAVALARY_SYMB_G1))
-                {
-
+               
                     gordPlayer->cavalryHealth -= 7;
-                    printf("Gondor cavalry health after attack: %d\n ", gordPlayer->cavalryHealth);
+
+                    printf("\nMordor Cavalry attacked Gondor Cavalry! Gondor Cavalry health: %d\n", gordPlayer->cavalryHealth);
 
                     if (gordPlayer->cavalryHealth <= 0) {
-                        ((field[rowAtack][colAtack].symbol = ' ') && (field[row][colAtack + 1].symbol = ' '));
-                        printf("Gondor cavalry was destroyed!\n");
-                    }
-                }
-                else {
-                    printf("Gondor cavalry not found!!\n");
-                }
 
+                        for (int i = 0; i < 2; ++i) {
+                            field[r][c + i].symbol = ' ';
+                        }
+
+                        printf("\nGondor Cavalry has been eliminated!\n");
+                    }                    
             }
             else {
-                printf("Does not exist mordor cavalry at that position\n");
+                printf("\nNo Gondor Cavalry found adjacent to Mordor Cavalry.\n");
             }
-           
         }
         else {
-            printf("Invalid position for mordor cavalry atack!!\n");
+            printf("\nNo Mordor Cavalry found at the specified position.\n");
         }
-
     }
+    else {
+        printf("\nInvalid position for Mordor Cavalry attack.\n");
+    }
+    return mordorMovesBattle();
+}
 
     void MordArtilleryVSGondCavalry(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer)
     {

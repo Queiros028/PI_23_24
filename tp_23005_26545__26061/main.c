@@ -569,6 +569,19 @@ int mordorAttackBattle()
 {
 	gordorPlayer gPlayer;
 	mordorPlayer mPlayer;
+	gPlayer.coins = 100;
+	mPlayer.coins = 100;
+
+	mPlayer.infantryHealth = 100;
+	mPlayer.cavalryHealth = 100;
+	mPlayer.artilleryHealth = 100;
+
+	mPlayer.mBaseHealth = 100;
+	mPlayer.mMineHealth = 100;
+	mPlayer.mBarrackHealth = 100;
+	mPlayer.mStableHealth = 100;
+	mPlayer.mArmouryHealth = 100;
+
 	int row = 0;
 	int col = 0;
 
@@ -608,12 +621,12 @@ int mordorAttackBattle()
 	do {
 		/*opcaoAttack = gondorAtackOption();*/
 		switch (opcaoAttack) {
-		case 1:	GondorInfantryVSMordBase(row, col, &mPlayer);
+		case 1:	MordorInfantryVSGondBase(row, col, &gPlayer ,&mPlayer);
 			/* saadasdsa();*/
 			break;
-		case 2:GondorCavalryVSMordBase(row, col, &mPlayer);
+		case 2:MordorCavalryVSGondBase(row, col, &gPlayer ,&mPlayer);
 			break;
-		case 3: GondorArtilleryVSMordBase(row, col, &mPlayer);
+		case 3: MordorArtilleryVSGondBase(row, col, &gPlayer,&mPlayer);
 			break;
 		case 4:GondorInfantryVSMordMine(row, col, &mPlayer);
 			break;
@@ -648,7 +661,7 @@ int mordorAttackBattle()
 
 		case 19: GondorInfantryVSMordCavalry(row, col, &mPlayer);
 			break;
-		case 20: MordCavalryVSGondCavalry(row, col, &mPlayer);
+		case 20: MordCavalryVSGondCavalry(row, col, &mPlayer,&gPlayer);
 			break;
 		case 21: GondorArtillheryVSMordCavalry(row, col, &mPlayer);
 			break;

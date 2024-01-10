@@ -348,7 +348,7 @@ void MordorCavalryVSGondInfantry(int row, int col, gordorPlayer* gordPlayer, mor
 void MordorArtilleryVSGondInfantry(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
 
 void MordInfantryVSGondCavalry(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
-void MordCavalryVSGondCavalry(int row, int col, gordorPlayer* gordPlayer);
+void MordCavalryVSGondCavalry(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
 void MordArtilleryVSGondCavalry(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
 
 void MordorInfantryVSGondArtillhery(int row, int col, gordorPlayer* gordPlayer, mordorPlayer* mordPlayer);
